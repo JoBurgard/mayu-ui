@@ -1,6 +1,7 @@
 <script>
-  import '@unocss/reset/tailwind.css';
-  import 'virtual:uno.css';
+	import '@unocss/reset/tailwind.css';
+	import '../theme.css';
+	import 'virtual:uno.css';
 </script>
 
-<slot></slot>
+<slot />
