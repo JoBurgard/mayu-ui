@@ -1,4 +1,6 @@
 <script lang="ts">
+	export let value: string;
 </script>
 
-<div class="input-container"><input class="input" type="text" /></div>
+<!-- TODO forward events -->
+<div class="input-container"><input class="input" type="text" bind:value /></div>

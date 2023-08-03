@@ -6,9 +6,7 @@
 <Meta title="Components/Textfield" />
 
 <Template>
-	<div class="w-[300px]">
-		<Textfield />
-	</div>
+	<Textfield />
 </Template>
 
 <Story name="Default"></Story>

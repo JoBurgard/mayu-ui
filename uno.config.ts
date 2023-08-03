@@ -33,6 +33,6 @@ export default defineConfig({
 			shadow-[inset_1px_1px_2px_theme('colors.gray.300')]
 			focus:bg-white
 		`,
-		'input-container': `[&>input]:w-full inset-0 rounded-[--input-roundedness] mix-blend-multiply ring-1 ring-gray-300/50`,
+		'input-container': `[&>input]:w-full inline-block rounded-[--input-roundedness] mix-blend-multiply ring-1 ring-gray-400/50`,
 	},
 });
