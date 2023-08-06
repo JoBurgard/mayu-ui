@@ -13,6 +13,9 @@ dependencies:
     version: 0.53.6
 
 devDependencies:
+  '@iconify-json/lucide':
+    specifier: ^1.1.115
+    version: 1.1.115
   '@melt-ui/pp':
     specifier: ^0.1.0
     version: 0.1.0(@melt-ui/svelte@0.31.0)(svelte@4.1.2)
@@ -27,7 +30,7 @@ devDependencies:
     version: 7.2.1(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-svelte-csf':
     specifier: 3.0.7
-    version: 3.0.7(@storybook/svelte@7.2.1)(@storybook/theming@7.2.0)(@sveltejs/vite-plugin-svelte@2.4.3)(svelte@4.1.2)(vite@4.4.8)
+    version: 3.0.7(@storybook/svelte@7.2.1)(@storybook/theming@7.2.1)(@sveltejs/vite-plugin-svelte@2.4.3)(svelte@4.1.2)(vite@4.4.8)
   '@storybook/blocks':
     specifier: ^7.2.1
     version: 7.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -1777,6 +1780,12 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify-json/lucide@1.1.115:
+    resolution: {integrity: sha512-POKAb46BP9nzzUmWxN47ojC4ZnW2aOhtVZUZEEUopUpT/+RcBfPJqzBlvANiUwby/lExaCrhJRWIATfrcV9llw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
@@ -2674,7 +2683,7 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@storybook/addon-svelte-csf@3.0.7(@storybook/svelte@7.2.1)(@storybook/theming@7.2.0)(@sveltejs/vite-plugin-svelte@2.4.3)(svelte@4.1.2)(vite@4.4.8):
+  /@storybook/addon-svelte-csf@3.0.7(@storybook/svelte@7.2.1)(@storybook/theming@7.2.1)(@sveltejs/vite-plugin-svelte@2.4.3)(svelte@4.1.2)(vite@4.4.8):
     resolution: {integrity: sha512-T7KYWlhIs3G2N4r0UPawCCnHnYUWyg2rUMIfi/HLVYODsnqG7rJmK3ZAvtEgd1sFST0gRNBu13NIyH3YYUnA7A==}
     peerDependencies:
       '@storybook/svelte': ^7.0.0
@@ -2693,7 +2702,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.6
       '@storybook/svelte': 7.2.1(svelte@4.1.2)
-      '@storybook/theming': 7.2.0(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/theming': 7.2.1(react-dom@18.2.0)(react@18.2.0)
       '@sveltejs/vite-plugin-svelte': 2.4.3(svelte@4.1.2)(vite@4.4.8)
       dedent: 1.5.1
       fs-extra: 11.1.1
@@ -2917,12 +2926,6 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
-    dev: true
-
-  /@storybook/client-logger@7.2.0:
-    resolution: {integrity: sha512-e31snLKvP2h/BBl+DXR/pM/CI8uvDU89BujHniK3ttJNynjOpJmHp0SgxOKnlRXpOaau9jKKoLVMegi/BgIYpA==}
-    dependencies:
-      '@storybook/global': 5.0.0
     dev: true
 
   /@storybook/client-logger@7.2.1:
@@ -3323,20 +3326,6 @@ packages:
       '@testing-library/dom': 9.3.1
       '@testing-library/user-event': 14.4.3(@testing-library/dom@9.3.1)
       ts-dedent: 2.2.0
-    dev: true
-
-  /@storybook/theming@7.2.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-E/nFqZuHnR1HK/jXwlPzLnmbIDxWg4cbSkX3sfTbsDd1h7YhxbouheYSuSPqVDjk+3F87Tv2CP+cZUKDkPd3pQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
-      '@storybook/client-logger': 7.2.0
-      '@storybook/global': 5.0.0
-      memoizerific: 1.11.3
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: true
 
   /@storybook/theming@7.2.1(react-dom@18.2.0)(react@18.2.0):
