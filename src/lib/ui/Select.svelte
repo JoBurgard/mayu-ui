@@ -7,10 +7,13 @@
 </script>
 
 <!-- TODO forward events -->
-<select {required} {...$$restProps}>
-	{#each options as option}
-		{@const value = getValue(option)}
-		{@const text = getText(option)}
-		<option {value}>{text}</option>
-	{/each}
-</select>
+<div class="input-container">
+	<select class="input appearance-none" {required} {...$$restProps}>
+		{#each options as option}
+			{@const value = getValue(option)}
+			{@const text = getText(option)}
+			<option {value}>{text}</option>
+		{/each}
+	</select>
+	<!-- TODO add dropdown icon -->
+</div>
