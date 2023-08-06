@@ -1,8 +1,14 @@
-import { defineConfig, presetAttributify, presetWind, transformerDirectives } from 'unocss';
+import {
+	defineConfig,
+	presetAttributify,
+	presetWind,
+	transformerDirectives,
+	presetIcons,
+} from 'unocss';
 import transformerVariantGroup from '@unocss/transformer-variant-group';
 
 export default defineConfig({
-	presets: [presetAttributify(), presetWind()],
+	presets: [presetAttributify(), presetWind(), presetIcons()],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
 	content: {
 		pipeline: {
@@ -32,6 +38,7 @@ export default defineConfig({
 			px-3 py-1.5
 			shadow-[inset_1px_1px_2px_theme('colors.gray.300')]
 			focus:bg-white
+			hover:bg-gray-50
 		`,
 		'input-container': `[&>input]:w-full relative inline-flex rounded-[--input-roundedness] mix-blend-multiply ring-1 ring-gray-400/50`,
 	},

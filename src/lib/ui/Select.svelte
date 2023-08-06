@@ -7,13 +7,13 @@
 </script>
 
 <!-- TODO forward events -->
-<div class="input-container">
-	<select class="input appearance-none" {required} {...$$restProps}>
+<div class="input-container group">
+	<select class="input appearance-none pr-8" {required} {...$$restProps}>
 		{#each options as option}
 			{@const value = getValue(option)}
 			{@const text = getText(option)}
 			<option {value}>{text}</option>
 		{/each}
 	</select>
-	<!-- TODO add dropdown icon -->
+	<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 -translate-y-1/2" />
 </div>
