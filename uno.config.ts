@@ -30,6 +30,10 @@ export default defineConfig({
 			before:(absolute inset-0 rounded-[--btn-roundedness] mix-blend-multiply ring-1 content-[''] ring-[--btn-ring-color])
 			after:hover:(absolute inset-0 rounded-[--btn-roundedness] bg-white/5 content-[''])
 		`,
+		'btn-sm': `px-2 py-0.75 text-xs/6`,
+		'btn-base': `px-4 py-1.5 text-sm/6`,
+		'btn-lg': `px-8 py-3 text-lg/6`,
+		'btn-xl': `px-12 py-5 text-2xl/6`,
 		'btn-primary': `bg-sky-500 text-white [--btn-ring-color:theme('colors.sky.600')5A]`,
 		input: `
 			relative
