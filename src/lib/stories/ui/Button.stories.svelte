@@ -1,17 +1,23 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
+	export const meta = {
+		title: 'Button',
+	};
 </script>
 
-<Meta title="Components/Button" />
+<script lang="ts">
+	import { buttonVariants } from '$lib/ui/button';
+	import { Story } from '@storybook/addon-svelte-csf';
+</script>
 
-<Template let:args>
-	<button type="button" class="btn btn-primary">Text</button>
-</Template>
-
-<Story name="Primary"></Story>
+<Story name="Default">
+	<button type="button" class={buttonVariants()}>Text</button>
+</Story>
+<Story name="Primary">
+	<button type="button" class={buttonVariants({ variant: 'primary', size: 'base' })}>Text</button>
+</Story>
 <Story name="Sizes">
-	<button type="button" class="btn btn-sm btn-primary">Text</button>
-	<button type="button" class="btn btn-base btn-primary">Text</button>
-	<button type="button" class="btn btn-lg btn-primary">Text</button>
-	<button type="button" class="btn btn-xl btn-primary">Text</button>
+	<button type="button" class={buttonVariants({ size: 'sm' })}>Text</button>
+	<button type="button" class={buttonVariants({ size: 'base' })}>Text</button>
+	<button type="button" class={buttonVariants({ size: 'lg' })}>Text</button>
+	<button type="button" class={buttonVariants({ size: 'xl' })}>Text</button>
 </Story>
