@@ -5,8 +5,13 @@
 	import { buttonVariants } from '$lib/ui/button';
 </script>
 
+<div class="w-2xl h-sm bg-red-500 -z-1 fixed top-12 left-12"></div>
 <div class="flex flex-col gap-6">
-	<div><button class={buttonVariants()} type="button">Button</button></div>
+	<div class="flex flex-col gap-2 items-start">
+		<button class={buttonVariants()} type="button">Button</button>
+		<button class={buttonVariants()} type="button">Button</button>
+		<button class={buttonVariants()} type="button">Button</button>
+	</div>
 	<div><Textfield value="" /></div>
 	<div>
 		<Label text="Fruit">
