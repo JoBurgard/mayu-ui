@@ -3,18 +3,12 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 const buttonVariants = tv({
 	base: [
-		'relative [transform-style:preserve-3d]',
+		`transition-transform`,
+		`[transform-style:preserve-3d]`,
+		'relative',
 		'rounded-[--btn-roundedness]',
 		'px-3 py-1.5 mb-[2px]',
 		'text-sm/6 font-semibold',
-		'shadow-[inset_0px_2px_0px_#ffffff2f]',
-		`transition-transform`,
-		`hover:(-translate-y-1px duration-250 ease-out) hover:before:(translate-y-3px duration-250 ease-out) hover:after:(translate-y-6px duration-250 ease-out)`,
-		`before:(transition-transform absolute -translate-z-1px translate-y-2px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full [background:linear-gradient(to_right,_var(--btn-edge-color-dark)_0%,_var(--btn-edge-color-bright)_9%,_var(--btn-edge-color-bright)_91%,_var(--btn-edge-color-dark)_100%)] from-[--btn-edge-color-dark] from-15% via-[--btn-edge-color-bright] to-[--btn-edge-color-dark] to-85%)`,
-		`after:(transition-transform absolute -translate-z-2px translate-y-4px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full bg-[#0000004f] filter-blur-1px)`,
-		'active:(shadow-[inset_0px_2px_0px_#ffffff00] duration-34 translate-y-1px)',
-		'active:before:(translate-y-1px duration-34)',
-		'active:after:(translate-y-2px duration-34)',
 	],
 	variants: {
 		variant: {
@@ -26,10 +20,27 @@ const buttonVariants = tv({
 			lg: `px-8 py-3 text-lg/6`,
 			xl: `px-12 py-5 text-2xl/6`,
 		},
+		'3d': {
+			true: [
+				'shadow-none shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff2f]',
+				`hover:(-translate-y-1px duration-250 ease-out) hover:before:(translate-y-3px duration-250 ease-out) hover:after:(translate-y-6px duration-250 ease-out)`,
+				`before:(transition-transform absolute -translate-z-1px translate-y-2px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full [background:linear-gradient(to_right,_var(--btn-edge-color-dark)_0%,_var(--btn-edge-color-bright)_9%,_var(--btn-edge-color-bright)_91%,_var(--btn-edge-color-dark)_100%)] from-[--btn-edge-color-dark] from-15% via-[--btn-edge-color-bright] to-[--btn-edge-color-dark] to-85%)`,
+				`after:(transition-transform absolute -translate-z-2px translate-y-4px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full bg-[#0000004f] filter-blur-1px)`,
+				'active:(shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff00] duration-34 translate-y-1px)',
+				'active:before:(translate-y-1px duration-34)',
+				'active:after:(translate-y-2px duration-34)',
+			],
+			false: [
+				`after:(transition-transform absolute -translate-z-2px translate-y-4px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full bg-[#0000004f] filter-blur-[calc(1px*var(--btn-has-shadow))])`,
+				'active:(shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff00] duration-34 translate-y-1px)',
+				'active:after:(translate-y-2px duration-34)',
+			],
+		},
 	},
 	defaultVariants: {
 		variant: 'primary',
 		size: 'base',
+		'3d': false,
 	},
 });
 

@@ -1,4 +1,14 @@
 :root {
-	--btn-roundedness: 0.5rem;
-	--input-roundedness: 0.5rem;
+	/* roundedness / border-radius */
+	--roundedness-base: 0.5rem;
+	--roundedness-lg: var(--roundedness-base);
+	--roundedness-sm: var(--roundedness-base);
+
+	/* button */
+	--btn-roundedness: var(--roundedness-base);
+	--btn-has-shadow: 1;
+	--btn-has-highlight: 1;
+
+	/* input */
+	--input-roundedness: var(--roundedness-base);
 }
