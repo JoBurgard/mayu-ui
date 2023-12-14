@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
+SPDX-License-Identifier: Unlicense
+-->
+
 <script>
 	import Label from '$lib/ui/Label.svelte';
 	import Select from '$lib/ui/Select.svelte';

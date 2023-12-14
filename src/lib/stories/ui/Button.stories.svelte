@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
+
+SPDX-License-Identifier: Unlicense
+-->
+
 <script context="module" lang="ts">
 	export const meta = {
 		title: 'Button',

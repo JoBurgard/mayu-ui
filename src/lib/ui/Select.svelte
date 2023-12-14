@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
+SPDX-License-Identifier: Unlicense
+-->
+
 <script lang="ts" generics="T">
 	export let options: Array<T> = [];
 	export let required: boolean | undefined = undefined;
