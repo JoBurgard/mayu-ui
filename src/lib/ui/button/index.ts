@@ -2,9 +2,10 @@
  * SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
  * SPDX-License-Identifier: Unlicense
  *
- * ---
- * Credits
- * 3D Button inspired by https://www.joshwcomeau.com/animation/3d-button/
+ *
+ * Credits / Inspiration
+ * https://www.joshwcomeau.com/animation/3d-button/
+ * https://github.com/huntabyte/shadcn-svelte
  *
  */
 

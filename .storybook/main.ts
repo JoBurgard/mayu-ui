@@ -1,3 +1,8 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
+ * SPDX-License-Identifier: Unlicense
+ */
+
 import type { StorybookConfig } from '@storybook/sveltekit';
 const config: StorybookConfig = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx|svelte)'],

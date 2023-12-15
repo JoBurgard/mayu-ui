@@ -3,8 +3,6 @@ Upstream-Name: Mayu UI
 Upstream-Contact: Jo Burgard <mail@joburgard.com>
 Source: https://github.com/joburgard/mayu_ui
 
-# Sample paragraph, commented out:
-#
-# Files: src/*
-# Copyright: $YEAR $NAME <$CONTACT>
-# License: ...
+Files: .eslintignore .eslintrc.cjs .gitignore .npmrc .prettierignore .prettierrc bun.lockb package.json uno.config.ts README.md svelte.config.js vite.config.ts tsconfig.json
+Copyright: 2023 Jo Burgard <mail@joburgard.com>
+License: Unlicense

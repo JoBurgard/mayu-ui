@@ -1,3 +1,8 @@
+/**
+ * SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
+ * SPDX-License-Identifier: Unlicense
+ */
+
 import type { Preview } from '@storybook/svelte';
 
 import '@unocss/reset/tailwind.css';
