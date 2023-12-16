@@ -5,7 +5,7 @@ SPDX-License-Identifier: Unlicense
 
 <script>
 	import Label from '$lib/ui/Label.svelte';
-	import Select from '$lib/ui/Select.svelte';
+	import Select from '$lib/ui/select/Select.svelte';
 	import { buttonVariants } from '$lib/ui/button';
 	import { Input } from '$lib/ui/input';
 </script>

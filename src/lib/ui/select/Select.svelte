@@ -4,6 +4,8 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="T">
+	import { inputVariants } from '../input';
+
 	export let options: Array<T> = [];
 	export let required: boolean | undefined = undefined;
 
@@ -12,8 +14,8 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <!-- TODO forward events -->
-<div class="input-container group">
-	<select class="input appearance-none pr-8" {required} {...$$restProps}>
+<div class="relative">
+	<select class="appearance-none {inputVariants()} bg-white pr-8" {required} {...$$restProps}>
 		{#each options as option}
 			{@const value = getValue(option)}
 			{@const text = getText(option)}

@@ -5,21 +5,22 @@
  * Credits / Inspiration
  * https://github.com/huntabyte/shadcn-svelte
  */
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
 import Root from './Input.svelte';
 
 const inputVariants = tv({
 	base: [
 		'rounded-[--input-roundedness]',
-		`border`,
-		`shadow-[0px_1px_1px_inset_#0000002f] outline-1 outline-offset-2`,
+		`border outline-1`,
+		`shadow-[0px_1px_1px_inset_#0000002f]`,
+		`focus:border-[--input-focus-border-color]`,
 	],
 	variants: {
 		size: {
-			sm: `px-2 py-0.75 text-xs/6`,
-			base: `px-4 py-1.5 text-sm/6`,
-			lg: `px-8 py-3 text-lg/6`,
-			xl: `px-12 py-5 text-2xl/6`,
+			sm: `px-2 py-0.75 text-xs/6 rounded-[--roundedness-sm]`,
+			base: `px-3 py-1.5 text-sm/6`,
+			lg: `px-4 py-3 text-lg/6 rounded-[--roundedness-lg]`,
+			xl: `px-5 py-5 text-2xl/6 rounded-[--roundedness-lg]`,
 		},
 	},
 	defaultVariants: {
@@ -46,4 +47,4 @@ export type InputEvents = {
 	input: FormInputEvent<InputEvent>;
 };
 
-export { inputVariants, Root as Input };
+export { Root as Input, inputVariants };

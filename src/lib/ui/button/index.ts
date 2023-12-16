@@ -20,6 +20,7 @@ const buttonVariants = tv({
 		'rounded-[--btn-roundedness]',
 		'px-3 py-1.5 mb-[2px]',
 		'text-sm/6 font-semibold',
+		`outline-offset-2`,
 	],
 	variants: {
 		variant: {

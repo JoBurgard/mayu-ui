@@ -4,10 +4,13 @@
  */
 
 :root {
+	/* colors */
+	--color-primary: #0284c7;
+
 	/* roundedness / border-radius */
 	--roundedness-base: 0.5rem;
-	--roundedness-lg: var(--roundedness-base);
-	--roundedness-sm: var(--roundedness-base);
+	--roundedness-lg: 0.75rem;
+	--roundedness-sm: 0.4rem;
 
 	/* button */
 	--btn-roundedness: var(--roundedness-base);
@@ -16,4 +19,9 @@
 
 	/* input */
 	--input-roundedness: var(--roundedness-base);
+	--input-focus-border-color: var(--color-primary);
+}
+
+*:focus-visible {
+	outline: 2px solid var(--color-primary);
 }

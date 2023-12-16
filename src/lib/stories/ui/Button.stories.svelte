@@ -5,7 +5,7 @@ SPDX-License-Identifier: Unlicense
 
 <script context="module" lang="ts">
 	export const meta = {
-		title: 'Button',
+		title: 'Components/Button',
 	};
 </script>
 

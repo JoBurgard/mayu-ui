@@ -5,7 +5,7 @@ SPDX-License-Identifier: Unlicense
 
 <script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-	import Select from '$lib/ui/Select.svelte';
+	import Select from '$lib/ui/select/Select.svelte';
 </script>
 
 <Meta title="Components/Select" />
