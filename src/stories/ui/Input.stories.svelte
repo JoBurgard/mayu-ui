@@ -10,7 +10,7 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts">
-	import { Input, inputVariants } from '$lib/ui/input/index.js';
+	import { Input, inputVariants } from '$lib/ui/input/';
 	import { Story } from '@storybook/addon-svelte-csf';
 </script>
 

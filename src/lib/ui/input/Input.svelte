@@ -7,12 +7,7 @@ https://github.com/huntabyte/shadcn-svelte
 -->
 
 <script lang="ts">
-	import {
-		inputVariants,
-		type InputEvents,
-		type InputProps,
-		inputPlaceholderVariants,
-	} from './index.js';
+	import { inputVariants, type InputEvents, type InputProps, inputPlaceholderVariants } from './';
 
 	type $$Props = InputProps;
 	type $$Events = InputEvents;

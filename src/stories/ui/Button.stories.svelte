@@ -10,7 +10,7 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts">
-	import { buttonVariants } from '$lib/ui/button';
+	import { buttonVariants } from '$lib/ui/button/';
 	import { Story } from '@storybook/addon-svelte-csf';
 </script>
 
