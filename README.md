@@ -1,5 +1,7 @@
 # Mayu UI
 
+> ⚠️ **Note**: Not production ready. Breaking changes may appear with any release.
+
 We want to deliver a great component library that can be simply styled by an extensive themeing system.
 Creating your own theme will be very simple with the provided Themebuilder.
 
