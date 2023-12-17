@@ -7,21 +7,27 @@ https://github.com/huntabyte/shadcn-svelte
 -->
 
 <script lang="ts">
-	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { inputVariants, type InputEvents } from '.';
+	import {
+		inputVariants,
+		type InputEvents,
+		type InputProps,
+		inputPlaceholderVariants,
+	} from './index.js';
 
-	type $$Props = HTMLInputAttributes;
+	type $$Props = InputProps;
 	type $$Events = InputEvents;
 
 	let className: $$Props['class'] = undefined;
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
+	export let size: $$Props['size'] = undefined;
 	export { className as class };
 </script>
 
-<label class="relative inline-block group">
+<label class="relative inline-block">
 	<input
 		class={inputVariants({
+			size,
 			class: ['placeholder-transparent w-full', className],
 		})}
 		bind:value
@@ -40,10 +46,5 @@ https://github.com/huntabyte/shadcn-svelte
 		{placeholder}
 		{...$$restProps}
 	/>
-	<!-- TODO text color from theme -->
-	<!-- TODO color transition -->
-	<span
-		class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400 transition transition-property-[top,font-size,line-height] [input:not(:placeholder-shown)~&,input:focus~&]:(text-gray-700 bg-white px-1 -ml-1 rounded text-xs top-0)"
-		>{placeholder || ''}</span
-	>
+	{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
 </label>

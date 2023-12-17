@@ -10,7 +10,7 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts">
-	import { Input, inputVariants } from '$lib/ui/input';
+	import { Input, inputVariants } from '$lib/ui/input/index.js';
 	import { Story } from '@storybook/addon-svelte-csf';
 </script>
 
@@ -20,6 +20,9 @@ SPDX-License-Identifier: Unlicense
 		<input type="text" class={inputVariants({ size: 'base' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'lg' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'xl' })} placeholder="Input text here" />
+		<Input size="sm" placeholder="Input text here" />
 		<Input placeholder="Input text here" />
+		<Input size="lg" placeholder="Input text here" />
+		<Input size="xl" placeholder="Input text here" />
 	</div>
 </Story>

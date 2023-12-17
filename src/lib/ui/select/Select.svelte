@@ -4,7 +4,7 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="T">
-	import { inputVariants } from '../input';
+	import { inputVariants } from '../input/index.js';
 
 	export let options: Array<T> = [];
 	export let required: boolean | undefined = undefined;
