@@ -11,19 +11,19 @@ It will be built on top of Melt-UI, the great headless-ui library for Svelte.
 
 ```ts
 export default defineConfig({
-	presets: [presetWind(), presetIcons()],
-	transformers: [transformerDirectives(), transformerVariantGroup()],
-	content: {
-		pipeline: {
-			include: [
-				// ...
-				// add this line
-				'node_modules/mayu-ui/dist/**/*.{svelte,js}',
-			],
-		},
-		// if you use unocss classes in your app.html
-		filesystem: ['src/app.html'],
-	},
+  presets: [presetWind(), presetIcons()],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
+  content: {
+    pipeline: {
+      include: [
+        // ...
+        // add this line
+        'node_modules/mayu-ui/dist/**/*.{svelte,js}',
+      ],
+    },
+    // if you use unocss classes in your app.html
+    filesystem: ['src/app.html'],
+  },
 });
 ```
 
@@ -43,9 +43,9 @@ Fill it with your theme from the Themebuilder.
 ```svelte
 <!-- src/routes/+layout.svelte -->
 <script>
-	import '@unocss/reset/tailwind.css';
-	import '../theme.css';
-	import 'virtual:uno.css';
+  import '@unocss/reset/tailwind.css';
+  import '../theme.css';
+  import 'virtual:uno.css';
 </script>
 ```
 
@@ -53,7 +53,7 @@ Fill it with your theme from the Themebuilder.
 
 ```svelte
 <script>
-	import { buttonVariants, Input } from 'mayu-ui';
+  import { buttonVariants, Input } from 'mayu-ui';
 </script>
 
 <Input type="text" />
