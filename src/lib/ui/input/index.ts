@@ -14,7 +14,7 @@ const inputVariants = tv({
 		transition transition-property-[outline-color,border-color]
 		rounded-[--input-roundedness] border outline-1
 		shadow-[0px_1px_1px_inset_#0000002f]
-		focus:border-[--input-focus-border-color
+		focus:border-[--input-focus-border-color]
 	`,
 	variants: {
 		size: {

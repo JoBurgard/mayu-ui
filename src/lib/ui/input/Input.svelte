@@ -19,7 +19,7 @@ https://github.com/huntabyte/shadcn-svelte
 	export { className as class };
 </script>
 
-<label class="relative inline-block">
+<label class="relative block">
 	<input
 		class={inputVariants({
 			size,
