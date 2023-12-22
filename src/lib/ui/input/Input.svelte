@@ -13,10 +13,10 @@ https://github.com/huntabyte/shadcn-svelte
 	type $$Events = InputEvents;
 
 	let className: $$Props['class'] = undefined;
+	export { className as class };
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
-	export { className as class };
 </script>
 
 <label class="relative block">
