@@ -64,8 +64,14 @@ SPDX-License-Identifier: Unlicense
 		forceVisible: true,
 	});
 
+	selected.subscribe((newValue) => (value = newValue));
+
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	const showAllResult = data.map((_, index) => index);
+
+	$: if (!$open) {
+		$inputValue = $selected?.label ?? '';
+	}
 
 	$: filteredOptions =
 		$touchedInput && $inputValue !== ''
@@ -96,14 +102,21 @@ SPDX-License-Identifier: Unlicense
 			{placeholder}
 			{...$$restProps}
 		/>
-		<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 z-10 -translate-y-1/2" />
 		{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
+		<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 z-10 -translate-y-1/2" />
 	</label>
 	{#if $open}
-		<ul use:melt={$menu} transition:fly={{ duration: 150, y: -5 }}>
+		<ul
+			class="p-2 border rounded-[--roundedness-base] shadow-lg"
+			use:melt={$menu}
+			transition:fly={{ duration: 150, y: -5 }}
+		>
 			{#each filteredOptions || [] as resultIndex, index (index)}
 				{@const optionData = toOption(data[resultIndex])}
-				<li use:melt={$option(optionData)}>
+				<li
+					class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200"
+					use:melt={$option(optionData)}
+				>
 					<div>{optionData.label}</div>
 				</li>
 			{/each}

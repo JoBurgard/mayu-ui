@@ -28,11 +28,14 @@ const inputVariants = tv({
 		size: 'base',
 	},
 });
+// TODO report unocss bug
+// [input[aria-expanded=true]~&] does not work
+// [input[aria-expanded=true]_~_&] works
 const inputPlaceholderVariants = tv({
 	base: `
 		absolute top-1/2 -translate-y-1/2 text-gray-400
 		transition-duration-100 transition-ease-out transition-property-[top,font-size,line-height]
-		[input:not(:placeholder-shown)~&,input:focus~&]:(text-[--color-primary] bg-white px-1 -ml-1 rounded text-xs/3 top-0)
+		[input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-[--color-primary] bg-white px-1 -ml-1 rounded text-xs/3 top-0)
 	`,
 	variants: {
 		size: {
