@@ -4,26 +4,25 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="T">
+	import uFuzzy from '@leeoniya/ufuzzy';
+	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
 	import {
 		inputPlaceholderVariants,
+		inputVariants,
 		type InputEvents,
 		type InputProps,
-		inputVariants,
 	} from '../input';
-	import uFuzzy from '@leeoniya/ufuzzy';
 
-	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
-
-	type $$Props = InputProps & {
+	type $$Props = Omit<InputProps, 'value'> & {
 		data: T[];
-		preprocess?: boolean;
-		createHaystack?: (data: T[]) => string[];
+		value: T | undefined;
+		createHaystack?: (item: T) => string;
+		toOption?: (item: T) => ComboboxOptionProps<T>;
 	};
 	type $$Events = InputEvents;
 
 	export let data: $$Props['data'];
-	export let preprocess: $$Props['preprocess'] = undefined;
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 	export let value: $$Props['value'] = undefined;
@@ -33,14 +32,11 @@ SPDX-License-Identifier: Unlicense
 
 	let haystack: T[] | string[] = data;
 
-	if (preprocess) {
-		if (!createHaystack) {
-			throw new Error('If preprocess = true, you must provide the function ceateHaystack');
-		}
-		haystack = createHaystack(data);
+	if (createHaystack) {
+		haystack = data.map(createHaystack);
 	}
 
-	export let toOption = (item: T): ComboboxOptionProps<T> => {
+	export let toOption: Required<$$Props>['toOption'] = (item: T): ComboboxOptionProps<T> => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
 			throw new Error(
 				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
@@ -68,10 +64,23 @@ SPDX-License-Identifier: Unlicense
 		},
 	});
 
-	selected.subscribe((newValue) => (value = newValue));
+	selected.subscribe((newValue) => (value = newValue?.value));
 
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	const showAllResult = data.map((_, index) => index);
+
+	function clearValueIfEmpty(event: InputEvents['input']) {
+		if (event.currentTarget.value === '') {
+			value = undefined;
+			$selected = undefined;
+		}
+	}
+
+	function clearValueAndInput() {
+		value = undefined;
+		$inputValue = '';
+		$selected = undefined;
+	}
 
 	$: if (!$open) {
 		$inputValue = $selected?.label ?? '';
@@ -83,14 +92,13 @@ SPDX-License-Identifier: Unlicense
 			: showAllResult;
 </script>
 
-<!-- TODO Ability to clear field -->
 <div class="isolate">
 	<label class="relative block" use:melt={$label}>
 		<input
 			use:melt={$input}
 			class={inputVariants({
 				size,
-				class: ['placeholder-transparent w-full pr-7.5', className],
+				class: ['placeholder-transparent w-full pr-13', className],
 			})}
 			on:blur
 			on:change
@@ -103,11 +111,19 @@ SPDX-License-Identifier: Unlicense
 			on:mouseenter
 			on:mouseleave
 			on:paste
+			on:input={clearValueIfEmpty}
 			on:input
 			{placeholder}
 			{...$$restProps}
 		/>
 		{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
+		{#if $inputValue !== ''}
+			<button
+				type="button"
+				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-$color-primary"
+				on:click={clearValueAndInput}><div class="i-lucide-x-circle" /></button
+			>
+		{/if}
 		<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 z-10 -translate-y-1/2" />
 	</label>
 	{#if $open}

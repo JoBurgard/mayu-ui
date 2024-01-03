@@ -13,7 +13,7 @@ SPDX-License-Identifier: Unlicense
 	import Combobox from '$lib/ui/combobox/Combobox.svelte';
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	let value;
+	let value: string;
 </script>
 
 <Story name="Default">
@@ -22,41 +22,41 @@ SPDX-License-Identifier: Unlicense
 		<Combobox
 			bind:value
 			data={[
-				{ label: 'EnragedEnragedEnragedEnragedEnragedEnraged' },
-				{ label: 'Gorgeous' },
-				{ label: 'Massive' },
-				{ label: 'Dull' },
-				{ label: 'Deafening' },
-				{ label: 'Destitute' },
-				{ label: 'emptySpaces' },
-				{ label: 'empty Spaces' },
-				{ label: 'Stingy' },
-				{ label: 'Spotless' },
-				{ label: 'Furious' },
-				{ label: 'Exquisite' },
-				{ label: 'Luminous' },
-				{ label: 'Brilliant' },
-				{ label: 'Pedantic' },
-				{ label: 'Terrible' },
-				{ label: 'Incredibly' },
-				{ label: 'Supersmart' },
-				{ label: 'Seething' },
-				{ label: 'Outraged' },
-				{ label: 'Mindnumbing' },
-				{ label: 'Incensed' },
-				{ label: 'Huge' },
-				{ label: 'Radiant' },
-				{ label: 'Awful' },
-				{ label: 'Lovely' },
-				{ label: 'Colossal' },
-				{ label: 'Livid' },
-				{ label: 'Severely' },
-				{ label: 'Tremendous' },
-				{ label: 'Abominable' },
-				{ label: 'Exceedingly' },
+				'EnragedEnragedEnragedEnragedEnragedEnraged',
+				'Gorgeous',
+				'Massive',
+				'Dull',
+				'Deafening',
+				'Destitute',
+				'emptySpaces',
+				'empty Spaces',
+				'Stingy',
+				'Spotless',
+				'Furious',
+				'Exquisite',
+				'Luminous',
+				'Brilliant',
+				'Pedantic',
+				'Terrible',
+				'Incredibly',
+				'Supersmart',
+				'Seething',
+				'Outraged',
+				'Mindnumbing',
+				'Incensed',
+				'Huge',
+				'Radiant',
+				'Awful',
+				'Lovely',
+				'Colossal',
+				'Livid',
+				'Severely',
+				'Tremendous',
+				'Abominable',
+				'Exceedingly',
 			]}
-			createHaystack={(data) => data.map((item) => item.label)}
-			preprocess
+			toOption={(it) => ({ label: it, value: it })}
+			createHaystack={(item) => item}
 			placeholder="Find a word"
 		/>
 	</div>
