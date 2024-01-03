@@ -2,7 +2,8 @@
 
 An extensively themable component library for Svelte. 
 
-> ⚠️ **Note**: Not production ready. Breaking changes may appear with any release.
+> [!WARNING]
+> This project is very early stages and not production ready. Breaking changes may appear with any release.
 
 We want to deliver a great component library that can be simply styled by an extensive theming system.
 Creating your own theme will be very simple with the provided Themebuilder.
