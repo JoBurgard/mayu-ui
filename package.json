@@ -1,84 +1,84 @@
 {
-  "name": "mayu-ui",
-  "version": "0.1.1",
-  "devDependencies": {
-    "@iconify-json/lucide": "^1.1.148",
-    "@melt-ui/pp": "^0.2.0",
-    "@melt-ui/svelte": "^0.66.2",
-    "@storybook/addon-essentials": "^7.6.6",
-    "@storybook/addon-interactions": "^7.6.6",
-    "@storybook/addon-links": "^7.6.6",
-    "@storybook/addon-svelte-csf": "4.0.13",
-    "@storybook/blocks": "^7.6.6",
-    "@storybook/svelte": "^7.6.6",
-    "@storybook/sveltekit": "^7.6.6",
-    "@storybook/testing-library": "^0.2.2",
-    "@sveltejs/adapter-auto": "^3.0.1",
-    "@sveltejs/kit": "^2.0.6",
-    "@sveltejs/package": "^2.2.4",
-    "@sveltejs/vite-plugin-svelte": "^3.0.1",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
-    "@unocss/extractor-svelte": "^0.58.0",
-    "@unocss/reset": "^0.58.0",
-    "@unocss/transformer-variant-group": "^0.58.0",
-    "autoprefixer": "^10.4.16",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-storybook": "^0.6.15",
-    "eslint-plugin-svelte": "^2.35.1",
-    "eslint": "^8.56.0",
-    "prettier-plugin-svelte": "^3.1.2",
-    "prettier": "^3.1.1",
-    "publint": "^0.2.6",
-    "react-dom": "^18.2.0",
-    "react": "^18.2.0",
-    "storybook": "^7.6.6",
-    "svelte-check": "^3.6.2",
-    "svelte-sequential-preprocessor": "^2.0.1",
-    "svelte": "^4.2.8",
-    "tailwind-variants": "^0.1.19",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.3",
-    "unocss": "^0.58.0",
-    "vite": "^5.0.10"
-  },
-  "peerDependencies": {
-    "@melt-ui/pp": "^0.2.0",
-    "@melt-ui/svelte": "^0.66.2",
-    "@unocss/reset": "^0.58.0",
-    "@unocss/transformer-variant-group": "^0.58.0",
-    "unocss": "^0.58.0",
-    "svelte": ">= 4.0.0",
-    "tailwind-variants": "^0.1.19"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js"
-    }
-  },
-  "files": [
-    "dist",
-    "!dist/**/*.test.*",
-    "!dist/**/*.spec.*"
-  ],
-  "license": "Unlicense",
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build && npm run package",
-    "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && publint",
-    "package:watch": "svelte-kit sync && svelte-package --watch && publint",
-    "prepublishOnly": "npm run package",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "format": "prettier --plugin-search-dir . --write .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "type": "module",
-  "dependencies": {
-    "@leeoniya/ufuzzy": "^1.0.13"
-  }
+	"name": "mayu-ui",
+	"version": "0.1.2",
+	"devDependencies": {
+		"@iconify-json/lucide": "^1.1.150",
+		"@melt-ui/pp": "^0.3.0",
+		"@melt-ui/svelte": "^0.67.0",
+		"@storybook/addon-essentials": "^7.6.7",
+		"@storybook/addon-interactions": "^7.6.7",
+		"@storybook/addon-links": "^7.6.7",
+		"@storybook/addon-svelte-csf": "4.1.0",
+		"@storybook/blocks": "^7.6.7",
+		"@storybook/svelte": "^7.6.7",
+		"@storybook/sveltekit": "^7.6.7",
+		"@storybook/testing-library": "^0.2.2",
+		"@sveltejs/adapter-auto": "^3.0.1",
+		"@sveltejs/kit": "^2.0.6",
+		"@sveltejs/package": "^2.2.5",
+		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@typescript-eslint/eslint-plugin": "^6.17.0",
+		"@typescript-eslint/parser": "^6.17.0",
+		"@unocss/extractor-svelte": "^0.58.3",
+		"@unocss/reset": "^0.58.3",
+		"@unocss/transformer-variant-group": "^0.58.3",
+		"autoprefixer": "^10.4.16",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-storybook": "^0.6.15",
+		"eslint-plugin-svelte": "^2.35.1",
+		"eslint": "^8.56.0",
+		"prettier-plugin-svelte": "^3.1.2",
+		"prettier": "^3.1.1",
+		"publint": "^0.2.7",
+		"react-dom": "^18.2.0",
+		"react": "^18.2.0",
+		"storybook": "^7.6.7",
+		"svelte-check": "^3.6.2",
+		"svelte-sequential-preprocessor": "^2.0.1",
+		"svelte": "^4.2.8",
+		"tailwind-variants": "^0.1.19",
+		"tslib": "^2.6.2",
+		"typescript": "^5.3.3",
+		"unocss": "^0.58.3",
+		"vite": "^5.0.10"
+	},
+	"peerDependencies": {
+		"@melt-ui/pp": "^0.3.0",
+		"@melt-ui/svelte": "^0.67.0",
+		"@unocss/reset": "^0.58.3",
+		"@unocss/transformer-variant-group": "^0.58.3",
+		"unocss": "^0.58.3",
+		"svelte": ">= 4.0.0",
+		"tailwind-variants": "^0.1.19"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"license": "Unlicense",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && npm run package",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"package:watch": "svelte-kit sync && svelte-package --watch && publint",
+		"prepublishOnly": "npm run package",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write .",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"type": "module",
+	"dependencies": {
+		"@leeoniya/ufuzzy": "^1.0.14"
+	}
 }
