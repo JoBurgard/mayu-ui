@@ -112,7 +112,7 @@ SPDX-License-Identifier: Unlicense
 	</label>
 	{#if $open}
 		<ul
-			class="p-2 border min-h-0 max-h-[500px] rounded-[--roundedness-base] shadow-lg overflow-y-auto"
+			class="p-2 border min-h-0 max-h-[500px] rounded-[--roundedness-base] shadow-lg bg-white overflow-y-auto"
 			use:melt={$menu}
 			transition:fly={{ duration: 150, y: -5 }}
 		>
