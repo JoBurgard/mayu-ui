@@ -6,3 +6,7 @@
  * https://github.com/huntabyte/shadcn-svelte
  * https://melt-ui.com/docs/builders/combobox
  */
+
+import Root from './Combobox.svelte';
+
+export { Root as Combobox };

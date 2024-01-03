@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Unlicense
 
 // Reexport your entry components here
-export * from './ui/button/';
-export * from './ui/input/';
+export * from './ui/button';
+export * from './ui/input';
+export * from './ui/combobox';
 // export * from './ui/select/';
