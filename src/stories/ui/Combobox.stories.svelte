@@ -28,6 +28,8 @@ SPDX-License-Identifier: Unlicense
 				{ label: 'Dull' },
 				{ label: 'Deafening' },
 				{ label: 'Destitute' },
+				{ label: 'emptySpaces' },
+				{ label: 'empty Spaces' },
 				{ label: 'Stingy' },
 				{ label: 'Spotless' },
 				{ label: 'Furious' },
