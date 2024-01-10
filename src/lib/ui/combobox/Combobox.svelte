@@ -18,7 +18,7 @@ SPDX-License-Identifier: Unlicense
 	type $$Props = Omit<InputProps, 'value'> & {
 		data: T[];
 		value: T | undefined;
-		arbitraryValue: boolean;
+		arbitraryValue?: boolean;
 		createHaystack?: (item: T) => string;
 		toOption?: (item: T) => ComboboxOptionProps<T>;
 	};
@@ -34,7 +34,8 @@ SPDX-License-Identifier: Unlicense
 	export let createHaystack: $$Props['createHaystack'] = undefined;
 
 	let options: ComboboxOptionProps<T>[];
-	let valueInternal: typeof value = value;
+	let valueInternal: $$Props['value'] = value;
+	let lastAction: 'input' | 'select' | undefined = undefined;
 
 	// detect changes from the outside and try to match the option
 	beforeUpdate(() => {
@@ -96,11 +97,16 @@ SPDX-License-Identifier: Unlicense
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	const showAllResult = data.map((_, index) => index);
 
-	function clearValueIfEmpty(event: InputEvents['input']) {
-		if (event.currentTarget.value === '') {
+	function clearValueIfEmpty(currentInputValue: string) {
+		if (currentInputValue === '') {
 			value = undefined;
 			$selected = undefined;
 		}
+	}
+
+	function handleInput(event: InputEvents['input']) {
+		clearValueIfEmpty(event.currentTarget.value);
+		lastAction = 'input';
 	}
 
 	function clearValueAndInput() {
@@ -109,9 +115,18 @@ SPDX-License-Identifier: Unlicense
 		$selected = undefined;
 	}
 
-	$: if (!$open) {
-		$inputValue = $selected?.label ?? '';
+	function updateInputValue(open: boolean) {
+		if (!open) {
+			if (arbitraryValue && lastAction === 'input') {
+				valueInternal = $inputValue as T;
+				value = $inputValue as T;
+			} else {
+				$inputValue = $selected?.label ?? '';
+			}
+		}
 	}
+
+	$: updateInputValue($open);
 
 	$: filteredOptions =
 		$touchedInput && $inputValue !== ''
@@ -120,7 +135,6 @@ SPDX-License-Identifier: Unlicense
 
 	$: options = data.map((it) => toOption(it));
 
-	// TODO change from outside detection
 	// TODO onselect event
 </script>
 
@@ -143,7 +157,7 @@ SPDX-License-Identifier: Unlicense
 			on:mouseenter
 			on:mouseleave
 			on:paste
-			on:input={clearValueIfEmpty}
+			on:input={handleInput}
 			on:input
 			{placeholder}
 			{...$$restProps}
@@ -171,6 +185,7 @@ SPDX-License-Identifier: Unlicense
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
 						use:melt={$option(optionData)}
+						on:m-click={() => (lastAction = 'select')}
 					>
 						<div class="break-words">{optionData.label}</div>
 					</li>
