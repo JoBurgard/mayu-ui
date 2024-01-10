@@ -4,6 +4,7 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="T">
+	import { beforeUpdate } from 'svelte';
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
@@ -17,6 +18,7 @@ SPDX-License-Identifier: Unlicense
 	type $$Props = Omit<InputProps, 'value'> & {
 		data: T[];
 		value: T | undefined;
+		arbitraryValue: boolean;
 		createHaystack?: (item: T) => string;
 		toOption?: (item: T) => ComboboxOptionProps<T>;
 	};
@@ -28,7 +30,29 @@ SPDX-License-Identifier: Unlicense
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
+	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let createHaystack: $$Props['createHaystack'] = undefined;
+
+	let options: ComboboxOptionProps<T>[];
+	let valueInternal: typeof value = value;
+
+	// detect changes from the outside and try to match the option
+	beforeUpdate(() => {
+		if (value !== valueInternal) {
+			const foundOption = options.find((option) => option.value === value);
+			if (foundOption === undefined && arbitraryValue && value !== undefined) {
+				$selected = toOption(value);
+				$inputValue = $selected?.label ?? '';
+				valueInternal = value;
+			} else if (foundOption !== undefined) {
+				$selected = foundOption;
+				$inputValue = $selected?.label ?? '';
+				valueInternal = value;
+			} else {
+				value = valueInternal;
+			}
+		}
+	});
 
 	let haystack: T[] | string[] = data;
 
@@ -64,7 +88,10 @@ SPDX-License-Identifier: Unlicense
 		},
 	});
 
-	selected.subscribe((newValue) => (value = newValue?.value));
+	selected.subscribe((newValue) => {
+		value = newValue?.value;
+		valueInternal = value;
+	});
 
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	const showAllResult = data.map((_, index) => index);
@@ -90,6 +117,11 @@ SPDX-License-Identifier: Unlicense
 		$touchedInput && $inputValue !== ''
 			? fuzzySearch.filter(haystack as string[], $inputValue)
 			: showAllResult;
+
+	$: options = data.map((it) => toOption(it));
+
+	// TODO change from outside detection
+	// TODO onselect event
 </script>
 
 <div class="isolate">
@@ -135,7 +167,7 @@ SPDX-License-Identifier: Unlicense
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<div class="flex min-h-0 flex-col gap-0 overflow-y-scroll" tabindex="0">
 				{#each filteredOptions || [] as resultIndex, index (index)}
-					{@const optionData = toOption(data[resultIndex])}
+					{@const optionData = options[resultIndex]}
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
 						use:melt={$option(optionData)}

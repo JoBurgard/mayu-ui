@@ -10,6 +10,8 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts">
+	import { buttonVariants } from '$lib';
+
 	import Combobox from '$lib/ui/combobox/Combobox.svelte';
 	import { Story } from '@storybook/addon-svelte-csf';
 
@@ -18,7 +20,15 @@ SPDX-License-Identifier: Unlicense
 
 <Story name="Default">
 	<pre>{JSON.stringify(value, null, 2)}</pre>
-	<div class="flex flex-col gap-4 max-w-xs">
+	<div>
+		<button
+			class={buttonVariants()}
+			on:click={() => {
+				value = 'Huge';
+			}}>Change to 'Huge'</button
+		>
+	</div>
+	<div class="mt-4 flex flex-col gap-4 max-w-xs">
 		<Combobox
 			bind:value
 			data={[
