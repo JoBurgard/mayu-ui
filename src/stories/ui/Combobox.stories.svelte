@@ -14,12 +14,17 @@ SPDX-License-Identifier: Unlicense
 
 	import Combobox from '$lib/ui/combobox/Combobox.svelte';
 	import { Story } from '@storybook/addon-svelte-csf';
+	import type { ComponentEvents } from 'svelte';
 
 	let value: string;
+	let onSelectData: ComponentEvents<Combobox<typeof value>>['select']['detail'];
 </script>
 
 <Story name="Default">
+	<h2>Selected Value</h2>
 	<pre>{JSON.stringify(value, null, 2)}</pre>
+	<h2>onSelect</h2>
+	<pre>{JSON.stringify(onSelectData, null, 2)}</pre>
 	<div>
 		<button
 			class={buttonVariants()}
@@ -68,6 +73,9 @@ SPDX-License-Identifier: Unlicense
 			toOption={(it) => ({ label: it, value: it })}
 			createHaystack={(item) => item}
 			placeholder="Find a word"
+			on:select={(event) => {
+				onSelectData = event.detail;
+			}}
 		/>
 	</div>
 </Story>

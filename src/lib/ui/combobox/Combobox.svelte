@@ -4,9 +4,14 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="T">
-	import { beforeUpdate } from 'svelte';
+	import { beforeUpdate, createEventDispatcher } from 'svelte';
 	import uFuzzy from '@leeoniya/ufuzzy';
-	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
+	import {
+		createCombobox,
+		melt,
+		type ComboboxOptionProps,
+		type ComboboxOption,
+	} from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
 	import {
 		inputPlaceholderVariants,
@@ -22,7 +27,9 @@ SPDX-License-Identifier: Unlicense
 		createHaystack?: (item: T) => string;
 		toOption?: (item: T) => ComboboxOptionProps<T>;
 	};
-	type $$Events = InputEvents;
+	type $$Events = InputEvents & {
+		select: CustomEvent<ComboboxOption<T> | undefined>;
+	};
 
 	export let data: $$Props['data'];
 	let className: $$Props['class'] = undefined;
@@ -36,6 +43,10 @@ SPDX-License-Identifier: Unlicense
 	let options: ComboboxOptionProps<T>[];
 	let valueInternal: $$Props['value'] = value;
 	let lastAction: 'input' | 'select' | undefined = undefined;
+
+	const dispatch = createEventDispatcher<{
+		select: $$Events['select']['detail'];
+	}>();
 
 	// detect changes from the outside and try to match the option
 	beforeUpdate(() => {
@@ -89,9 +100,10 @@ SPDX-License-Identifier: Unlicense
 		},
 	});
 
-	selected.subscribe((newValue) => {
-		value = newValue?.value;
+	selected.subscribe((option) => {
+		value = option?.value;
 		valueInternal = value;
+		dispatch('select', option);
 	});
 
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
@@ -134,8 +146,6 @@ SPDX-License-Identifier: Unlicense
 			: showAllResult;
 
 	$: options = data.map((it) => toOption(it));
-
-	// TODO onselect event
 </script>
 
 <div class="isolate">
