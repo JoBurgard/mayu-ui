@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.2](https://github.com/joburgard/mayu-ui/compare/v0.3.1...v0.3.2) (2024-01-11)
+
+
+### Features
+
+* **Combobox:** Dispatch select event ([9b4765b](https://github.com/joburgard/mayu-ui/commit/9b4765b0a7fa9e806311dcad0c0c0e2bfde61f46))
+
 ## [0.3.1](https://github.com/joburgard/mayu-ui/compare/v0.2.1...v0.3.1) (2024-01-10)
 
 
