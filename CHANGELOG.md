@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.3](https://github.com/joburgard/mayu-ui/compare/v0.4.2...v0.4.3) (2024-01-13)
+
+
+### Bug Fixes
+
+* **Combobox:** handle setting value to empty string from outside ([8a83713](https://github.com/joburgard/mayu-ui/commit/8a837132c23f36c8b5b04cd9df9b66d1dfa863cc))
+
 ## [0.4.2](https://github.com/joburgard/mayu-ui/compare/v0.4.1...v0.4.2) (2024-01-13)
 
 
