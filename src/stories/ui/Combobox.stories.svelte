@@ -38,6 +38,12 @@ SPDX-License-Identifier: Unlicense
 				value = undefined;
 			}}>Change to 'undefined'</button
 		>
+		<button
+			class={buttonVariants()}
+			on:click={() => {
+				value = '';
+			}}>Change to '' (empty string)</button
+		>
 	</div>
 	<div class="mt-4 flex flex-col gap-4 max-w-xs">
 		<Combobox

@@ -56,7 +56,7 @@ SPDX-License-Identifier: Unlicense
 				return;
 			}
 			const foundOption = options.find((option) => option.value === value);
-			if (foundOption === undefined && arbitraryValue && value !== undefined) {
+			if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
 				$selected = toOption(value);
 				$inputValue = $selected?.label ?? '';
 				valueInternal = value;
@@ -117,11 +117,11 @@ SPDX-License-Identifier: Unlicense
 		lastAction = 'input';
 	}
 
-	function clearValueAndInput() {
+	function clearValueAndInput(value: undefined | '' = undefined) {
 		value = undefined;
+		valueInternal = undefined;
 		$inputValue = '';
 		$selected = undefined;
-		dispatch('select', { value, option: undefined });
 	}
 
 	function updateInputValue(open: boolean) {
@@ -176,7 +176,7 @@ SPDX-License-Identifier: Unlicense
 			<button
 				type="button"
 				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-$color-primary"
-				on:click={clearValueAndInput}><div class="i-lucide-x-circle" /></button
+				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
 		<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 z-10 -translate-y-1/2" />
