@@ -109,15 +109,7 @@ SPDX-License-Identifier: Unlicense
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	const showAllResult = data.map((_, index) => index);
 
-	function clearValueIfEmpty(currentInputValue: string) {
-		if (currentInputValue === '') {
-			value = undefined;
-			$selected = undefined;
-		}
-	}
-
 	function handleInput(event: InputEvents['input']) {
-		clearValueIfEmpty(event.currentTarget.value);
 		lastAction = 'input';
 	}
 
@@ -125,11 +117,14 @@ SPDX-License-Identifier: Unlicense
 		value = undefined;
 		$inputValue = '';
 		$selected = undefined;
+		dispatch('select', { value, option: undefined });
 	}
 
 	function updateInputValue(open: boolean) {
 		if (!open) {
-			if (arbitraryValue && lastAction === 'input') {
+			if (lastAction === 'input' && $inputValue === '') {
+				clearValueAndInput();
+			} else if (lastAction === 'input' && arbitraryValue) {
 				valueInternal = $inputValue as T;
 				value = $inputValue as T;
 			} else {
