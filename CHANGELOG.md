@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.1](https://github.com/joburgard/mayu-ui/compare/v0.4.0...v0.4.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* **Combobox:** dispatch select event when input is cleared ([1e6bb37](https://github.com/joburgard/mayu-ui/commit/1e6bb37bf409cf9325e8d6859c1b3590475573aa))
+
 ## [0.4.0](https://github.com/joburgard/mayu-ui/compare/v0.3.2...v0.4.0) (2024-01-13)
 
 
