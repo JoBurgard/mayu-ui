@@ -16,7 +16,7 @@ SPDX-License-Identifier: Unlicense
 	import { Story } from '@storybook/addon-svelte-csf';
 	import type { ComponentEvents } from 'svelte';
 
-	let value: string;
+	let value: string | undefined;
 	let onSelectData: ComponentEvents<Combobox<typeof value>>['select']['detail'];
 </script>
 
@@ -25,12 +25,18 @@ SPDX-License-Identifier: Unlicense
 	<pre>{JSON.stringify(value, null, 2)}</pre>
 	<h2>onSelect</h2>
 	<pre>{JSON.stringify(onSelectData, null, 2)}</pre>
-	<div>
+	<div class="flex gap-4">
 		<button
 			class={buttonVariants()}
 			on:click={() => {
 				value = 'Huge';
 			}}>Change to 'Huge'</button
+		>
+		<button
+			class={buttonVariants()}
+			on:click={() => {
+				value = undefined;
+			}}>Change to 'undefined'</button
 		>
 	</div>
 	<div class="mt-4 flex flex-col gap-4 max-w-xs">

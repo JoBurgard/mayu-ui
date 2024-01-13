@@ -51,6 +51,10 @@ SPDX-License-Identifier: Unlicense
 	// detect changes from the outside and try to match the option
 	beforeUpdate(() => {
 		if (value !== valueInternal) {
+			if (value === undefined) {
+				clearValueAndInput();
+				return;
+			}
 			const foundOption = options.find((option) => option.value === value);
 			if (foundOption === undefined && arbitraryValue && value !== undefined) {
 				$selected = toOption(value);
