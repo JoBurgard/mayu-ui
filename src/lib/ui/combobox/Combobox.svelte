@@ -25,10 +25,10 @@ SPDX-License-Identifier: Unlicense
 		value: T | undefined;
 		arbitraryValue?: boolean;
 		createHaystack?: (item: T) => string;
-		toOption?: (item: T) => ComboboxOptionProps<T>;
+		toOption?: (item: T) => ComboboxOptionProps<T> & { [x: string]: any };
 	};
 	type $$Events = InputEvents & {
-		select: CustomEvent<ComboboxOption<T> | undefined>;
+		select: CustomEvent<{ value: T | undefined; option: ComboboxOption<T> | undefined }>;
 	};
 
 	export let data: $$Props['data'];
@@ -72,7 +72,7 @@ SPDX-License-Identifier: Unlicense
 		haystack = data.map(createHaystack);
 	}
 
-	export let toOption: Required<$$Props>['toOption'] = (item: T): ComboboxOptionProps<T> => {
+	export let toOption: Required<$$Props>['toOption'] = (item) => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
 			throw new Error(
 				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
@@ -103,7 +103,7 @@ SPDX-License-Identifier: Unlicense
 	selected.subscribe((option) => {
 		value = option?.value;
 		valueInternal = value;
-		dispatch('select', option);
+		dispatch('select', { value, option: options?.find((option) => option.value === value) });
 	});
 
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
@@ -195,7 +195,9 @@ SPDX-License-Identifier: Unlicense
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
 						use:melt={$option(optionData)}
-						on:m-click={() => (lastAction = 'select')}
+						on:m-click={(event) => {
+							lastAction = 'select';
+						}}
 					>
 						<div class="break-words">{optionData.label}</div>
 					</li>

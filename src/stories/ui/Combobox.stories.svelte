@@ -70,7 +70,7 @@ SPDX-License-Identifier: Unlicense
 				'Abominable',
 				'Exceedingly',
 			]}
-			toOption={(it) => ({ label: it, value: it })}
+			toOption={(it) => ({ label: it, value: it, test: 'blub' })}
 			createHaystack={(item) => item}
 			placeholder="Find a word"
 			on:select={(event) => {
