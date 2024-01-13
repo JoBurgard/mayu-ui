@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.2](https://github.com/joburgard/mayu-ui/compare/v0.4.1...v0.4.2) (2024-01-13)
+
+
+### Bug Fixes
+
+* **Combobox:** setting the value to undefined from outside now clears the input ([7c84d96](https://github.com/joburgard/mayu-ui/commit/7c84d96dff29689c7cc336ac98d2c9ce0c1a5943))
+
 ## [0.4.1](https://github.com/joburgard/mayu-ui/compare/v0.4.0...v0.4.1) (2024-01-13)
 
 
