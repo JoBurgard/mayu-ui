@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/joburgard/mayu-ui/compare/v0.3.2...v0.4.0) (2024-01-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Combobox:** onSelect now returns value and the option (processed by toOption)
+
+### Features
+
+* **Combobox:** onSelect now returns value and the option (processed by toOption) ([2fdf37c](https://github.com/joburgard/mayu-ui/commit/2fdf37c0292474fa039cebcf11840a0272bed307))
+
 ## [0.3.2](https://github.com/joburgard/mayu-ui/compare/v0.3.1...v0.3.2) (2024-01-11)
 
 
