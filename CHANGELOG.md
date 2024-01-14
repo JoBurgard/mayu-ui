@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.4](https://github.com/joburgard/mayu-ui/compare/v0.4.3...v0.4.4) (2024-01-14)
+
+
+### Bug Fixes
+
+* **Combobox:** attempt to fix types and behaviour with arbitrary values ([b6415bc](https://github.com/joburgard/mayu-ui/commit/b6415bc92089a761e81da3f0d97fd5243da641f5))
+
 ## [0.4.3](https://github.com/joburgard/mayu-ui/compare/v0.4.2...v0.4.3) (2024-01-13)
 
 
