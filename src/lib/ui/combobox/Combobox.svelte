@@ -20,8 +20,11 @@ SPDX-License-Identifier: Unlicense
 		value: V | undefined;
 		arbitraryValue?: boolean;
 		createHaystack?: (item: D) => string;
-		toOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
+		dataToOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
 		valueToData?: (value: V) => D;
+		optionToDisplayText?: (
+			option: (ComboboxOptionProps<V> & { [x: string]: any }) | undefined,
+		) => string;
 	};
 	type $$Events = InputEvents & {
 		select: CustomEvent<{
@@ -38,7 +41,7 @@ SPDX-License-Identifier: Unlicense
 	export let size: $$Props['size'] = undefined;
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let createHaystack: Required<$$Props>['createHaystack'] = (it) => it as string;
-	export let toOption: Required<$$Props>['toOption'] = (item) => {
+	export let dataToOption: Required<$$Props>['dataToOption'] = (item) => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
 			throw new Error(
 				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
@@ -54,6 +57,8 @@ SPDX-License-Identifier: Unlicense
 		};
 	};
 	export let valueToData: Required<$$Props>['valueToData'] = (value) => value as unknown as D;
+	export let optionToDisplayText: Required<$$Props>['optionToDisplayText'] = (option) =>
+		option?.label || '';
 
 	let options: ComboboxOptionProps<V>[];
 	let valueInternal: $$Props['value'] = value;
@@ -72,12 +77,12 @@ SPDX-License-Identifier: Unlicense
 			}
 			const foundOption = options.find((option) => option.value === value);
 			if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
-				$selected = toOption(valueToData(value));
-				$inputValue = $selected?.label ?? '';
+				$selected = dataToOption(valueToData(value));
+				$inputValue = optionToDisplayText($selected);
 				valueInternal = value;
 			} else if (foundOption !== undefined) {
 				$selected = foundOption;
-				$inputValue = $selected?.label ?? '';
+				$inputValue = optionToDisplayText($selected);
 				valueInternal = value;
 			} else {
 				value = valueInternal;
@@ -124,11 +129,11 @@ SPDX-License-Identifier: Unlicense
 			if (lastAction === 'input' && $inputValue === '') {
 				clearValueAndInput();
 			} else if (lastAction === 'input' && arbitraryValue) {
-				$selected = toOption(valueToData($inputValue as V));
+				$selected = dataToOption(valueToData($inputValue as V));
 				valueInternal = $inputValue as V;
 				value = $inputValue as V;
 			} else {
-				$inputValue = $selected?.label ?? '';
+				$inputValue = optionToDisplayText($selected);
 			}
 		}
 	}
@@ -140,7 +145,7 @@ SPDX-License-Identifier: Unlicense
 			? fuzzySearch.filter(haystack as string[], $inputValue)
 			: showAllResult;
 
-	$: options = data.map((it) => toOption(it));
+	$: options = data.map((it) => dataToOption(it));
 </script>
 
 <div class="isolate">

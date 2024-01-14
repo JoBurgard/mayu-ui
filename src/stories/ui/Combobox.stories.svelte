@@ -17,7 +17,7 @@ SPDX-License-Identifier: Unlicense
 	import type { ComponentEvents } from 'svelte';
 
 	let value: string | undefined;
-	let onSelectData: ComponentEvents<Combobox<typeof value>>['select']['detail'];
+	let onSelectData: ComponentEvents<Combobox<typeof value, typeof value>>['select']['detail'];
 	let arbitraryValue: boolean = true;
 </script>
 
@@ -92,7 +92,7 @@ SPDX-License-Identifier: Unlicense
 				'Abominable',
 				'Exceedingly',
 			]}
-			toOption={(it) => ({ label: it, value: it, test: 'blub' })}
+			dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
 			createHaystack={(item) => item}
 			placeholder="Find a word"
 			on:select={(event) => {
