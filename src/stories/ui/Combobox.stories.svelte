@@ -18,6 +18,7 @@ SPDX-License-Identifier: Unlicense
 
 	let value: string | undefined;
 	let onSelectData: ComponentEvents<Combobox<typeof value>>['select']['detail'];
+	let arbitraryValue: boolean = true;
 </script>
 
 <Story name="Default">
@@ -35,6 +36,12 @@ SPDX-License-Identifier: Unlicense
 		<button
 			class={buttonVariants()}
 			on:click={() => {
+				value = 'This is unknown';
+			}}>Change to 'This is unknown'</button
+		>
+		<button
+			class={buttonVariants()}
+			on:click={() => {
 				value = undefined;
 			}}>Change to 'undefined'</button
 		>
@@ -44,6 +51,9 @@ SPDX-License-Identifier: Unlicense
 				value = '';
 			}}>Change to '' (empty string)</button
 		>
+	</div>
+	<div>
+		<label><input type="checkbox" bind:checked={arbitraryValue} /> arbitraryValue</label>
 	</div>
 	<div class="mt-4 flex flex-col gap-4 max-w-xs">
 		<Combobox
@@ -88,6 +98,7 @@ SPDX-License-Identifier: Unlicense
 			on:select={(event) => {
 				onSelectData = event.detail;
 			}}
+			{arbitraryValue}
 		/>
 	</div>
 </Story>

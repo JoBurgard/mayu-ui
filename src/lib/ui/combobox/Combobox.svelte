@@ -3,15 +3,10 @@ SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
 SPDX-License-Identifier: Unlicense
 -->
 
-<script lang="ts" generics="T">
-	import { beforeUpdate, createEventDispatcher } from 'svelte';
+<script lang="ts" generics="D, V">
 	import uFuzzy from '@leeoniya/ufuzzy';
-	import {
-		createCombobox,
-		melt,
-		type ComboboxOptionProps,
-		type ComboboxOption,
-	} from '@melt-ui/svelte';
+	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
+	import { beforeUpdate, createEventDispatcher } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import {
 		inputPlaceholderVariants,
@@ -21,14 +16,18 @@ SPDX-License-Identifier: Unlicense
 	} from '../input';
 
 	type $$Props = Omit<InputProps, 'value'> & {
-		data: T[];
-		value: T | undefined;
+		data: D[];
+		value: V | undefined;
 		arbitraryValue?: boolean;
-		createHaystack?: (item: T) => string;
-		toOption?: (item: T) => ComboboxOptionProps<T> & { [x: string]: any };
+		createHaystack?: (item: D) => string;
+		toOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
+		valueToData?: (value: V) => D;
 	};
 	type $$Events = InputEvents & {
-		select: CustomEvent<{ value: T | undefined; option: ComboboxOption<T> | undefined }>;
+		select: CustomEvent<{
+			value: V | undefined;
+			option: (ComboboxOptionProps<V> & { [x: string]: any }) | undefined;
+		}>;
 	};
 
 	export let data: $$Props['data'];
@@ -38,9 +37,25 @@ SPDX-License-Identifier: Unlicense
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
-	export let createHaystack: $$Props['createHaystack'] = undefined;
+	export let createHaystack: Required<$$Props>['createHaystack'] = (it) => it as string;
+	export let toOption: Required<$$Props>['toOption'] = (item) => {
+		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
+			throw new Error(
+				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
+			);
+		}
+		return {
+			// @ts-ignore
+			label: item?.label,
+			// @ts-ignore
+			value: item?.value,
+			// @ts-ignore
+			disabled: item?.disabled,
+		};
+	};
+	export let valueToData: Required<$$Props>['valueToData'] = (value) => value as unknown as D;
 
-	let options: ComboboxOptionProps<T>[];
+	let options: ComboboxOptionProps<V>[];
 	let valueInternal: $$Props['value'] = value;
 	let lastAction: 'input' | 'select' | undefined = undefined;
 
@@ -57,7 +72,7 @@ SPDX-License-Identifier: Unlicense
 			}
 			const foundOption = options.find((option) => option.value === value);
 			if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
-				$selected = toOption(value);
+				$selected = toOption(valueToData(value));
 				$inputValue = $selected?.label ?? '';
 				valueInternal = value;
 			} else if (foundOption !== undefined) {
@@ -70,33 +85,13 @@ SPDX-License-Identifier: Unlicense
 		}
 	});
 
-	let haystack: T[] | string[] = data;
-
-	if (createHaystack) {
-		haystack = data.map(createHaystack);
-	}
-
-	export let toOption: Required<$$Props>['toOption'] = (item) => {
-		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
-			throw new Error(
-				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
-			);
-		}
-		return {
-			// @ts-ignore
-			label: item?.label,
-			// @ts-ignore
-			value: item?.value,
-			// @ts-ignore
-			disabled: item?.disabled,
-		};
-	};
+	let haystack: string[] = data.map(createHaystack);
 
 	const {
 		elements: { menu, input, option, label },
 		states: { open, inputValue, touchedInput, selected },
 		helpers: { isSelected },
-	} = createCombobox<T>({
+	} = createCombobox<V>({
 		forceVisible: true,
 		positioning: {
 			placement: 'bottom-start',
@@ -129,8 +124,9 @@ SPDX-License-Identifier: Unlicense
 			if (lastAction === 'input' && $inputValue === '') {
 				clearValueAndInput();
 			} else if (lastAction === 'input' && arbitraryValue) {
-				valueInternal = $inputValue as T;
-				value = $inputValue as T;
+				$selected = toOption(valueToData($inputValue as V));
+				valueInternal = $inputValue as V;
+				value = $inputValue as V;
 			} else {
 				$inputValue = $selected?.label ?? '';
 			}
