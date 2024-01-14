@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/joburgard/mayu-ui/compare/v0.4.4...v0.5.0) (2024-01-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Combobox:** renamed toOption to dataToOption
+
+### Features
+
+* **Combobox:** renamed toOption to dataToOption and introduced optionToDisplayText ([36bdca3](https://github.com/joburgard/mayu-ui/commit/36bdca30bc4b112c94857acc21301931dd80f6a5))
+
 ## [0.4.4](https://github.com/joburgard/mayu-ui/compare/v0.4.3...v0.4.4) (2024-01-14)
 
 
