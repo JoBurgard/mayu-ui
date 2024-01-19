@@ -54,7 +54,7 @@
 		"vite": "^5.0.11"
 	},
 	"peerDependencies": {
-		"@melt-ui/pp": "^>=0.3.0",
+		"@melt-ui/pp": ">=0.3.0",
 		"@melt-ui/svelte": ">=0.67.0",
 		"@unocss/reset": ">=0.58.3",
 		"@unocss/transformer-variant-group": ">=0.58.3",
