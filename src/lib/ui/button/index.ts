@@ -26,7 +26,8 @@ const buttonVariants = tv({
 	],
 	variants: {
 		variant: {
-			primary: `[--btn-color-bg:theme('colors.sky.500')] text-white [--btn-color-edge-bright:theme('colors.sky.600')] [--btn-color-edge-dark:theme('colors.sky.800')]`,
+			primary: `[--btn-color-bg:var(--color-primary)] text-white [--btn-color-edge-bright:color-mix(in_oklch,var(--color-primary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-primary)_50%,black)]`,
+			secondary: `[--btn-color-bg:var(--color-secondary)] text-white [--btn-color-edge-bright:color-mix(in_oklch,var(--color-secondary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-secondary)_50%,black)]`,
 		},
 		size: {
 			xs: `px-1.75 py-0.5 text-xs/5`,

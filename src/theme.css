@@ -6,6 +6,7 @@
 :root {
 	/* colors */
 	--color-primary: #0284c7;
+	--color-secondary: #777777;
 
 	/* roundedness / border-radius */
 	--roundedness-base: 0.5rem;
