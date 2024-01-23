@@ -6,7 +6,7 @@
 :root {
 	/* colors */
 	--color-primary: #0284c7;
-	--color-secondary: #777777;
+	--color-secondary: #bbbbbb;
 
 	/* roundedness / border-radius */
 	--roundedness-base: 0.5rem;
@@ -17,6 +17,8 @@
 	--btn-roundedness: var(--roundedness-base);
 	--btn-has-shadow: 1;
 	--btn-has-highlight: 1;
+	--btn-color-text-on-primary: white;
+	--btn-color-text-on-secondary: theme('colors.gray.600');
 
 	/* input */
 	--input-roundedness: var(--roundedness-base);

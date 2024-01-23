@@ -19,15 +19,21 @@ const buttonVariants = tv({
 		'relative',
 		'rounded-[--btn-roundedness]',
 		'px-3 py-1.5 mb-[2px]',
-		'text-sm/6 font-semibold',
+		'text-sm/6 font-semibold text-[--btn-color-text]',
 		`outline-offset-2`,
 		`bg-[--btn-color-bg]`,
 		`hover:bg-[color-mix(in_oklch,var(--btn-color-bg)_95%,white)]`,
 	],
 	variants: {
 		variant: {
-			primary: `[--btn-color-bg:var(--color-primary)] text-white [--btn-color-edge-bright:color-mix(in_oklch,var(--color-primary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-primary)_50%,black)]`,
-			secondary: `[--btn-color-bg:var(--color-secondary)] text-white [--btn-color-edge-bright:color-mix(in_oklch,var(--color-secondary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-secondary)_50%,black)]`,
+			primary: [
+				`[--btn-color-bg:var(--color-primary)] [--btn-color-edge-bright:color-mix(in_oklch,var(--color-primary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-primary)_50%,black)]`,
+				`[--btn-color-text:var(--btn-color-text-on-primary)]`,
+			],
+			secondary: [
+				`[--btn-color-bg:var(--color-secondary)] [--btn-color-edge-bright:color-mix(in_oklch,var(--color-secondary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-secondary)_50%,black)]`,
+				`[--btn-color-text:var(--btn-color-text-on-secondary)]`,
+			],
 		},
 		size: {
 			xs: `px-1.75 py-0.5 text-xs/5 [--btn-roundedness:var(--roundedness-sm)]`,
