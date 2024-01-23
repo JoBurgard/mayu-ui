@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.5](https://github.com/joburgard/mayu-ui/compare/v0.5.4...v0.5.5) (2024-01-23)
+
+
+### Features
+
+* ability to theme the button text color ([31c9b6e](https://github.com/joburgard/mayu-ui/commit/31c9b6ed3aa64ffe6ba1948ecae4281fb4811a24))
+
 ## [0.5.4](https://github.com/joburgard/mayu-ui/compare/v0.5.3...v0.5.4) (2024-01-23)
 
 
