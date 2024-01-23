@@ -30,11 +30,11 @@ const buttonVariants = tv({
 			secondary: `[--btn-color-bg:var(--color-secondary)] text-white [--btn-color-edge-bright:color-mix(in_oklch,var(--color-secondary)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-secondary)_50%,black)]`,
 		},
 		size: {
-			xs: `px-1.75 py-0.5 text-xs/5`,
+			xs: `px-1.75 py-0.5 text-xs/5 [--btn-roundedness:var(--roundedness-sm)]`,
 			sm: `px-2 py-0.75 text-xs/6`,
 			base: `px-4 py-1.5 text-sm/6`,
-			lg: `px-8 py-3 text-lg/6`,
-			xl: `px-12 py-5 text-2xl/6`,
+			lg: `px-8 py-3 text-lg/6 [--btn-roundedness:var(--roundedness-lg)]`,
+			xl: `px-12 py-5 text-2xl/6 [--btn-roundedness:var(--roundedness-lg)]`,
 		},
 		'3d': {
 			true: [
