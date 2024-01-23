@@ -21,12 +21,15 @@ const buttonVariants = tv({
 		'px-3 py-1.5 mb-[2px]',
 		'text-sm/6 font-semibold',
 		`outline-offset-2`,
+		`bg-[--btn-color-bg]`,
+		`hover:bg-[color-mix(in_oklch,var(--btn-color-bg)_95%,white)]`,
 	],
 	variants: {
 		variant: {
-			primary: `bg-sky-500 text-white [--btn-edge-color-bright:theme('colors.sky.600')] [--btn-edge-color-dark:theme('colors.sky.800')]`,
+			primary: `[--btn-color-bg:theme('colors.sky.500')] text-white [--btn-color-edge-bright:theme('colors.sky.600')] [--btn-color-edge-dark:theme('colors.sky.800')]`,
 		},
 		size: {
+			xs: `px-1.75 py-0.5 text-xs/5`,
 			sm: `px-2 py-0.75 text-xs/6`,
 			base: `px-4 py-1.5 text-sm/6`,
 			lg: `px-8 py-3 text-lg/6`,
@@ -36,7 +39,7 @@ const buttonVariants = tv({
 			true: [
 				'shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff2f]',
 				`hover:(-translate-y-1px duration-250 ease-out) hover:before:(translate-y-3px duration-250 ease-out) hover:after:(translate-y-6px duration-250 ease-out)`,
-				`before:(transition-transform absolute -translate-z-1px translate-y-2px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full [background:linear-gradient(to_right,_var(--btn-edge-color-dark)_0%,_var(--btn-edge-color-bright)_9%,_var(--btn-edge-color-bright)_91%,_var(--btn-edge-color-dark)_100%)] from-[--btn-edge-color-dark] from-15% via-[--btn-edge-color-bright] to-[--btn-edge-color-dark] to-85%)`,
+				`before:(transition-transform absolute -translate-z-1px translate-y-2px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full [background:linear-gradient(to_right,_var(--btn-color-edge-dark)_0%,_var(--btn-color-edge-bright)_9%,_var(--btn-color-edge-bright)_91%,_var(--btn-color-edge-dark)_100%)] from-[--btn-color-edge-dark] from-15% via-[--btn-color-edge-bright] to-[--btn-color-edge-dark] to-85%)`,
 				`after:(transition-transform absolute -translate-z-2px translate-y-4px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full bg-[#0000004f] filter-blur-1px)`,
 				'active:(shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff0a] duration-34 translate-y-1px)',
 				'active:before:(translate-y-1px duration-34)',
