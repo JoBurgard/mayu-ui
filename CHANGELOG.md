@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.2](https://github.com/joburgard/mayu-ui/compare/v0.5.1...v0.5.2) (2024-01-23)
+
+
+### Features
+
+* **Button:** size xs + hover color ([ea3cc22](https://github.com/joburgard/mayu-ui/commit/ea3cc22ea4713a8a9619c00d6bcb8dfdb150de02))
+
 ## [0.5.1](https://github.com/joburgard/mayu-ui/compare/v0.5.0...v0.5.1) (2024-01-19)
 
 ## [0.5.0](https://github.com/joburgard/mayu-ui/compare/v0.4.4...v0.5.0) (2024-01-14)
