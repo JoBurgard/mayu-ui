@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.3](https://github.com/joburgard/mayu-ui/compare/v0.5.2...v0.5.3) (2024-01-23)
+
+
+### Features
+
+* **Button:** use css vars for primary and secondary color ([cd80732](https://github.com/joburgard/mayu-ui/commit/cd8073282e6c2c478fb57be00d6640e23a4b8d09))
+
 ## [0.5.2](https://github.com/joburgard/mayu-ui/compare/v0.5.1...v0.5.2) (2024-01-23)
 
 
