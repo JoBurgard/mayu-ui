@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.6](https://github.com/joburgard/mayu-ui/compare/v0.5.5...v0.5.6) (2024-01-31)
+
+
+### Features
+
+* **Components:** add Tooltip component ([3cf52e4](https://github.com/joburgard/mayu-ui/commit/3cf52e48356bf0b68e3a22b6ed5c93f140fc997b))
+
 ## [0.5.5](https://github.com/joburgard/mayu-ui/compare/v0.5.4...v0.5.5) (2024-01-23)
 
 
