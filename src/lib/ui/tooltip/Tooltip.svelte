@@ -22,6 +22,8 @@ SPDX-License-Identifier: Unlicense
 		| 'left-end'
 		| undefined = undefined;
 
+	export let disabled = false;
+
 	const {
 		elements: { trigger, content },
 		states: { open },
@@ -36,7 +38,7 @@ SPDX-License-Identifier: Unlicense
 	});
 </script>
 
-<slot name="trigger" trigger={$trigger} />
+<slot name="trigger" trigger={disabled ? { action: () => {} } : $trigger} />
 {#if $open}
 	<div
 		use:melt={$content}

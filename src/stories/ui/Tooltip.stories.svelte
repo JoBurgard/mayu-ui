@@ -24,3 +24,11 @@ SPDX-License-Identifier: Unlicense
 		<p>This is a tooltip!</p>
 	</Tooltip>
 </Story>
+<Story name="Disabled">
+	<Tooltip placement="right" disabled>
+		<button type="button" class={buttonVariants()} slot="trigger" let:trigger use:melt={trigger}
+			>Hover me</button
+		>
+		<p>This is a tooltip!</p>
+	</Tooltip>
+</Story>
