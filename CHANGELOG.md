@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.8](https://github.com/joburgard/mayu-ui/compare/v0.5.7...v0.5.8) (2024-01-31)
+
+
+### Features
+
+* **Tooltip:** add disabled prop ([69f912b](https://github.com/joburgard/mayu-ui/commit/69f912bd814d3267b4066dad819fcb19ac66db00))
+
 ## [0.5.7](https://github.com/joburgard/mayu-ui/compare/v0.5.6...v0.5.7) (2024-01-31)
 
 
