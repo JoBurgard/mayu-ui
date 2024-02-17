@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/joburgard/mayu-ui/compare/v0.5.8...v0.6.0) (2024-02-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* several wrong behaviours in edge cases
+
+### Bug Fixes
+
+* <a> tags now render correctly ([3625b44](https://github.com/joburgard/mayu-ui/commit/3625b44aa5dda5be16af3a8a9a51ef8f7b977b37))
+* several wrong behaviours in edge cases ([903c2fa](https://github.com/joburgard/mayu-ui/commit/903c2fa02b2f89066445e5729cdfec38d68688e0))
+
 ## [0.5.8](https://github.com/joburgard/mayu-ui/compare/v0.5.7...v0.5.8) (2024-01-31)
 
 
