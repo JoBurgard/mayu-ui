@@ -68,6 +68,30 @@ SPDX-License-Identifier: Unlicense
 		select: $$Events['select']['detail'];
 	}>();
 
+	const {
+		elements: { menu, input, option, label },
+		states: { open, inputValue, touchedInput, selected },
+		helpers: { isSelected },
+	} = createCombobox<V>({
+		forceVisible: true,
+		positioning: {
+			placement: 'bottom-start',
+			sameWidth: false,
+		},
+		onOpenChange: ({ next }) => {
+			if (next === false) {
+				updateInputValue();
+			}
+			return next;
+		},
+	});
+
+	// initially set the value of the input field
+	// otherwise it would be empty if value is just a string
+	if (typeof value === 'string') {
+		$inputValue = value;
+	}
+
 	// detect changes from the outside and try to match the option
 	beforeUpdate(() => {
 		if (value !== valueInternal) {
@@ -92,19 +116,10 @@ SPDX-License-Identifier: Unlicense
 
 	let haystack: string[] = data.map(createHaystack);
 
-	const {
-		elements: { menu, input, option, label },
-		states: { open, inputValue, touchedInput, selected },
-		helpers: { isSelected },
-	} = createCombobox<V>({
-		forceVisible: true,
-		positioning: {
-			placement: 'bottom-start',
-			sameWidth: false,
-		},
-	});
-
 	selected.subscribe((option) => {
+		if (option === undefined) {
+			return;
+		}
 		value = option?.value;
 		valueInternal = value;
 		dispatch('select', { value, option: options?.find((option) => option.value === value) });
@@ -124,21 +139,17 @@ SPDX-License-Identifier: Unlicense
 		$selected = undefined;
 	}
 
-	function updateInputValue(open: boolean) {
-		if (!open) {
-			if (lastAction === 'input' && $inputValue === '') {
-				clearValueAndInput();
-			} else if (lastAction === 'input' && arbitraryValue) {
-				$selected = dataToOption(valueToData($inputValue as V));
-				valueInternal = $inputValue as V;
-				value = $inputValue as V;
-			} else {
-				$inputValue = optionToDisplayText($selected);
-			}
+	function updateInputValue() {
+		if (lastAction === 'input' && $inputValue === '') {
+			clearValueAndInput();
+		} else if (lastAction === 'input' && arbitraryValue) {
+			$selected = dataToOption(valueToData($inputValue as V));
+			valueInternal = $inputValue as V;
+			value = $inputValue as V;
+		} else if (lastAction === 'select') {
+			$inputValue = optionToDisplayText($selected);
 		}
 	}
-
-	$: updateInputValue($open);
 
 	$: filteredOptions =
 		$touchedInput && $inputValue !== ''
