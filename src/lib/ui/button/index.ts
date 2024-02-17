@@ -16,7 +16,7 @@ const buttonVariants = tv({
 	base: [
 		`transition-transform`,
 		`[transform-style:preserve-3d]`,
-		'relative',
+		'inline-block relative',
 		'rounded-[--btn-roundedness]',
 		'px-3 py-1.5 mb-[2px]',
 		'text-sm/6 font-semibold text-[--btn-color-text]',
