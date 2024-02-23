@@ -6,6 +6,7 @@ SPDX-License-Identifier: Unlicense
 <script lang="ts">
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
+	import { tooltipVariants } from '.';
 
 	export let placement:
 		| 'top'
@@ -23,6 +24,7 @@ SPDX-License-Identifier: Unlicense
 		| undefined = undefined;
 
 	export let disabled = false;
+	export let size: 'sm' | 'base' | 'lg' | 'xl' | undefined = undefined;
 
 	const {
 		elements: { trigger, content },
@@ -40,11 +42,7 @@ SPDX-License-Identifier: Unlicense
 
 <slot name="trigger" trigger={disabled ? { action: () => {} } : $trigger} />
 {#if $open}
-	<div
-		use:melt={$content}
-		transition:fade={{ duration: 100 }}
-		class="px-4 py-1 rounded-lg bg-white shadow-md"
-	>
+	<div use:melt={$content} transition:fade={{ duration: 100 }} class={tooltipVariants({ size })}>
 		<slot />
 	</div>
 {/if}
