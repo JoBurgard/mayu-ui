@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.1](https://github.com/joburgard/mayu-ui/compare/v0.6.0...v0.6.1) (2024-02-23)
+
+
+### Features
+
+* **Combobox:** use tooltip styles for popover element ([c884fd3](https://github.com/joburgard/mayu-ui/commit/c884fd3a0e3fa2bc2f98404685e38b8e9b5d8403))
+* **Tooltip:** add size variants ([6d4e7d4](https://github.com/joburgard/mayu-ui/commit/6d4e7d4f94b60ae7d4aeffe4dc1f11f016b4c4f2))
+
+
+### Bug Fixes
+
+* **Combobox:** solve some edge cases ([56efd3a](https://github.com/joburgard/mayu-ui/commit/56efd3abd930576db6ae0bff2c1de4425a7cfb2a))
+
 ## [0.6.0](https://github.com/joburgard/mayu-ui/compare/v0.5.8...v0.6.0) (2024-02-17)
 
 
