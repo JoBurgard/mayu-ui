@@ -4,7 +4,8 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script context="module" lang="ts">
-	export const meta = {
+	import type { Meta } from '@storybook/svelte';
+	export const meta: Meta<typeof Combobox> = {
 		title: 'Components/Combobox',
 	};
 </script>
@@ -16,6 +17,41 @@ SPDX-License-Identifier: Unlicense
 	import { Story } from '@storybook/addon-svelte-csf';
 	import type { ComponentEvents } from 'svelte';
 
+	const sizes = ['sm', 'base', 'lg', 'xl'] as const;
+	const data = [
+		'EnragedEnragedEnragedEnragedEnragedEnraged',
+		'Gorgeous',
+		'Massive',
+		'Dull',
+		'Deafening',
+		'Destitute',
+		'emptySpaces',
+		'empty Spaces',
+		'Stingy',
+		'Spotless',
+		'Furious',
+		'Exquisite',
+		'Luminous',
+		'Brilliant',
+		'Pedantic',
+		'Terrible',
+		'Incredibly',
+		'Supersmart',
+		'Seething',
+		'Outraged',
+		'Mindnumbing',
+		'Incensed',
+		'Huge',
+		'Radiant',
+		'Awful',
+		'Lovely',
+		'Colossal',
+		'Livid',
+		'Severely',
+		'Tremendous',
+		'Abominable',
+		'Exceedingly',
+	];
 	let value: string | undefined;
 	let onSelectData: ComponentEvents<Combobox<typeof value, typeof value>>['select']['detail'];
 	let arbitraryValue: boolean = true;
@@ -58,40 +94,7 @@ SPDX-License-Identifier: Unlicense
 	<div class="mt-4 flex flex-col gap-4 max-w-xs">
 		<Combobox
 			bind:value
-			data={[
-				'EnragedEnragedEnragedEnragedEnragedEnraged',
-				'Gorgeous',
-				'Massive',
-				'Dull',
-				'Deafening',
-				'Destitute',
-				'emptySpaces',
-				'empty Spaces',
-				'Stingy',
-				'Spotless',
-				'Furious',
-				'Exquisite',
-				'Luminous',
-				'Brilliant',
-				'Pedantic',
-				'Terrible',
-				'Incredibly',
-				'Supersmart',
-				'Seething',
-				'Outraged',
-				'Mindnumbing',
-				'Incensed',
-				'Huge',
-				'Radiant',
-				'Awful',
-				'Lovely',
-				'Colossal',
-				'Livid',
-				'Severely',
-				'Tremendous',
-				'Abominable',
-				'Exceedingly',
-			]}
+			{data}
 			dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
 			createHaystack={(item) => item}
 			placeholder="Find a word"
@@ -100,5 +103,27 @@ SPDX-License-Identifier: Unlicense
 			}}
 			{arbitraryValue}
 		/>
+	</div>
+</Story>
+
+<Story name="Sizes">
+	<div class="flex gap-4">
+		{#each sizes as size}
+			<div class="flex flex-col gap-2">
+				<h2>{size}</h2>
+				<Combobox
+					bind:value
+					{data}
+					dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+					createHaystack={(item) => item}
+					placeholder="Find a word"
+					on:select={(event) => {
+						onSelectData = event.detail;
+					}}
+					arbitraryValue
+					{size}
+				/>
+			</div>
+		{/each}
 	</div>
 </Story>

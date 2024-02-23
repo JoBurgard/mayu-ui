@@ -4,6 +4,8 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="D, V">
+	import { tooltipVariants } from '../tooltip';
+
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
@@ -117,7 +119,7 @@ SPDX-License-Identifier: Unlicense
 	let haystack: string[] = data.map(createHaystack);
 
 	selected.subscribe((option) => {
-		if (option === undefined) {
+		if (option === undefined && lastAction === undefined) {
 			return;
 		}
 		value = option?.value;
@@ -133,8 +135,6 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	function clearValueAndInput(value: undefined | '' = undefined) {
-		value = undefined;
-		valueInternal = undefined;
 		$inputValue = '';
 		$selected = undefined;
 	}
@@ -146,7 +146,7 @@ SPDX-License-Identifier: Unlicense
 			$selected = dataToOption(valueToData($inputValue as V));
 			valueInternal = $inputValue as V;
 			value = $inputValue as V;
-		} else if (lastAction === 'select') {
+		} else if (lastAction === 'select' || !arbitraryValue) {
 			$inputValue = optionToDisplayText($selected);
 		}
 	}
@@ -187,7 +187,7 @@ SPDX-License-Identifier: Unlicense
 		{#if $inputValue !== ''}
 			<button
 				type="button"
-				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-$color-primary"
+				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-[--color-primary] transition-transform duration-34 select-none hover:-translate-y-[calc(50%+1px)] active:-translate-y-[calc(50%-1px)]"
 				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
