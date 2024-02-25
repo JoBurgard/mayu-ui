@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.3](https://github.com/joburgard/mayu-ui/compare/v0.6.2...v0.6.3) (2024-02-25)
+
+
+### Features
+
+* **ContextMenu:** allow external trigger via component prop ([d9b106f](https://github.com/joburgard/mayu-ui/commit/d9b106f1bde47d1e84703df987786059d06b4fdb))
+
 ## [0.6.2](https://github.com/joburgard/mayu-ui/compare/v0.6.1...v0.6.2) (2024-02-25)
 
 
