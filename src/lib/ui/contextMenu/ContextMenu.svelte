@@ -38,15 +38,16 @@ SPDX-License-Identifier: Unlicense
 		| (BaseItem & CheckboxItem)
 		| (BaseItem & RadioGroupItem);
 
-	export let items: IncomingItem[];
-
 	const {
-		elements: { trigger, menu, item, separator },
+		elements: { trigger: meltTrigger, menu, item, separator },
 		states: { open },
 		builders: { createSubmenu, createMenuRadioGroup, createCheckboxItem },
 	} = createContextMenu({
 		loop: true,
 	});
+
+	export let items: IncomingItem[];
+	export const trigger = $meltTrigger;
 
 	$: menuItems = items.map((it) => {
 		switch (it.type) {
@@ -75,7 +76,7 @@ SPDX-License-Identifier: Unlicense
 	} = contextMenuVariants();
 </script>
 
-<slot trigger={$trigger} />
+<slot trigger={$meltTrigger} />
 
 {#if $open}
 	<div class={menuClasses()} use:melt={$menu}>
