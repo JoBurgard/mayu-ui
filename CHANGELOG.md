@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.2](https://github.com/joburgard/mayu-ui/compare/v0.6.1...v0.6.2) (2024-02-25)
+
+
+### Features
+
+* added ContextMenu component ([21aa531](https://github.com/joburgard/mayu-ui/commit/21aa531d9b885260b84d151f36698dc573b11dc8))
+
 ## [0.6.1](https://github.com/joburgard/mayu-ui/compare/v0.6.0...v0.6.1) (2024-02-23)
 
 
