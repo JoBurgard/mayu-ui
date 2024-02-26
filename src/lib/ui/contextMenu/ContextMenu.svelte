@@ -47,7 +47,7 @@ SPDX-License-Identifier: Unlicense
 	});
 
 	export let items: IncomingItem[];
-	export const trigger = $meltTrigger;
+	export const trigger = meltTrigger;
 
 	$: menuItems = items.map((it) => {
 		switch (it.type) {

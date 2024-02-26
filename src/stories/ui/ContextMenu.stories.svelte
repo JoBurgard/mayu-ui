@@ -75,12 +75,12 @@ SPDX-License-Identifier: Unlicense
 		]}
 	></ContextMenu>
 
-	{#if trigger}
+	{#if $trigger}
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 		<div
 			tabindex="0"
 			class="inline-block b-dashed border-2 rounded-lg p-6"
-			use:melt={trigger || { action: () => {} }}
+			use:melt={$trigger}
 			aria-label="Right click for context menu"
 		>
 			Context Area (Right click)
