@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.5](https://github.com/joburgard/mayu-ui/compare/v0.6.4...v0.6.5) (2024-02-26)
+
+
+### Bug Fixes
+
+* pass trigger prop as a store to keep it reactive ([ae34ba3](https://github.com/joburgard/mayu-ui/commit/ae34ba3cf71919f82ea1d7fbd0282b008c204f50))
+
 ## [0.6.4](https://github.com/joburgard/mayu-ui/compare/v0.6.3...v0.6.4) (2024-02-25)
 
 
