@@ -20,6 +20,7 @@ SPDX-License-Identifier: Unlicense
 <Story name="Styles">
 	<button type="button" class={buttonVariants({ variant: 'primary', size: 'base' })}>Text</button>
 	<button type="button" class={buttonVariants({ variant: 'secondary', size: 'base' })}>Text</button>
+	<button type="button" class={buttonVariants({ variant: 'neutral', size: 'base' })}>Text</button>
 </Story>
 <Story name="Sizes">
 	<button type="button" class={buttonVariants({ size: 'xs' })}>Text</button>
