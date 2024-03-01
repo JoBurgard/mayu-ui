@@ -8,4 +8,5 @@ export * from './ui/input';
 export * from './ui/combobox';
 export * from './ui/tooltip';
 export * from './ui/contextMenu';
+export * from './ui/pagination';
 // export * from './ui/select/';
