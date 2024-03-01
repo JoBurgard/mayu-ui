@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.0](https://github.com/joburgard/mayu-ui/compare/v0.6.5...v0.7.0) (2024-03-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Button:** new variant + new default variant + changed styles
+
+### Features
+
+* added pagination component ([bbe16f1](https://github.com/joburgard/mayu-ui/commit/bbe16f1f9418d6c2246dfe585bf67c2e38be0553))
+* **Button:** new variant + new default variant + changed styles ([5ef478f](https://github.com/joburgard/mayu-ui/commit/5ef478fea332cb3f7c7b895969d913901d158593))
+
 ## [0.6.5](https://github.com/joburgard/mayu-ui/compare/v0.6.4...v0.6.5) (2024-02-26)
 
 
