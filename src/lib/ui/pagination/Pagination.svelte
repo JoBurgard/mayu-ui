@@ -6,6 +6,7 @@ SPDX-License-Identifier: Unlicense
 	import { createPagination } from '@melt-ui/svelte';
 	import type { VariantProps } from 'tailwind-variants';
 	import { buttonVariants } from '../button';
+	import { tick } from 'svelte';
 
 	export let size: VariantProps<typeof buttonVariants>['size'] = 'base';
 	export let page: number;
@@ -22,13 +23,15 @@ SPDX-License-Identifier: Unlicense
 		defaultPage: page,
 		siblingCount: 1,
 	});
-
-	pageState.subscribe(onpagechange);
 </script>
 
 <nav {...$root} use:root>
 	<div class="flex gap-3">
-		<button class={buttonVariants({ size })} {...$prevButton} use:prevButton
+		<button
+			class={buttonVariants({ size })}
+			{...$prevButton}
+			use:prevButton
+			on:m-click={() => tick().then(() => onpagechange($pageState))}
 			><div class="px-1">
 				<div class="i-lucide-chevron-left size-4" />
 			</div></button
@@ -45,12 +48,17 @@ SPDX-License-Identifier: Unlicense
 							class: 'min-w-8',
 						})}
 						{...$pageTrigger(page)}
-						use:pageTrigger>{page.value}</button
+						use:pageTrigger
+						on:m-click={() => tick().then(() => onpagechange($pageState))}>{page.value}</button
 					>
 				{/if}
 			{/each}
 		</div>
-		<button class={buttonVariants({ size })} {...$nextButton} use:nextButton
+		<button
+			class={buttonVariants({ size })}
+			{...$nextButton}
+			use:nextButton
+			on:m-click={() => tick().then(() => onpagechange($pageState))}
 			><div class="px-1">
 				<div class="i-lucide-chevron-right size-4" />
 			</div></button
