@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.1](https://github.com/joburgard/mayu-ui/compare/v0.7.0...v0.7.1) (2024-03-02)
+
+
+### Bug Fixes
+
+* **Pagination:** trigger onpagechange only on user input ([43a3675](https://github.com/joburgard/mayu-ui/commit/43a3675b12bd3f95d43b6859f01080748a495c74))
+
 ## [0.7.0](https://github.com/joburgard/mayu-ui/compare/v0.6.5...v0.7.0) (2024-03-01)
 
 
