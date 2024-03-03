@@ -62,8 +62,8 @@ SPDX-License-Identifier: Unlicense
 	export let optionToDisplayText: Required<$$Props>['optionToDisplayText'] = (option) =>
 		option?.label || '';
 
-	let options: ComboboxOptionProps<V>[];
-	let valueInternal: $$Props['value'] = value;
+	let options: ComboboxOptionProps<V>[] = data.map((it) => dataToOption(it));
+	let valueInternal: $$Props['value'];
 	let lastAction: 'input' | 'select' | undefined = undefined;
 
 	const dispatch = createEventDispatcher<{
@@ -94,8 +94,7 @@ SPDX-License-Identifier: Unlicense
 		$inputValue = value;
 	}
 
-	// detect changes from the outside and try to match the option
-	beforeUpdate(() => {
+	function checkIfUpdateFromOutside() {
 		if (value !== valueInternal) {
 			if (value === undefined) {
 				clearValueAndInput();
@@ -114,7 +113,15 @@ SPDX-License-Identifier: Unlicense
 				value = valueInternal;
 			}
 		}
+	}
+
+	// detect changes from the outside and try to match the option
+	beforeUpdate(() => {
+		checkIfUpdateFromOutside();
 	});
+
+	// run on SSR
+	checkIfUpdateFromOutside();
 
 	let haystack: string[] = data.map(createHaystack);
 
