@@ -123,8 +123,6 @@ SPDX-License-Identifier: Unlicense
 	// run on SSR
 	checkIfUpdateFromOutside();
 
-	let haystack: string[] = data.map(createHaystack);
-
 	selected.subscribe((option) => {
 		if (option === undefined && lastAction === undefined) {
 			return;
@@ -135,7 +133,8 @@ SPDX-License-Identifier: Unlicense
 	});
 
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
-	const showAllResult = data.map((_, index) => index);
+	let haystack: string[] = data.map(createHaystack);
+	let showAllResult = data.map((_, index) => index);
 
 	function handleInput(event: InputEvents['input']) {
 		lastAction = 'input';
@@ -165,6 +164,7 @@ SPDX-License-Identifier: Unlicense
 
 	$: options = data.map((it) => dataToOption(it));
 	$: haystack = data.map(createHaystack);
+	$: showAllResult = data.map((_, index) => index);
 </script>
 
 <div class="isolate">
