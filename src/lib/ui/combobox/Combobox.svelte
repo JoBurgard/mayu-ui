@@ -164,6 +164,7 @@ SPDX-License-Identifier: Unlicense
 			: showAllResult;
 
 	$: options = data.map((it) => dataToOption(it));
+	$: haystack = data.map(createHaystack);
 </script>
 
 <div class="isolate">
