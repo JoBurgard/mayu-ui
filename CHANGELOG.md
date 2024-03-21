@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.3](https://github.com/joburgard/mayu-ui/compare/v0.7.2...v0.7.3) (2024-03-21)
+
+
+### Features
+
+* regenerate haystack when data changes ([8d42628](https://github.com/joburgard/mayu-ui/commit/8d426283d6f95646769706179e7aea7b62c8a84b))
+
 ## [0.7.2](https://github.com/joburgard/mayu-ui/compare/v0.7.1...v0.7.2) (2024-03-03)
 
 
