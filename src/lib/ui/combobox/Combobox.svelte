@@ -4,8 +4,7 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" generics="D, V">
-	import { tooltipVariants } from '../tooltip';
-
+	import type { Action } from 'svelte/action';
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
@@ -16,11 +15,13 @@ SPDX-License-Identifier: Unlicense
 		type InputEvents,
 		type InputProps,
 	} from '../input';
+	import { tooltipVariants } from '../tooltip';
 
 	type $$Props = Omit<InputProps, 'value'> & {
 		data: D[];
 		value: V | undefined;
 		arbitraryValue?: boolean;
+		isLoading?: boolean;
 		createHaystack?: (item: D) => string;
 		dataToOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
 		valueToData?: (value: V) => D;
@@ -41,6 +42,7 @@ SPDX-License-Identifier: Unlicense
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
+	export let isLoading: $$Props['isLoading'] = false;
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let createHaystack: Required<$$Props>['createHaystack'] = (it) => it as string;
 	export let dataToOption: Required<$$Props>['dataToOption'] = (item) => {
@@ -165,6 +167,11 @@ SPDX-License-Identifier: Unlicense
 	$: options = data.map((it) => dataToOption(it));
 	$: haystack = data.map(createHaystack);
 	$: showAllResult = data.map((_, index) => index);
+
+	const minSameWidth: Action<HTMLUListElement> = (element) => {
+		const inputElement = document.getElementById($input.id);
+		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
+	};
 </script>
 
 <div class="isolate">
@@ -203,8 +210,9 @@ SPDX-License-Identifier: Unlicense
 	</label>
 	{#if $open}
 		<ul
-			class={tooltipVariants({ size })}
+			class={tooltipVariants({ size, class: 'relative' })}
 			use:melt={$menu}
+			use:minSameWidth
 			transition:fly={{ duration: 150, y: -5 }}
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -221,11 +229,18 @@ SPDX-License-Identifier: Unlicense
 						<div class="break-words">{optionData.label}</div>
 					</li>
 				{:else}
-					<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
-						No matching entry found.
-					</li>
+					{#if !isLoading}
+						<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
+							No matching entry found.
+						</li>
+					{/if}
 				{/each}
 			</div>
+			{#if isLoading}
+				<div class="px-3 py-1.5 flex items-center justify-center bg-white/50">
+					<div class="i-svg-spinners-90-ring-with-bg size-5" />
+				</div>
+			{/if}
 		</ul>
 	{/if}
 </div>

@@ -6,6 +6,10 @@
 		"url": "https://github.com/joburgard/mayu-ui.git"
 	},
 	"homepage": "https://github.com/joburgard/mayu-ui",
+	"dependencies": {
+		"@iconify-json/svg-spinners": "^1.1.2",
+		"@leeoniya/ufuzzy": "^1.0.14"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.6.1",
 		"@commitlint/config-conventional": "^18.6.2",
@@ -91,9 +95,6 @@
 		"prepare": "husky"
 	},
 	"type": "module",
-	"dependencies": {
-		"@leeoniya/ufuzzy": "^1.0.14"
-	},
 	"config": {
 		"commitizen": {
 			"path": "@commitlint/cz-commitlint"

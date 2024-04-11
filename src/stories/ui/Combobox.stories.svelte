@@ -55,6 +55,21 @@ SPDX-License-Identifier: Unlicense
 	let value: string | undefined;
 	let onSelectData: ComponentEvents<Combobox<typeof value, typeof value>>['select']['detail'];
 	let arbitraryValue: boolean = true;
+
+	let externalData: { a: string; b: number }[] = [];
+	let isLoading = false;
+	function fakeFetch() {
+		externalData = [];
+		isLoading = true;
+		setTimeout(() => {
+			externalData = [
+				{ a: 'abc', b: 123 },
+				{ a: 'def', b: 456 },
+				{ a: 'ghi', b: 789 },
+			];
+			isLoading = false;
+		}, 500);
+	}
 </script>
 
 <Story name="Default">
@@ -125,5 +140,27 @@ SPDX-License-Identifier: Unlicense
 				/>
 			</div>
 		{/each}
+	</div>
+</Story>
+
+<Story name="Loading external Data">
+	<h2>Selected Value</h2>
+	<pre>{JSON.stringify(value, null, 2)}</pre>
+	<div class="mt-4 flex flex-col gap-4 max-w-xs">
+		<Combobox
+			bind:value
+			data={externalData}
+			dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+			createHaystack={(it) => `${it.a}${String(it.b)}`}
+			placeholder="Find a word"
+			on:select={(event) => {
+				onSelectData = event.detail;
+			}}
+			on:input={() => {
+				fakeFetch();
+			}}
+			arbitraryValue
+			{isLoading}
+		/>
 	</div>
 </Story>
