@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.5](https://github.com/joburgard/mayu-ui/compare/v0.7.4...v0.7.5) (2024-04-11)
+
+
+### Features
+
+* **Combobox:** isLoading + minSameWidth ([c29099c](https://github.com/joburgard/mayu-ui/commit/c29099cb15206f5e11dd4b83736dd175a4d7a758))
+
+
+### Bug Fixes
+
+* pointer-events-none for input placeholder / label ([96b6103](https://github.com/joburgard/mayu-ui/commit/96b6103b867234a957fc853bd22424a22582541d))
+
 ## [0.7.4](https://github.com/joburgard/mayu-ui/compare/v0.7.3...v0.7.4) (2024-03-21)
 
 
