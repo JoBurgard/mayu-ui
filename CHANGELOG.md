@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.6](https://github.com/joburgard/mayu-ui/compare/v0.7.5...v0.7.6) (2024-04-12)
+
+
+### Features
+
+* Input + Combobox unstyled variant ([0290a7a](https://github.com/joburgard/mayu-ui/commit/0290a7a0fd948e16fccc450b261611cc5f1e0d6f))
+
 ## [0.7.5](https://github.com/joburgard/mayu-ui/compare/v0.7.4...v0.7.5) (2024-04-11)
 
 
