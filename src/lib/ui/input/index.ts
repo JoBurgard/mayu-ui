@@ -10,13 +10,16 @@ import Root from './Input.svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
 
 const inputVariants = tv({
-	base: `
-		transition transition-property-[outline-color,border-color]
-		rounded-[--input-roundedness] border outline-1
-		shadow-[0px_1px_1px_inset_#0000002f]
-		focus:border-[--input-focus-border-color]
-	`,
 	variants: {
+		unstyled: {
+			false: [
+				'transition transition-property-[outline-color,border-color]',
+				'rounded-[--input-roundedness] border outline-1',
+				'shadow-[0px_1px_1px_inset_#0000002f]',
+				'focus:border-[--input-focus-border-color]',
+			],
+			true: 'outline-0',
+		},
 		size: {
 			sm: `px-3 py-0.75 text-xs/6 rounded-[--roundedness-sm]`,
 			base: `px-3 py-1.5 text-sm/6`,
@@ -25,6 +28,7 @@ const inputVariants = tv({
 		},
 	},
 	defaultVariants: {
+		unstyled: false,
 		size: 'base',
 	},
 });

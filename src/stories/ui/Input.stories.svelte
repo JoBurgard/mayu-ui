@@ -26,3 +26,7 @@ SPDX-License-Identifier: Unlicense
 		<Input size="xl" placeholder="Input text here" />
 	</div>
 </Story>
+
+<Story name="Unstyled">
+	<input class={inputVariants({ unstyled: true })} type="text" />
+</Story>

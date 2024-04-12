@@ -22,6 +22,7 @@ SPDX-License-Identifier: Unlicense
 		value: V | undefined;
 		arbitraryValue?: boolean;
 		isLoading?: boolean;
+		unstyled?: boolean;
 		createHaystack?: (item: D) => string;
 		dataToOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
 		valueToData?: (value: V) => D;
@@ -42,8 +43,9 @@ SPDX-License-Identifier: Unlicense
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
-	export let isLoading: $$Props['isLoading'] = false;
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
+	export let isLoading: $$Props['isLoading'] = false;
+	export let unstyled: $$Props['unstyled'] = false;
 	export let createHaystack: Required<$$Props>['createHaystack'] = (it) => it as string;
 	export let dataToOption: Required<$$Props>['dataToOption'] = (item) => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
@@ -180,6 +182,7 @@ SPDX-License-Identifier: Unlicense
 			use:melt={$input}
 			class={inputVariants({
 				size,
+				unstyled,
 				class: ['placeholder-transparent w-full pr-13', className],
 			})}
 			on:blur

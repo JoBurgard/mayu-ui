@@ -1,13 +1,14 @@
 import {
 	defineConfig,
 	presetIcons,
+	presetTypography,
 	presetWind,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
 
 export default defineConfig({
-	presets: [presetWind(), presetIcons()],
+	presets: [presetWind(), presetIcons(), presetTypography()],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 	content: {
 		pipeline: {
