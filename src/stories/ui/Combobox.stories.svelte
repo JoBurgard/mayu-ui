@@ -54,7 +54,7 @@ SPDX-License-Identifier: Unlicense
 	];
 	let value: string | undefined;
 	let onSelectData: ComponentEvents<Combobox<typeof value, typeof value>>['select']['detail'];
-	let arbitraryValue: boolean = true;
+	let arbitraryValue = true;
 
 	let externalData: { a: string; b: number }[] = [];
 	let isLoading = false;
@@ -181,6 +181,7 @@ SPDX-License-Identifier: Unlicense
 						bind:value
 						data={externalData}
 						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+						valueToData={(value) => ({ a: value, b: Number(value) })}
 						createHaystack={(it) => `${it.a}${String(it.b)}`}
 						on:select={(event) => {
 							onSelectData = event.detail;
@@ -209,6 +210,7 @@ SPDX-License-Identifier: Unlicense
 						bind:value
 						data={externalData}
 						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+						valueToData={(value) => ({ a: value, b: Number(value) })}
 						createHaystack={(it) => `${it.a}${String(it.b)}`}
 						on:select={(event) => {
 							onSelectData = event.detail;

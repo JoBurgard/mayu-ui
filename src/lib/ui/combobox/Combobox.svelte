@@ -24,16 +24,16 @@ SPDX-License-Identifier: Unlicense
 		isLoading?: boolean;
 		unstyled?: boolean;
 		createHaystack?: (item: D) => string;
-		dataToOption?: (item: D) => ComboboxOptionProps<V> & { [x: string]: any };
+		dataToOption?: (item: D) => ComboboxOptionProps<V> & Record<string, any>;
 		valueToData?: (value: V) => D;
 		optionToDisplayText?: (
-			option: (ComboboxOptionProps<V> & { [x: string]: any }) | undefined,
+			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined,
 		) => string;
 	};
 	type $$Events = InputEvents & {
 		select: CustomEvent<{
 			value: V | undefined;
-			option: (ComboboxOptionProps<V> & { [x: string]: any }) | undefined;
+			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined;
 		}>;
 	};
 
@@ -54,11 +54,11 @@ SPDX-License-Identifier: Unlicense
 			);
 		}
 		return {
-			// @ts-ignore
+			// @ts-expect-error workaround
 			label: item?.label,
-			// @ts-ignore
+			// @ts-expect-error workaround
 			value: item?.value,
-			// @ts-ignore
+			// @ts-expect-error workaround
 			disabled: item?.disabled,
 		};
 	};
@@ -77,7 +77,6 @@ SPDX-License-Identifier: Unlicense
 	const {
 		elements: { menu, input, option, label },
 		states: { open, inputValue, touchedInput, selected },
-		helpers: { isSelected },
 	} = createCombobox<V>({
 		forceVisible: true,
 		positioning: {
@@ -85,6 +84,12 @@ SPDX-License-Identifier: Unlicense
 			sameWidth: false,
 		},
 		onOpenChange: ({ next }) => {
+			if (
+				lastAction !== 'select' &&
+				document.activeElement === document.getElementById($input.id)
+			) {
+				return true;
+			}
 			if (next === false) {
 				updateInputValue();
 			}
@@ -140,11 +145,21 @@ SPDX-License-Identifier: Unlicense
 	let haystack: string[] = data.map(createHaystack);
 	let showAllResult = data.map((_, index) => index);
 
-	function handleInput(event: InputEvents['input']) {
+	function handleInput() {
 		lastAction = 'input';
 	}
 
-	function clearValueAndInput(value: undefined | '' = undefined) {
+	const handleEnterKey = (event: InputEvents['keyup']) => {
+		if (event.key !== 'Enter') {
+			return;
+		}
+
+		$selected = dataToOption(valueToData($inputValue as V));
+		valueInternal = $inputValue as V;
+		value = $inputValue as V;
+	};
+
+	function clearValueAndInput() {
 		$inputValue = '';
 		$selected = undefined;
 	}
@@ -191,6 +206,7 @@ SPDX-License-Identifier: Unlicense
 			on:focus
 			on:keydown
 			on:keypress
+			on:keyup={handleEnterKey}
 			on:keyup
 			on:mouseover
 			on:mouseenter
@@ -225,7 +241,7 @@ SPDX-License-Identifier: Unlicense
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
 						use:melt={$option(optionData)}
-						on:m-click={(event) => {
+						on:m-click={() => {
 							lastAction = 'select';
 						}}
 					>
