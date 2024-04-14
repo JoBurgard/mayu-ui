@@ -29,4 +29,11 @@ module.exports = {
 			},
 		},
 	],
+	rules: {
+		'@typescript-eslint/no-unused-vars': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		eqeqeq: 'error',
+		'no-var': 'error',
+		'no-plusplus': ['error'],
+	},
 };
