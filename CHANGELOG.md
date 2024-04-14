@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.8](https://github.com/joburgard/mayu-ui/compare/v0.7.7...v0.7.8) (2024-04-14)
+
+
+### Bug Fixes
+
+* **Combobox:** revert keeping popover open, needs better implementation ([a926bed](https://github.com/joburgard/mayu-ui/commit/a926bed483c1e32b7c0bcca3abb485de13b204aa))
+
 ## [0.7.7](https://github.com/joburgard/mayu-ui/compare/v0.7.6...v0.7.7) (2024-04-13)
 
 
