@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.9](https://github.com/joburgard/mayu-ui/compare/v0.7.8...v0.7.9) (2024-04-14)
+
+
+### Features
+
+* **Combobox:** remove clear button from keyboard navigation ([8388f78](https://github.com/joburgard/mayu-ui/commit/8388f785239089b1b099be33bdb76b0c1124a5e2))
+
 ## [0.7.8](https://github.com/joburgard/mayu-ui/compare/v0.7.7...v0.7.8) (2024-04-14)
 
 
