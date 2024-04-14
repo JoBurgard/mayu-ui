@@ -84,12 +84,6 @@ SPDX-License-Identifier: Unlicense
 			sameWidth: false,
 		},
 		onOpenChange: ({ next }) => {
-			if (
-				lastAction !== 'select' &&
-				document.activeElement === document.getElementById($input.id)
-			) {
-				return true;
-			}
 			if (next === false) {
 				updateInputValue();
 			}
