@@ -215,6 +215,7 @@ SPDX-License-Identifier: Unlicense
 		{#if $inputValue !== ''}
 			<button
 				type="button"
+				tabindex="-1"
 				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-[--color-primary] transition-transform duration-34 select-none hover:-translate-y-[calc(50%+1px)] active:-translate-y-[calc(50%-1px)]"
 				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
 			>
