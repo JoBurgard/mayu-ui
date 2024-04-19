@@ -20,7 +20,7 @@
 	--btn-has-highlight: 1;
 	--btn-color-text-on-primary: white;
 	--btn-color-text-on-secondary: white;
-	--btn-color-text-on-neutral: theme('colors.gray.600');
+	--btn-color-text-on-neutral: theme('colors.gray.800');
 
 	/* input */
 	--input-roundedness: var(--roundedness-base);

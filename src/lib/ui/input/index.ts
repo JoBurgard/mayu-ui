@@ -14,7 +14,7 @@ const inputVariants = tv({
 		unstyled: {
 			false: [
 				'transition transition-property-[outline-color,border-color]',
-				'rounded-[--input-roundedness] border outline-1',
+				'rounded-[--input-roundedness] border border-gray-300 outline-1',
 				'shadow-[0px_1px_1px_inset_#0000002f]',
 				'focus:border-[--input-focus-border-color]',
 			],
@@ -37,9 +37,9 @@ const inputVariants = tv({
 // [input[aria-expanded=true]_~_&] works
 const inputPlaceholderVariants = tv({
 	base: [
-		'absolute top-1/2 -translate-y-1/2 text-gray-400 select-none',
+		'absolute top-1/2 -translate-y-1/2 text-gray-600 select-none',
 		'transition-duration-100 transition-ease-out transition-property-[top,font-size,line-height]',
-		'[input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-[--color-primary] bg-white px-1 -ml-1 rounded text-xs/3 top-0)',
+		'[input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-$color-primary bg-white px-1 -ml-1 rounded text-xs/3 top-0)',
 		'pointer-events-none',
 	],
 	variants: {
