@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.10](https://github.com/joburgard/mayu-ui/compare/v0.7.9...v0.7.10) (2024-04-19)
+
+
+### Features
+
+* increase default contrast for input fields ([0862c02](https://github.com/joburgard/mayu-ui/commit/0862c022ebec7307513d697d30bc11c909dcfa15))
+
 ## [0.7.9](https://github.com/joburgard/mayu-ui/compare/v0.7.8...v0.7.9) (2024-04-14)
 
 
