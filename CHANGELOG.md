@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.11](https://github.com/joburgard/mayu-ui/compare/v0.7.10...v0.7.11) (2024-04-19)
+
+
+### Bug Fixes
+
+* **Button:** style <a> tags with button classes correctly ([77291fc](https://github.com/joburgard/mayu-ui/commit/77291fcb27c4c7ec938eaff08437f0f3069b35ed))
+
 ## [0.7.10](https://github.com/joburgard/mayu-ui/compare/v0.7.9...v0.7.10) (2024-04-19)
 
 
