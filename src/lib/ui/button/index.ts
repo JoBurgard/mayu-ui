@@ -22,8 +22,8 @@ const buttonVariants = tv({
 		'text-sm/6 text-[--btn-color-text]',
 		`outline-offset-2`,
 		`bg-[--btn-color-bg]`,
-		`hover:enabled:bg-[color-mix(in_oklch,var(--btn-color-bg)_95%,white)]`,
-		`disabled:opacity-50`,
+		`hover:bg-[color-mix(in_oklch,var(--btn-color-bg)_95%,white)]`,
+		`[&:is(:disabled),&[data-disabled]]:(opacity-50 pointer-events-none)`,
 	],
 	variants: {
 		variant: {
@@ -38,6 +38,7 @@ const buttonVariants = tv({
 			neutral: [
 				`[--btn-color-bg:var(--color-neutral)] [--btn-color-edge-bright:color-mix(in_oklch,var(--color-neutral)_75%,black)] [--btn-color-edge-dark:color-mix(in_oklch,var(--color-neutral)_50%,black)]`,
 				`[--btn-color-text:var(--btn-color-text-on-neutral)]`,
+				`hover:[&:not(:disabled)]:bg-[color-mix(in_oklch,var(--btn-color-bg)_95%,black)]`,
 			],
 		},
 		size: {
@@ -58,10 +59,10 @@ const buttonVariants = tv({
 				'active:after:(translate-y-2px duration-34)',
 			],
 			false: [
-				`hover:enabled:(-translate-y-1px duration-250 ease-out) hover:enabled:after:(translate-y-2px duration-250 ease-out)`,
+				`hover:(-translate-y-1px duration-250 ease-out) hover:after:(translate-y-2px duration-250 ease-out)`,
 				`after:(transition-transform absolute -translate-z-2px translate-y-1px top-0 left-0 content-[''] rounded-[--btn-roundedness] w-full h-full bg-[#0000004f] filter-blur-[calc(1px*var(--btn-has-shadow))])`,
-				'active:enabled:(shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff00] duration-34 translate-y-1px)',
-				'active:enabled:after:(translate-y-0px duration-34)',
+				'active:(shadow-[inset_0px_calc(2px*var(--btn-has-highlight))_0px_#ffffff00] duration-34 translate-y-1px)',
+				'active:after:(translate-y-0px duration-34)',
 			],
 		},
 	},

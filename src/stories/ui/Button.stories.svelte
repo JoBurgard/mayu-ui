@@ -15,7 +15,16 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <Story name="Default">
-	<button type="button" class={buttonVariants()}>Text</button>
+	<h2>Enabled</h2>
+	<div class="flex gap-4">
+		<button type="button" class={buttonVariants()}>Button</button>
+		<a href="#1" class={buttonVariants()}>Link</a>
+	</div>
+	<h2>Disabled</h2>
+	<div class="flex gap-4">
+		<button type="button" class={buttonVariants()} disabled>Button</button>
+		<a href="#1" class={buttonVariants()} data-disabled>Link</a>
+	</div>
 </Story>
 <Story name="Styles">
 	<button type="button" class={buttonVariants({ variant: 'primary', size: 'base' })}>Text</button>
