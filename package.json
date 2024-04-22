@@ -14,9 +14,9 @@
 		"@commitlint/cli": "^18.6.1",
 		"@commitlint/config-conventional": "^18.6.2",
 		"@commitlint/cz-commitlint": "^18.6.1",
-		"@iconify-json/lucide": "^1.1.183",
+		"@iconify-json/lucide": "^1.1.184",
 		"@melt-ui/pp": "^0.3.0",
-		"@melt-ui/svelte": "^0.76.3",
+		"@melt-ui/svelte": "^0.77.0",
 		"@storybook/addon-essentials": "^8.0.8",
 		"@storybook/addon-interactions": "^8.0.8",
 		"@storybook/addon-links": "^8.0.8",
@@ -26,7 +26,7 @@
 		"@storybook/sveltekit": "^8.0.8",
 		"@storybook/testing-library": "^0.2.2",
 		"@sveltejs/adapter-auto": "^3.2.0",
-		"@sveltejs/kit": "^2.5.6",
+		"@sveltejs/kit": "^2.5.7",
 		"@sveltejs/package": "^2.3.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.0",
 		"@typescript-eslint/eslint-plugin": "^7.7.0",
@@ -34,7 +34,7 @@
 		"@unocss/extractor-svelte": "^0.59.4",
 		"@unocss/reset": "^0.59.4",
 		"autoprefixer": "^10.4.19",
-		"commit-and-tag-version": "^12.2.0",
+		"commit-and-tag-version": "^12.4.0",
 		"commitizen": "^4.3.0",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -52,7 +52,7 @@
 		"tslib": "^2.6.2",
 		"typescript": "^5.4.5",
 		"unocss": "^0.59.4",
-		"vite": "^5.2.9"
+		"vite": "^5.2.10"
 	},
 	"peerDependencies": {
 		"@melt-ui/pp": ">=0.3.0",
