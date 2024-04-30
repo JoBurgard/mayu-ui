@@ -68,7 +68,8 @@ SPDX-License-Identifier: Unlicense
 
 	let options: ComboboxOptionProps<V>[] = data.map((it) => dataToOption(it));
 	let valueInternal: $$Props['value'];
-	let lastAction: 'input' | 'select' | undefined = undefined;
+	let lastAction: 'input' | 'select' | null = null;
+	let skipProcessingOnClose = false;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
@@ -76,7 +77,7 @@ SPDX-License-Identifier: Unlicense
 
 	const {
 		elements: { menu, input, option, label },
-		states: { open, inputValue, touchedInput, selected },
+		states: { open, inputValue, touchedInput, selected, highlightedItem },
 	} = createCombobox<V>({
 		forceVisible: true,
 		positioning: {
@@ -84,8 +85,11 @@ SPDX-License-Identifier: Unlicense
 			sameWidth: false,
 		},
 		onOpenChange: ({ next }) => {
-			if (next === false) {
-				updateInputValue();
+			if (next === false && skipProcessingOnClose === false) {
+				processInputValue();
+			}
+			if (next === true) {
+				skipProcessingOnClose = false;
 			}
 			return next;
 		},
@@ -141,6 +145,7 @@ SPDX-License-Identifier: Unlicense
 
 	function handleInput() {
 		lastAction = 'input';
+		$highlightedItem = null;
 	}
 
 	const handleEnterKey = (event: InputEvents['keyup']) => {
@@ -148,9 +153,7 @@ SPDX-License-Identifier: Unlicense
 			return;
 		}
 
-		$selected = dataToOption(valueToData($inputValue as V));
-		valueInternal = $inputValue as V;
-		value = $inputValue as V;
+		processInputValue();
 	};
 
 	function clearValueAndInput() {
@@ -158,7 +161,7 @@ SPDX-License-Identifier: Unlicense
 		$selected = undefined;
 	}
 
-	function updateInputValue() {
+	function processInputValue() {
 		if (lastAction === 'input' && $inputValue === '') {
 			clearValueAndInput();
 		} else if (lastAction === 'input' && arbitraryValue) {
@@ -195,12 +198,13 @@ SPDX-License-Identifier: Unlicense
 				class: ['placeholder-transparent w-full pr-13', className],
 			})}
 			on:blur
+			on:blur={processInputValue}
 			on:change
 			on:click
 			on:focus
 			on:keydown
+			on:keydown={handleEnterKey}
 			on:keypress
-			on:keyup={handleEnterKey}
 			on:keyup
 			on:mouseover
 			on:mouseenter
@@ -208,6 +212,15 @@ SPDX-License-Identifier: Unlicense
 			on:paste
 			on:input={handleInput}
 			on:input
+			on:m-keydown={(e) => {
+				// Prevent selecting value when closing by escape
+				if (e.detail.originalEvent.key === 'Escape') {
+					skipProcessingOnClose = true;
+				}
+				if (e.detail.originalEvent.key === 'Enter' && $highlightedItem) {
+					lastAction = 'select';
+				}
+			}}
 			{placeholder}
 			{...$$restProps}
 		/>
