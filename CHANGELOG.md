@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.12](https://github.com/joburgard/mayu-ui/compare/v0.7.11...v0.7.12) (2024-04-30)
+
+
+### Bug Fixes
+
+* **combobox:** options are now selectable by keyboard again + esc does not select ([8d20f63](https://github.com/joburgard/mayu-ui/commit/8d20f6398b70e628ce5ecee9429f09e09421a8c5))
+
 ## [0.7.11](https://github.com/joburgard/mayu-ui/compare/v0.7.10...v0.7.11) (2024-04-19)
 
 
