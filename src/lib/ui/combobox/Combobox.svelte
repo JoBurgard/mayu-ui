@@ -9,10 +9,10 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts" generics="D, V">
-	import type { Action } from 'svelte/action';
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
+	import type { Action } from 'svelte/action';
 	import { fly } from 'svelte/transition';
 	import {
 		inputPlaceholderVariants,
@@ -205,7 +205,6 @@ SPDX-License-Identifier: Unlicense
 				class: ['placeholder-transparent w-full pr-13', className],
 			})}
 			on:blur
-			on:blur={processInputValue}
 			on:change
 			on:click
 			on:focus
