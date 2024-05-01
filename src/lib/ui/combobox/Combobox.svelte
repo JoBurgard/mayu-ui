@@ -2,6 +2,11 @@
 SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
 SPDX-License-Identifier: Unlicense
 -->
+<script lang="ts" context="module">
+	export const i18n = {
+		noSearchResult: 'No matching entry found.',
+	};
+</script>
 
 <script lang="ts" generics="D, V">
 	import type { Action } from 'svelte/action';
@@ -23,6 +28,7 @@ SPDX-License-Identifier: Unlicense
 		arbitraryValue?: boolean;
 		isLoading?: boolean;
 		unstyled?: boolean;
+		menuClasses?: string;
 		createHaystack?: (item: D) => string;
 		dataToOption?: (item: D) => ComboboxOptionProps<V> & Record<string, any>;
 		valueToData?: (value: V) => D;
@@ -43,6 +49,7 @@ SPDX-License-Identifier: Unlicense
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
+	export let menuClasses: $$Props['menuClasses'] = undefined;
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let isLoading: $$Props['isLoading'] = false;
 	export let unstyled: $$Props['unstyled'] = false;
@@ -237,7 +244,7 @@ SPDX-License-Identifier: Unlicense
 	</label>
 	{#if $open}
 		<ul
-			class={tooltipVariants({ size, class: 'relative' })}
+			class={tooltipVariants({ size, class: ['relative', menuClasses] })}
 			use:melt={$menu}
 			use:minSameWidth
 			transition:fly={{ duration: 150, y: -5 }}
@@ -258,7 +265,7 @@ SPDX-License-Identifier: Unlicense
 				{:else}
 					{#if !isLoading}
 						<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
-							No matching entry found.
+							{i18n.noSearchResult}
 						</li>
 					{/if}
 				{/each}
