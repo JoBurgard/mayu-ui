@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.13](https://github.com/joburgard/mayu-ui/compare/v0.7.12...v0.7.13) (2024-05-01)
+
+
+### Features
+
+* **combobox:** allow to pass in menu CSS classes ([2e759db](https://github.com/joburgard/mayu-ui/commit/2e759db7791391467d1406797b2a319d4b61ba9f))
+
 ## [0.7.12](https://github.com/joburgard/mayu-ui/compare/v0.7.11...v0.7.12) (2024-04-30)
 
 
