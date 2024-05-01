@@ -7,6 +7,6 @@
  * https://melt-ui.com/docs/builders/combobox
  */
 
-import Root from './Combobox.svelte';
+import Combobox, { i18n } from './Combobox.svelte';
 
-export { Root as Combobox };
+export { Combobox, i18n as i18nCombobox };
