@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.17](https://github.com/joburgard/mayu-ui/compare/v0.7.16...v0.7.17) (2024-05-02)
+
+
+### Features
+
+* **combobox:** new event noselectblur ([a01d3a3](https://github.com/joburgard/mayu-ui/commit/a01d3a35f12b32bca4afe0bfb6987da9f2eb4059))
+
 ## [0.7.16](https://github.com/joburgard/mayu-ui/compare/v0.7.15...v0.7.16) (2024-05-02)
 
 
