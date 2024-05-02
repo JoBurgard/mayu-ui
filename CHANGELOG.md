@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.15](https://github.com/joburgard/mayu-ui/compare/v0.7.14...v0.7.15) (2024-05-02)
+
+
+### Features
+
+* **combobox, input:** xs size and adapt icon sizes based on variant size ([e42298d](https://github.com/joburgard/mayu-ui/commit/e42298d5824d5c6fa67ebe2f99e4b334d62cf357))
+
 ## [0.7.14](https://github.com/joburgard/mayu-ui/compare/v0.7.13...v0.7.14) (2024-05-01)
 
 
