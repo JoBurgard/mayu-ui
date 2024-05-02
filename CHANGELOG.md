@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.16](https://github.com/joburgard/mayu-ui/compare/v0.7.15...v0.7.16) (2024-05-02)
+
+
+### Features
+
+* **combobox:** ability to hide icons ([b3f7ac6](https://github.com/joburgard/mayu-ui/commit/b3f7ac6ab6b4a4cccda3ba001d173a8c2bfaa16a))
+
 ## [0.7.15](https://github.com/joburgard/mayu-ui/compare/v0.7.14...v0.7.15) (2024-05-02)
 
 
