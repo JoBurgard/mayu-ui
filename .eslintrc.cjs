@@ -32,6 +32,7 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/no-unused-vars': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/consistent-type-definitions': 'off',
 		eqeqeq: 'error',
 		'no-var': 'error',
 		'no-plusplus': ['error'],
