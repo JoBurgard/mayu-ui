@@ -10,6 +10,7 @@ const tooltipVariants = tv({
 	base: 'border min-h-0 max-h-[500px] rounded-[--roundedness-base] shadow-lg bg-white overflow-y-auto',
 	variants: {
 		size: {
+			xs: 'p-1.5 text-xs',
 			sm: 'p-1.5 text-xs',
 			base: 'p-2 text-sm',
 			lg: 'p-3 text-lg',

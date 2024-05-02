@@ -17,7 +17,7 @@ SPDX-License-Identifier: Unlicense
 	import { Story } from '@storybook/addon-svelte-csf';
 	import type { ComponentEvents } from 'svelte';
 
-	const sizes = ['sm', 'base', 'lg', 'xl'] as const;
+	const sizes = ['xs', 'sm', 'base', 'lg', 'xl'] as const;
 	const data = [
 		'EnragedEnragedEnragedEnragedEnragedEnraged',
 		'Gorgeous',
@@ -126,18 +126,20 @@ SPDX-License-Identifier: Unlicense
 		{#each sizes as size}
 			<div class="flex flex-col gap-2">
 				<h2>{size}</h2>
-				<Combobox
-					bind:value
-					{data}
-					dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
-					createHaystack={(item) => item}
-					placeholder="Find a word"
-					on:select={(event) => {
-						onSelectData = event.detail;
-					}}
-					arbitraryValue
-					{size}
-				/>
+				<div>
+					<Combobox
+						bind:value
+						{data}
+						dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+						createHaystack={(item) => item}
+						placeholder="Find a word"
+						on:select={(event) => {
+							onSelectData = event.detail;
+						}}
+						arbitraryValue
+						{size}
+					/>
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -168,7 +170,7 @@ SPDX-License-Identifier: Unlicense
 <Story name="Unstyled">
 	<h2>Selected Value</h2>
 	<pre>{JSON.stringify(value, null, 2)}</pre>
-	<table class="mt-4 w-full max-w-sm prose prose-truegray">
+	<table class="mt-4 w-full max-w-sm prose prose-truegray border-collapse">
 		<thead>
 			<th>ID</th>
 			<th>Combobox</th>
@@ -197,7 +199,7 @@ SPDX-License-Identifier: Unlicense
 			</tr>
 		</tbody>
 	</table>
-	<table class="mt-4 w-full max-w-sm text-sm prose prose-truegray">
+	<table class="mt-4 w-full max-w-sm text-sm prose prose-truegray border-collapse">
 		<thead>
 			<th>ID</th>
 			<th>Combobox</th>
@@ -205,8 +207,9 @@ SPDX-License-Identifier: Unlicense
 		<tbody>
 			<tr>
 				<td class="p-0 leading-none text-center">1</td>
-				<td class="p-0 leading-none"
+				<td class="p-0 leading-none" style="width:90.5001px;height:18px"
 					><Combobox
+						class="pl-3 py-0.75 h-full"
 						bind:value
 						data={externalData}
 						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}

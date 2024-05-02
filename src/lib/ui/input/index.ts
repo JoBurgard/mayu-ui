@@ -14,15 +14,17 @@ const inputVariants = tv({
 		unstyled: {
 			false: [
 				'transition transition-property-[outline-color,border-color]',
-				'rounded-[--input-roundedness] border border-gray-300 outline-1',
+				'border border-gray-300 outline-1',
 				'shadow-[0px_1px_1px_inset_#0000002f]',
 				'focus:border-[--input-focus-border-color]',
+				'placeholder:text-gray-600',
 			],
 			true: 'outline-0',
 		},
 		size: {
+			xs: `px-2 py-0.5 text-xs/6 rounded-[--roundedness-xs]`,
 			sm: `px-3 py-0.75 text-xs/6 rounded-[--roundedness-sm]`,
-			base: `px-3 py-1.5 text-sm/6`,
+			base: `px-3 py-1.5 text-sm/6 rounded-[--roundedness-base]`,
 			lg: `px-4 py-3 text-lg/6 rounded-[--roundedness-lg]`,
 			xl: `px-5 py-5 text-2xl/6 rounded-[--roundedness-lg]`,
 		},
@@ -39,15 +41,16 @@ const inputPlaceholderVariants = tv({
 	base: [
 		'absolute top-1/2 -translate-y-1/2 text-gray-600 select-none',
 		'transition-duration-100 transition-ease-out transition-property-[top,font-size,line-height]',
-		'[input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-$color-primary bg-white px-1 -ml-1 rounded text-xs/3 top-0)',
+		'[input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-$color-primary bg-white px-1 -ml-1 rounded top-0)',
 		'pointer-events-none',
 	],
 	variants: {
 		size: {
-			sm: `text-xs/6 left-3`,
-			base: `text-sm/6 left-3`,
-			lg: `text-lg/6 left-4`,
-			xl: `text-2xl/6 left-5`,
+			xs: `text-xs/6 left-2 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			sm: `text-xs/6 left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			base: `text-sm/6 left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			lg: `text-lg/6 left-4 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-sm/4)`,
+			xl: `text-2xl/6 left-5 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-base/5)`,
 		},
 	},
 	defaultVariants: {
@@ -64,6 +67,7 @@ type Props = Omit<HTMLInputAttributes, 'size'> & {
 type FormInputEvent<T extends Event = Event> = T & {
 	currentTarget: EventTarget & HTMLInputElement;
 };
+
 type InputEvents = {
 	blur: FormInputEvent<FocusEvent>;
 	change: FormInputEvent<Event>;

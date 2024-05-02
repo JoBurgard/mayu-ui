@@ -9,6 +9,8 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts" generics="D, V">
+	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
+
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
@@ -153,6 +155,7 @@ SPDX-License-Identifier: Unlicense
 	function handleInput() {
 		lastAction = 'input';
 		$highlightedItem = null;
+		// TODO highlight if exact match
 	}
 
 	const handleEnterKey = (event: InputEvents['keyup']) => {
@@ -195,14 +198,14 @@ SPDX-License-Identifier: Unlicense
 	};
 </script>
 
-<div class="isolate">
-	<label class="relative block" use:melt={$label}>
+<div class="isolate flex h-full">
+	<label class="relative grow flex flex-col" use:melt={$label}>
 		<input
 			use:melt={$input}
-			class={inputVariants({
+			class={comboboxInputVariants({
 				size,
 				unstyled,
-				class: ['placeholder-transparent w-full pr-13', className],
+				class: className,
 			})}
 			on:blur
 			on:change
@@ -235,11 +238,11 @@ SPDX-License-Identifier: Unlicense
 			<button
 				type="button"
 				tabindex="-1"
-				class="p-1 absolute right-6 top-1/2 z-10 -translate-y-1/2 hover:text-[--color-primary] transition-transform duration-34 select-none hover:-translate-y-[calc(50%+1px)] active:-translate-y-[calc(50%-1px)]"
+				class={comboboxClearButtonVariants({ size })}
 				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
-		<div class="i-lucide-chevrons-up-down absolute right-2 top-1/2 z-10 -translate-y-1/2" />
+		<div class={comboboxChevronVariants({ size })} />
 	</label>
 	{#if $open}
 		<ul

@@ -16,10 +16,12 @@ SPDX-License-Identifier: Unlicense
 
 <Story name="Text"
 	><div class="flex flex-col gap-4 max-w-xs">
+		<input type="text" class={inputVariants({ size: 'xs' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'sm' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'base' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'lg' })} placeholder="Input text here" />
 		<input type="text" class={inputVariants({ size: 'xl' })} placeholder="Input text here" />
+		<Input size="xs" placeholder="Input text here" />
 		<Input size="sm" placeholder="Input text here" />
 		<Input placeholder="Input text here" />
 		<Input size="lg" placeholder="Input text here" />

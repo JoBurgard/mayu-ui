@@ -13,6 +13,7 @@
 	--roundedness-base: 0.5rem;
 	--roundedness-lg: 0.75rem;
 	--roundedness-sm: 0.4rem;
+	--roundedness-xs: 0.3rem;
 
 	/* button */
 	--btn-roundedness: var(--roundedness-base);
