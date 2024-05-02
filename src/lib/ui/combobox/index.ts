@@ -14,15 +14,13 @@ import { inputVariants } from '../input';
 const comboboxInputVariants = tv({
 	extend: inputVariants,
 	base: 'placeholder-transparent w-full',
-	variants: {
-		size: {
-			xs: 'pr-9.5',
-			sm: 'pr-13',
-			base: 'pr-13',
-			lg: 'pr-17',
-			xl: 'pr-21.5',
-		},
-	},
+	compoundVariants: [
+		{ unstyled: false, size: 'xs', class: `pr-9.5` },
+		{ unstyled: false, size: 'sm', class: `pr-13` },
+		{ unstyled: false, size: 'base', class: `pr-13` },
+		{ unstyled: false, size: 'lg', class: `pr-17` },
+		{ unstyled: false, size: 'xl', class: `pr-21.5` },
+	],
 });
 
 const comboboxClearButtonVariants = tv({

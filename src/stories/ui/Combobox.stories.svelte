@@ -207,9 +207,9 @@ SPDX-License-Identifier: Unlicense
 		<tbody>
 			<tr>
 				<td class="p-0 leading-none text-center">1</td>
-				<td class="p-0 leading-none" style="width:90.5001px;height:18px"
+				<td class="p-0 leading-none" style="width:90.5001px;height:20px"
 					><Combobox
-						class="pl-3 py-0.75 h-full"
+						class="px-2.5 py-1 h-full"
 						bind:value
 						data={externalData}
 						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
@@ -221,10 +221,12 @@ SPDX-License-Identifier: Unlicense
 						on:input={() => {
 							fakeFetch();
 						}}
-						size="sm"
+						size="xs"
 						arbitraryValue
 						{isLoading}
 						unstyled
+						hideClearButton
+						hideChevronIcon
 					/></td
 				>
 			</tr>

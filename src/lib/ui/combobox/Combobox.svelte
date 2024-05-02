@@ -16,12 +16,7 @@ SPDX-License-Identifier: Unlicense
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { fly } from 'svelte/transition';
-	import {
-		inputPlaceholderVariants,
-		inputVariants,
-		type InputEvents,
-		type InputProps,
-	} from '../input';
+	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
 	import { tooltipVariants } from '../tooltip';
 
 	type $$Props = Omit<InputProps, 'value'> & {
@@ -31,6 +26,8 @@ SPDX-License-Identifier: Unlicense
 		isLoading?: boolean;
 		unstyled?: boolean;
 		menuClasses?: string;
+		hideClearButton?: boolean;
+		hideChevronIcon?: boolean;
 		createHaystack?: (item: D) => string;
 		dataToOption?: (item: D) => ComboboxOptionProps<V> & Record<string, any>;
 		valueToData?: (value: V) => D;
@@ -49,12 +46,14 @@ SPDX-License-Identifier: Unlicense
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 	export let value: $$Props['value'] = undefined;
+	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
-	export let menuClasses: $$Props['menuClasses'] = undefined;
-	export let arbitraryValue: $$Props['arbitraryValue'] = false;
-	export let isLoading: $$Props['isLoading'] = false;
 	export let unstyled: $$Props['unstyled'] = false;
+	export let menuClasses: $$Props['menuClasses'] = undefined;
+	export let isLoading: $$Props['isLoading'] = false;
+	export let hideClearButton: $$Props['hideClearButton'] = false;
+	export let hideChevronIcon: $$Props['hideChevronIcon'] = false;
 	export let createHaystack: Required<$$Props>['createHaystack'] = (it) => it as string;
 	export let dataToOption: Required<$$Props>['dataToOption'] = (item) => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
@@ -234,7 +233,7 @@ SPDX-License-Identifier: Unlicense
 			{...$$restProps}
 		/>
 		{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
-		{#if $inputValue !== ''}
+		{#if $inputValue !== '' && !hideClearButton}
 			<button
 				type="button"
 				tabindex="-1"
@@ -242,7 +241,9 @@ SPDX-License-Identifier: Unlicense
 				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
-		<div class={comboboxChevronVariants({ size })} />
+		{#if !hideChevronIcon}
+			<div class={comboboxChevronVariants({ size })} />
+		{/if}
 	</label>
 	{#if $open}
 		<ul
