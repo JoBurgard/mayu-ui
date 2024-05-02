@@ -40,6 +40,7 @@ SPDX-License-Identifier: Unlicense
 			value: V | undefined;
 			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined;
 		}>;
+		noselectblur: CustomEvent<null>;
 	};
 
 	export let data: $$Props['data'];
@@ -81,6 +82,7 @@ SPDX-License-Identifier: Unlicense
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
+		noselectblur: $$Events['noselectblur']['detail'];
 	}>();
 
 	const {
@@ -195,6 +197,8 @@ SPDX-License-Identifier: Unlicense
 		const inputElement = document.getElementById($input.id);
 		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
 	};
+
+	// TODO event when focus moves out of component
 </script>
 
 <div class="isolate flex h-full">
@@ -207,6 +211,11 @@ SPDX-License-Identifier: Unlicense
 				class: className,
 			})}
 			on:blur
+			on:blur={() => {
+				if (!$open) {
+					dispatch('noselectblur');
+				}
+			}}
 			on:change
 			on:click
 			on:focus
