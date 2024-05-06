@@ -53,11 +53,11 @@ const inputPlaceholderVariants = tv({
 	],
 	variants: {
 		size: {
-			xs: `text-xs/6 left-2 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
-			sm: `text-xs/6 left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
-			base: `text-sm/6 left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
-			lg: `text-lg/6 left-4 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-sm/4)`,
-			xl: `text-2xl/6 left-5 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-base/5)`,
+			xs: `text-xs left-2 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			sm: `text-xs left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			base: `text-sm left-3 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-xs/3)`,
+			lg: `text-lg left-4 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-sm/4)`,
+			xl: `text-2xl left-5 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-base/5)`,
 		},
 	},
 	defaultVariants: {
