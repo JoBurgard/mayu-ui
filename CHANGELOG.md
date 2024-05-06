@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.18](https://github.com/joburgard/mayu-ui/compare/v0.7.17...v0.7.18) (2024-05-06)
+
+
+### Bug Fixes
+
+* prevent default enter key behaviour to prevent form submission ([ee803b7](https://github.com/joburgard/mayu-ui/commit/ee803b7b56822d730cccd05140af6de7b143e6bf))
+
 ## [0.7.17](https://github.com/joburgard/mayu-ui/compare/v0.7.16...v0.7.17) (2024-05-02)
 
 
