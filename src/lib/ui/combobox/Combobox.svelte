@@ -159,11 +159,12 @@ SPDX-License-Identifier: Unlicense
 		// TODO highlight if exact match
 	}
 
-	const handleEnterKey = (event: InputEvents['keyup']) => {
+	const handleEnterKey = (event: InputEvents['keydown']) => {
 		if (event.key !== 'Enter') {
 			return;
 		}
 
+		event.preventDefault();
 		processInputValue();
 	};
 

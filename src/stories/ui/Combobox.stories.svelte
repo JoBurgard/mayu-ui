@@ -170,66 +170,69 @@ SPDX-License-Identifier: Unlicense
 <Story name="Unstyled">
 	<h2>Selected Value</h2>
 	<pre>{JSON.stringify(value, null, 2)}</pre>
-	<table class="mt-4 w-full max-w-sm prose prose-truegray border-collapse">
-		<thead>
-			<th>ID</th>
-			<th>Combobox</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="p-0 leading-none text-center">1</td>
-				<td class="p-0 leading-none"
-					><Combobox
-						bind:value
-						data={externalData}
-						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
-						valueToData={(value) => ({ a: value, b: Number(value) })}
-						createHaystack={(it) => `${it.a}${String(it.b)}`}
-						on:select={(event) => {
-							onSelectData = event.detail;
-						}}
-						on:input={() => {
-							fakeFetch();
-						}}
-						arbitraryValue
-						{isLoading}
-						unstyled
-					/></td
-				>
-			</tr>
-		</tbody>
-	</table>
-	<table class="mt-4 w-full max-w-sm text-sm prose prose-truegray border-collapse">
-		<thead>
-			<th>ID</th>
-			<th>Combobox</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="p-0 leading-none text-center">1</td>
-				<td class="p-0 leading-none" style="width:90.5001px;height:20px"
-					><Combobox
-						class="px-2.5 py-1 h-full"
-						bind:value
-						data={externalData}
-						dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
-						valueToData={(value) => ({ a: value, b: Number(value) })}
-						createHaystack={(it) => `${it.a}${String(it.b)}`}
-						on:select={(event) => {
-							onSelectData = event.detail;
-						}}
-						on:input={() => {
-							fakeFetch();
-						}}
-						size="xs"
-						arbitraryValue
-						{isLoading}
-						unstyled
-						hideClearButton
-						hideChevronIcon
-					/></td
-				>
-			</tr>
-		</tbody>
-	</table>
+	<form on:submit|preventDefault={() => alert('Form was submitted. This should not happen.')}>
+		<table class="mt-4 w-full max-w-sm prose prose-truegray border-collapse">
+			<thead>
+				<th>ID</th>
+				<th>Combobox</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="p-0 leading-none text-center">1</td>
+					<td class="p-0 leading-none"
+						><Combobox
+							bind:value
+							data={externalData}
+							dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+							valueToData={(value) => ({ a: value, b: Number(value) })}
+							createHaystack={(it) => `${it.a}${String(it.b)}`}
+							on:select={(event) => {
+								onSelectData = event.detail;
+							}}
+							on:input={() => {
+								fakeFetch();
+							}}
+							arbitraryValue
+							{isLoading}
+							unstyled
+						/></td
+					>
+				</tr>
+			</tbody>
+		</table>
+		<table class="mt-4 w-full max-w-sm text-sm prose prose-truegray border-collapse">
+			<thead>
+				<th>ID</th>
+				<th>Combobox</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="p-0 leading-none text-center">1</td>
+					<td class="p-0 leading-none" style="width:90.5001px;height:20px"
+						><Combobox
+							class="px-2.5 py-1 h-full"
+							name="test"
+							bind:value
+							data={externalData}
+							dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+							valueToData={(value) => ({ a: value, b: Number(value) })}
+							createHaystack={(it) => `${it.a}${String(it.b)}`}
+							on:select={(event) => {
+								onSelectData = event.detail;
+							}}
+							on:input={() => {
+								fakeFetch();
+							}}
+							size="xs"
+							arbitraryValue
+							{isLoading}
+							unstyled
+							hideClearButton
+							hideChevronIcon
+						/></td
+					>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 </Story>
