@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.19](https://github.com/joburgard/mayu-ui/compare/v0.7.18...v0.7.19) (2024-05-15)
+
+
+### Features
+
+* **combobox:** new event 'noselectenter' ([2c1ee13](https://github.com/joburgard/mayu-ui/commit/2c1ee13073541718dbb4dfb93a8d2f173100e938))
+
+
+### Bug Fixes
+
+* double scrollbar ([e6a53d4](https://github.com/joburgard/mayu-ui/commit/e6a53d44be27c34457aa925c36c5a7e8b48cd1d7))
+* **input:** correct bad line heights ([e4479a6](https://github.com/joburgard/mayu-ui/commit/e4479a64075119c1680aa78cf3a561c6bad9d2fd))
+
 ## [0.7.18](https://github.com/joburgard/mayu-ui/compare/v0.7.17...v0.7.18) (2024-05-06)
 
 
