@@ -263,7 +263,7 @@ SPDX-License-Identifier: Unlicense
 			transition:fly={{ duration: 150, y: -5 }}
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-			<div class="flex min-h-0 flex-col gap-0 overflow-y-scroll" tabindex="0">
+			<div class="flex min-h-0 flex-col gap-0" tabindex="0">
 				{#each filteredOptions || [] as resultIndex, index (index)}
 					{@const optionData = options[resultIndex]}
 					<li
