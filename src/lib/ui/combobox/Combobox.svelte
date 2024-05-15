@@ -13,7 +13,7 @@ SPDX-License-Identifier: Unlicense
 
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
-	import { beforeUpdate, createEventDispatcher } from 'svelte';
+	import { afterUpdate, beforeUpdate, createEventDispatcher } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { fly } from 'svelte/transition';
 	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
@@ -41,6 +41,7 @@ SPDX-License-Identifier: Unlicense
 			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined;
 		}>;
 		noselectblur: CustomEvent<null>;
+		noselectenter: CustomEvent<null>;
 	};
 
 	export let data: $$Props['data'];
@@ -79,10 +80,12 @@ SPDX-License-Identifier: Unlicense
 	let valueInternal: $$Props['value'];
 	let lastAction: 'input' | 'select' | null = null;
 	let skipProcessingOnClose = false;
+	let dispatchedSelect = false;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
 		noselectblur: $$Events['noselectblur']['detail'];
+		noselectenter: $$Events['noselectenter']['detail'];
 	}>();
 
 	const {
@@ -98,9 +101,25 @@ SPDX-License-Identifier: Unlicense
 			if (next === false && skipProcessingOnClose === false) {
 				processInputValue();
 			}
+			if (next === false) {
+				$highlightedItem = null;
+				lastAction = null;
+			}
 			if (next === true) {
 				skipProcessingOnClose = false;
+				dispatchedSelect = false;
 			}
+			return next;
+		},
+		onSelectedChange: ({ next }) => {
+			dispatchedSelect = true;
+
+			if (!(next === undefined && lastAction === undefined)) {
+				value = next?.value;
+				valueInternal = value;
+				dispatch('select', { value, option: options?.find((option) => option.value === value) });
+			}
+
 			return next;
 		},
 	});
@@ -140,15 +159,6 @@ SPDX-License-Identifier: Unlicense
 	// run on SSR
 	checkIfUpdateFromOutside();
 
-	selected.subscribe((option) => {
-		if (option === undefined && lastAction === undefined) {
-			return;
-		}
-		value = option?.value;
-		valueInternal = value;
-		dispatch('select', { value, option: options?.find((option) => option.value === value) });
-	});
-
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	let haystack: string[] = data.map(createHaystack);
 	let showAllResult = data.map((_, index) => index);
@@ -165,7 +175,13 @@ SPDX-License-Identifier: Unlicense
 		}
 
 		event.preventDefault();
+
 		processInputValue();
+
+		if (!dispatchedSelect) {
+			dispatch('noselectenter');
+		}
+		dispatchedSelect = false;
 	};
 
 	function clearValueAndInput() {
@@ -198,8 +214,6 @@ SPDX-License-Identifier: Unlicense
 		const inputElement = document.getElementById($input.id);
 		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
 	};
-
-	// TODO event when focus moves out of component
 </script>
 
 <div class="isolate flex h-full">
