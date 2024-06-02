@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.21](https://github.com/joburgard/mayu-ui/compare/v0.7.20...v0.7.21) (2024-06-02)
+
+
+### Bug Fixes
+
+* export DialogTrigger ([c863270](https://github.com/joburgard/mayu-ui/commit/c863270a4e9495a5ae92986231d6eacfee86793d))
+
 ## [0.7.20](https://github.com/joburgard/mayu-ui/compare/v0.7.19...v0.7.20) (2024-06-02)
 
 
