@@ -16,6 +16,7 @@ SPDX-License-Identifier: Unlicense
 	import Combobox from '$lib/ui/combobox/Combobox.svelte';
 	import { Story } from '@storybook/addon-svelte-csf';
 	import type { ComponentEvents } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	const sizes = ['xs', 'sm', 'base', 'lg', 'xl'] as const;
 	const data = [
@@ -70,6 +71,12 @@ SPDX-License-Identifier: Unlicense
 			isLoading = false;
 		}, 500);
 	}
+
+	let delayedValue = writable<undefined | string>();
+
+	setTimeout(() => {
+		$delayedValue = 'Delayed value';
+	}, 1000);
 </script>
 
 <Story name="Default">
@@ -161,6 +168,23 @@ SPDX-License-Identifier: Unlicense
 			on:input={() => {
 				fakeFetch();
 			}}
+			arbitraryValue
+			{isLoading}
+		/>
+	</div>
+</Story>
+
+<Story name="Delayed value from store">
+	<h2>Selected Value</h2>
+	<pre>{JSON.stringify($delayedValue, null, 2)}</pre>
+	<div class="mt-4 flex flex-col gap-4 max-w-xs">
+		<Combobox
+			bind:value={$delayedValue}
+			data={[]}
+			valueToData={(value) => ({ a: value, b: value })}
+			dataToOption={(it) => ({ label: it.a, value: String(it.b) })}
+			createHaystack={(it) => `${it.a}${String(it.b)}`}
+			placeholder="Find a word"
 			arbitraryValue
 			{isLoading}
 		/>
