@@ -9,4 +9,5 @@ export * from './ui/combobox';
 export * from './ui/tooltip';
 export * from './ui/contextMenu';
 export * from './ui/pagination';
+export * from './ui/dialog';
 // export * from './ui/select/';
