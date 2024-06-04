@@ -13,7 +13,7 @@ SPDX-License-Identifier: Unlicense
 
 	import uFuzzy from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
-	import { afterUpdate, beforeUpdate, createEventDispatcher } from 'svelte';
+	import { beforeUpdate, createEventDispatcher } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { fly } from 'svelte/transition';
 	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
