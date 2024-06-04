@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.0](https://github.com/joburgard/mayu-ui/compare/v0.7.21...v0.8.0) (2024-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Combobox:** improve default valutToData
+
+### Features
+
+* **Combobox:** improve default valutToData ([1fddb9d](https://github.com/joburgard/mayu-ui/commit/1fddb9da202aaf4a7fb30956c8bce770e0dd8e20))
+
 ## [0.7.21](https://github.com/joburgard/mayu-ui/compare/v0.7.20...v0.7.21) (2024-06-02)
 
 
