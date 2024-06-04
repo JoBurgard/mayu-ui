@@ -72,7 +72,8 @@ SPDX-License-Identifier: Unlicense
 			disabled: item?.disabled,
 		};
 	};
-	export let valueToData: Required<$$Props>['valueToData'] = (value) => value as unknown as D;
+	export let valueToData: Required<$$Props>['valueToData'] = (value) =>
+		({ label: value, value }) as unknown as D;
 	export let optionToDisplayText: Required<$$Props>['optionToDisplayText'] = (option) =>
 		option?.label || '';
 
