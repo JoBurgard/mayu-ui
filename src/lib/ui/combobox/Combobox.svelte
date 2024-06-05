@@ -176,6 +176,7 @@ SPDX-License-Identifier: Unlicense
 		}
 
 		event.preventDefault();
+		event.stopPropagation();
 
 		processInputValue();
 
