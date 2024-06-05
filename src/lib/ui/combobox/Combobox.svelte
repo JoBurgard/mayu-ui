@@ -250,13 +250,9 @@ SPDX-License-Identifier: Unlicense
 				// Prevent selecting value when closing by escape
 				if (e.detail.originalEvent.key === 'Escape') {
 					skipProcessingOnClose = true;
-					e.detail.originalEvent.preventDefault();
-					e.detail.originalEvent.stopPropagation();
 				}
 				if (e.detail.originalEvent.key === 'Enter' && $highlightedItem) {
 					lastAction = 'select';
-					e.detail.originalEvent.preventDefault();
-					e.detail.originalEvent.stopPropagation();
 				}
 			}}
 			{placeholder}
