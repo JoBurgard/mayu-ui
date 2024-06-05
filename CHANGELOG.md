@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.3](https://github.com/joburgard/mayu-ui/compare/v0.8.2...v0.8.3) (2024-06-05)
+
+
+### Bug Fixes
+
+* revert problematic stopPropagations ([ef5a10a](https://github.com/joburgard/mayu-ui/commit/ef5a10a566f88a5a00d08a2f623d3b60c040ad8d))
+
 ## [0.8.2](https://github.com/joburgard/mayu-ui/compare/v0.8.1...v0.8.2) (2024-06-05)
 
 
