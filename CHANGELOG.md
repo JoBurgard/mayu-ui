@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.1](https://github.com/joburgard/mayu-ui/compare/v0.8.0...v0.8.1) (2024-06-05)
+
+
+### Bug Fixes
+
+* prevent Enter key from propagating ([798ad5c](https://github.com/joburgard/mayu-ui/commit/798ad5ccafa23db795f369d66a6eeacef6e2bfe7))
+
 ## [0.8.0](https://github.com/joburgard/mayu-ui/compare/v0.7.21...v0.8.0) (2024-06-04)
 
 
