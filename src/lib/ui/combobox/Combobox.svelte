@@ -131,24 +131,28 @@ SPDX-License-Identifier: Unlicense
 		$inputValue = value;
 	}
 
+	function pickOptionByValue() {
+		const foundOption = options.find((option) => option.value === value);
+		if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
+			$selected = dataToOption(valueToData(value));
+			$inputValue = optionToDisplayText($selected);
+			valueInternal = value;
+		} else if (foundOption !== undefined) {
+			$selected = foundOption;
+			$inputValue = optionToDisplayText($selected);
+			valueInternal = value;
+		} else {
+			value = valueInternal;
+		}
+	}
+
 	function checkIfUpdateFromOutside() {
 		if (value !== valueInternal) {
 			if (value === undefined) {
 				clearValueAndInput();
 				return;
 			}
-			const foundOption = options.find((option) => option.value === value);
-			if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
-				$selected = dataToOption(valueToData(value));
-				$inputValue = optionToDisplayText($selected);
-				valueInternal = value;
-			} else if (foundOption !== undefined) {
-				$selected = foundOption;
-				$inputValue = optionToDisplayText($selected);
-				valueInternal = value;
-			} else {
-				value = valueInternal;
-			}
+			pickOptionByValue();
 		}
 	}
 
@@ -194,10 +198,9 @@ SPDX-License-Identifier: Unlicense
 	function processInputValue() {
 		if (lastAction === 'input' && $inputValue === '') {
 			clearValueAndInput();
-		} else if (lastAction === 'input' && arbitraryValue) {
-			$selected = dataToOption(valueToData($inputValue as V));
-			valueInternal = $inputValue as V;
+		} else if (lastAction === 'input') {
 			value = $inputValue as V;
+			pickOptionByValue();
 		} else if (lastAction === 'select' || !arbitraryValue) {
 			$inputValue = optionToDisplayText($selected);
 		}

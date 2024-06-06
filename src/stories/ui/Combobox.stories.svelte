@@ -118,6 +118,7 @@ SPDX-License-Identifier: Unlicense
 			bind:value
 			{data}
 			dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+			valueToData={(it) => it}
 			createHaystack={(item) => item}
 			placeholder="Find a word"
 			on:select={(event) => {
