@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.4](https://github.com/joburgard/mayu-ui/compare/v0.8.3...v0.8.4) (2024-06-06)
+
+
+### Features
+
+* **Combobox:** if inputValue matches a value exactly, then select that value on enter ([4fa0b7d](https://github.com/joburgard/mayu-ui/commit/4fa0b7d6f33925a353d8fa042c335d5588e10d7d))
+
 ## [0.8.3](https://github.com/joburgard/mayu-ui/compare/v0.8.2...v0.8.3) (2024-06-05)
 
 
