@@ -41,7 +41,7 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <slot name="trigger" trigger={disabled ? { action: () => {} } : $trigger} />
-{#if $open}
+{#if $open && !disabled}
 	<div use:melt={$content} transition:fade={{ duration: 100 }} class={tooltipVariants({ size })}>
 		<slot />
 	</div>
