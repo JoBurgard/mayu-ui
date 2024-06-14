@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.0](https://github.com/joburgard/mayu-ui/compare/v0.8.5...v0.9.0) (2024-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **FormError:** change messages prop to Array
+
+### Features
+
+* **FormError:** change messages prop to Array ([33dddf3](https://github.com/joburgard/mayu-ui/commit/33dddf3ac7c05dfc2c250aed691c231999cae4f0))
+
 ## [0.8.5](https://github.com/joburgard/mayu-ui/compare/v0.8.4...v0.8.5) (2024-06-14)
 
 
