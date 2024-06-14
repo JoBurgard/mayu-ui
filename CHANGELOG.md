@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.5](https://github.com/joburgard/mayu-ui/compare/v0.8.4...v0.8.5) (2024-06-14)
+
+
+### Features
+
+* Error states ([078891e](https://github.com/joburgard/mayu-ui/commit/078891e26166bacb6d0795092b7c0c308ea14517))
+* FormError helper component for SuperForms ([78ea575](https://github.com/joburgard/mayu-ui/commit/78ea5756257452a80e595aa87fe8abaec3d52da9))
+
+
+### Bug Fixes
+
+* **Tooltip:** do not show content if disabled ([108a4f6](https://github.com/joburgard/mayu-ui/commit/108a4f6a42bf71b3f962ced92d570d9ab9952c6a))
+
 ## [0.8.4](https://github.com/joburgard/mayu-ui/compare/v0.8.3...v0.8.4) (2024-06-06)
 
 
