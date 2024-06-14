@@ -264,6 +264,7 @@ SPDX-License-Identifier: Unlicense
 				}
 			}}
 			{placeholder}
+			aria-invalid={status ? 'true' : undefined}
 			{...$$restProps}
 		/>
 		{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}

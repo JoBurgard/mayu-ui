@@ -41,7 +41,9 @@ https://github.com/huntabyte/shadcn-svelte
 		on:paste
 		on:input
 		{placeholder}
+		aria-invalid={status ? 'true' : undefined}
 		{...$$restProps}
 	/>
-	{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
+	{#if placeholder}<span class={inputPlaceholderVariants({ size, status })}>{placeholder}</span
+		>{/if}
 </label>

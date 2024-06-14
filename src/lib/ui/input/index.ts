@@ -64,9 +64,15 @@ const inputPlaceholderVariants = tv({
 			lg: `text-lg left-4 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-sm/4)`,
 			xl: `text-2xl left-5 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-base/5)`,
 		},
+		status: {
+			default: [],
+			error:
+				'text-red-500 [input:not(:placeholder-shown)~&,input:focus~&,input[aria-expanded=true]_~_&]:(text-red-700)',
+		},
 	},
 	defaultVariants: {
 		size: 'base',
+		status: 'default',
 	},
 });
 

@@ -10,8 +10,16 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts">
+	import { buttonVariants } from '$lib';
+
+	import FormError from '$lib/helper/form-error/FormError.svelte';
+
 	import { Input, inputVariants } from '$lib/ui/input/';
 	import { Story } from '@storybook/addon-svelte-csf';
+	import { tick } from 'svelte';
+	import { writable } from 'svelte/store';
+
+	let errors = writable<Record<string, any>>({ test: {} });
 </script>
 
 <Story name="Text"
@@ -34,5 +42,35 @@ SPDX-License-Identifier: Unlicense
 </Story>
 
 <Story name="Error">
-	<input class={inputVariants({ status: 'error' })} type="text" />
+	<div class="flex gap-2">
+		<button
+			class={buttonVariants()}
+			type="button"
+			on:click={() => {
+				$errors.test.input1 = 'This is an error message.';
+				tick().then(() => {
+					document.querySelector('[aria-invalid]')?.focus();
+				});
+			}}>Set Error1</button
+		>
+		<button
+			class={buttonVariants()}
+			type="button"
+			on:click={() => {
+				$errors.test.input2 = 'This is an error message.';
+				tick().then(() => {
+					document.querySelector('[aria-invalid]')?.focus();
+				});
+			}}>Set Error2</button
+		>
+	</div>
+	<hr class="my-4" />
+	<div class="flex gap-2">
+		<FormError errorMessage={$errors?.test?.input1} let:status
+			><Input placeholder="Input1" {status} /></FormError
+		>
+		<FormError errorMessage={$errors?.test?.input2} let:status
+			><Input placeholder="Input2" {status} /></FormError
+		>
+	</div>
 </Story>

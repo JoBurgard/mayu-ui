@@ -17,6 +17,7 @@ SPDX-License-Identifier: Unlicense
 	import { Story } from '@storybook/addon-svelte-csf';
 	import type { ComponentEvents } from 'svelte';
 	import { writable } from 'svelte/store';
+	import FormError from '$lib/helper/form-error/FormError.svelte';
 
 	const sizes = ['xs', 'sm', 'base', 'lg', 'xl'] as const;
 	const data = [
@@ -267,16 +268,22 @@ SPDX-License-Identifier: Unlicense
 </Story>
 
 <Story name="Error">
-	<Combobox
-		bind:value
-		{data}
-		dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
-		createHaystack={(item) => item}
-		placeholder="Find a word"
-		on:select={(event) => {
-			onSelectData = event.detail;
-		}}
-		arbitraryValue
-		status="error"
-	/>
+	<FormError
+		errorMessage="This is a very long error message! Please correct the input."
+		placement="right"
+		let:status
+	>
+		<Combobox
+			bind:value
+			{data}
+			dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+			createHaystack={(item) => item}
+			placeholder="Find a word"
+			on:select={(event) => {
+				onSelectData = event.detail;
+			}}
+			arbitraryValue
+			{status}
+		/></FormError
+	>
 </Story>
