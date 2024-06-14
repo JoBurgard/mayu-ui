@@ -265,3 +265,18 @@ SPDX-License-Identifier: Unlicense
 		</table>
 	</form>
 </Story>
+
+<Story name="Error">
+	<Combobox
+		bind:value
+		{data}
+		dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+		createHaystack={(item) => item}
+		placeholder="Find a word"
+		on:select={(event) => {
+			onSelectData = event.detail;
+		}}
+		arbitraryValue
+		status="error"
+	/>
+</Story>

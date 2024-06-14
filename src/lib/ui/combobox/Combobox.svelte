@@ -51,6 +51,7 @@ SPDX-License-Identifier: Unlicense
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
+	export let status: $$Props['status'] = undefined;
 	export let unstyled: $$Props['unstyled'] = false;
 	export let menuClasses: $$Props['menuClasses'] = undefined;
 	export let isLoading: $$Props['isLoading'] = false;
@@ -206,6 +207,9 @@ SPDX-License-Identifier: Unlicense
 		}
 	}
 
+	// TODO sort results by relevancy
+	// TODO mark input in results
+	// TODO if arbitraryValue is false, preselect first entry
 	$: filteredOptions =
 		$touchedInput && $inputValue !== ''
 			? fuzzySearch.filter(haystack as string[], $inputValue)
@@ -227,6 +231,7 @@ SPDX-License-Identifier: Unlicense
 			use:melt={$input}
 			class={comboboxInputVariants({
 				size,
+				status,
 				unstyled,
 				class: className,
 			})}

@@ -16,6 +16,10 @@ const tooltipVariants = tv({
 			lg: 'p-3 text-lg',
 			xl: 'p-5 text-2xl',
 		},
+		status: {
+			default: [],
+			error: 'bg-red-50 border-red-400 text-red-800',
+		},
 	},
 	defaultVariants: {
 		size: 'base',

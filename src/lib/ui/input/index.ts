@@ -28,6 +28,10 @@ const inputVariants = tv({
 			lg: ``,
 			xl: ``,
 		},
+		status: {
+			default: [],
+			error: `border-red-400 outline-red-500 focus:border-red-500`,
+		},
 	},
 	compoundVariants: [
 		{ unstyled: false, size: 'xs', class: `px-2 py-0.5 text-xs/6 rounded-[--roundedness-xs]` },
@@ -39,6 +43,7 @@ const inputVariants = tv({
 	defaultVariants: {
 		unstyled: false,
 		size: 'base',
+		status: 'default',
 	},
 });
 // TODO report unocss bug
@@ -66,9 +71,11 @@ const inputPlaceholderVariants = tv({
 });
 
 type Size = VariantProps<typeof inputVariants>['size'];
+type Status = VariantProps<typeof inputVariants>['status'];
 
 type Props = Omit<HTMLInputAttributes, 'size'> & {
 	size?: Size;
+	status?: Status;
 };
 
 type FormInputEvent<T extends Event = Event> = T & {

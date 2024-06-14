@@ -17,12 +17,14 @@ https://github.com/huntabyte/shadcn-svelte
 	export let value: $$Props['value'] = undefined;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
+	export let status: $$Props['status'] = undefined;
 </script>
 
 <label class="relative block">
 	<input
 		class={inputVariants({
 			size,
+			status,
 			class: ['placeholder-transparent w-full', className],
 		})}
 		bind:value

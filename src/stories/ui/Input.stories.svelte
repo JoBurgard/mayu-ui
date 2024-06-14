@@ -32,3 +32,7 @@ SPDX-License-Identifier: Unlicense
 <Story name="Unstyled">
 	<input class={inputVariants({ unstyled: true })} type="text" />
 </Story>
+
+<Story name="Error">
+	<input class={inputVariants({ status: 'error' })} type="text" />
+</Story>
