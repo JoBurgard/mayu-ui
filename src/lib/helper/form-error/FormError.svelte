@@ -7,13 +7,13 @@ SPDX-License-Identifier: Unlicense
 	import Tooltip from '$lib/ui/tooltip/Tooltip.svelte';
 	import type { ComponentProps } from 'svelte';
 
-	export let errorMessage: string | undefined = undefined;
+	export let errorMessages: string[] | undefined = undefined;
 	export let placement: ComponentProps<Tooltip>['placement'] = 'bottom';
 
 	let showMessage = false;
 	let status: 'error' | undefined = undefined;
 
-	$: status = errorMessage ? 'error' : undefined;
+	$: status = errorMessages?.length ? 'error' : undefined;
 </script>
 
 <Tooltip
@@ -22,7 +22,7 @@ SPDX-License-Identifier: Unlicense
 	size="xs"
 	bind:open={showMessage}
 	onOpenChange={({ curr }) => curr}
-	disabled={!errorMessage}
+	disabled={!errorMessages}
 >
 	<div
 		class="inline-flex flex-col"
@@ -34,5 +34,9 @@ SPDX-License-Identifier: Unlicense
 	>
 		<slot {status} />
 	</div>
-	<p>{errorMessage}</p>
+	<ul class={Array.isArray(errorMessages) && errorMessages.length > 1 ? 'list-disc-inside' : ''}>
+		{#each errorMessages || [] as message}
+			<li>{message}</li>
+		{/each}
+	</ul>
 </Tooltip>

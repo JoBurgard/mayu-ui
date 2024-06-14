@@ -269,8 +269,11 @@ SPDX-License-Identifier: Unlicense
 
 <Story name="Error">
 	<FormError
-		errorMessage="This is a very long error message! Please correct the input."
-		placement="right"
+		errorMessages={[
+			'This is a very long error message! Please correct the input.',
+			'And another one.',
+		]}
+		placement="right-end"
 		let:status
 	>
 		<Combobox

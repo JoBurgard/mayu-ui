@@ -47,7 +47,7 @@ SPDX-License-Identifier: Unlicense
 			class={buttonVariants()}
 			type="button"
 			on:click={() => {
-				$errors.test.input1 = 'This is an error message.';
+				$errors.test.input1 = ['This is an error message.', "And don't forget to fix this."];
 				tick().then(() => {
 					document.querySelector('[aria-invalid]')?.focus();
 				});
@@ -57,7 +57,7 @@ SPDX-License-Identifier: Unlicense
 			class={buttonVariants()}
 			type="button"
 			on:click={() => {
-				$errors.test.input2 = 'This is an error message.';
+				$errors.test.input2 = ['This is an error message.'];
 				tick().then(() => {
 					document.querySelector('[aria-invalid]')?.focus();
 				});
@@ -66,10 +66,10 @@ SPDX-License-Identifier: Unlicense
 	</div>
 	<hr class="my-4" />
 	<div class="flex gap-2">
-		<FormError errorMessage={$errors?.test?.input1} let:status
+		<FormError errorMessages={$errors?.test?.input1} let:status
 			><Input placeholder="Input1" {status} /></FormError
 		>
-		<FormError errorMessage={$errors?.test?.input2} let:status
+		<FormError errorMessages={$errors?.test?.input2} let:status
 			><Input placeholder="Input2" {status} /></FormError
 		>
 	</div>
