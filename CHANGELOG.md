@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.1](https://github.com/joburgard/mayu-ui/compare/v0.9.0...v0.9.1) (2024-06-15)
+
+
+### Features
+
+* **FormError:** change default placement ([f022560](https://github.com/joburgard/mayu-ui/commit/f022560846fe437de9b1d61e6dc1863bd603f94e))
+
 ## [0.9.0](https://github.com/joburgard/mayu-ui/compare/v0.8.5...v0.9.0) (2024-06-14)
 
 
