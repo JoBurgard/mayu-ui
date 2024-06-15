@@ -8,7 +8,7 @@ SPDX-License-Identifier: Unlicense
 	import type { ComponentProps } from 'svelte';
 
 	export let errorMessages: string[] | undefined = undefined;
-	export let placement: ComponentProps<Tooltip>['placement'] = 'bottom';
+	export let placement: ComponentProps<Tooltip>['placement'] = 'bottom-start';
 
 	let showMessage = false;
 	let status: 'error' | undefined = undefined;
