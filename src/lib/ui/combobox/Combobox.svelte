@@ -267,7 +267,8 @@ SPDX-License-Identifier: Unlicense
 			aria-invalid={status ? 'true' : undefined}
 			{...$$restProps}
 		/>
-		{#if placeholder}<span class={inputPlaceholderVariants({ size })}>{placeholder}</span>{/if}
+		{#if placeholder}<span class={inputPlaceholderVariants({ size, status })}>{placeholder}</span
+			>{/if}
 		{#if $inputValue !== '' && !hideClearButton}
 			<button
 				type="button"
