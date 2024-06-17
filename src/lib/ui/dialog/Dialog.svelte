@@ -21,9 +21,14 @@ SPDX-License-Identifier: Unlicense
 			registry.set(name, dialog);
 		}
 
+		function remove(name: string) {
+			registry.delete(name);
+		}
+
 		return {
 			get,
 			set,
+			remove,
 		};
 	}
 
@@ -35,6 +40,7 @@ SPDX-License-Identifier: Unlicense
 	import { dialogOverlayVariants, dialogVariants } from '.';
 	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { onDestroy } from 'svelte';
 
 	export let name: string;
 
@@ -42,6 +48,8 @@ SPDX-License-Identifier: Unlicense
 		elements: { portalled, title, content, description, close, overlay },
 		states: { open },
 	} = dialogRegistry.get(name);
+
+	onDestroy(() => dialogRegistry.remove(name));
 </script>
 
 {#if $open}
