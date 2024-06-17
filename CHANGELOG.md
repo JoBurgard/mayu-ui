@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.2](https://github.com/joburgard/mayu-ui/compare/v0.9.1...v0.9.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* **Combobox:** correct label color, when visualising error state ([305d5f1](https://github.com/joburgard/mayu-ui/commit/305d5f1ccac058a40e044283950ad1a6a590aa38))
+* **Tooltip:** correct behaviour when toggeling disabled prop ([ba8818b](https://github.com/joburgard/mayu-ui/commit/ba8818be46624a789c1436593cb7248ce671e6db))
+
 ## [0.9.1](https://github.com/joburgard/mayu-ui/compare/v0.9.0...v0.9.1) (2024-06-15)
 
 
