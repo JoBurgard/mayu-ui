@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.3](https://github.com/joburgard/mayu-ui/compare/v0.9.2...v0.9.3) (2024-06-17)
+
+
+### Features
+
+* **Button:** add new ghost variant ([4e44634](https://github.com/joburgard/mayu-ui/commit/4e446346871a8eb42be814161ff042607deafcd6))
+* **Dialog:** remove from registry when destroyed ([2c09f6d](https://github.com/joburgard/mayu-ui/commit/2c09f6d8afc24f84872f3a6bb6d5f1fbbc18dbcd))
+* new Popover component ([e7452ba](https://github.com/joburgard/mayu-ui/commit/e7452bae8a043b9925f71be7f74a1835b6250a5a))
+
 ## [0.9.2](https://github.com/joburgard/mayu-ui/compare/v0.9.1...v0.9.2) (2024-06-17)
 
 
