@@ -14,6 +14,8 @@ SPDX-License-Identifier: Unlicense
 	import { Tooltip } from '$lib/ui/tooltip';
 	import { melt } from '@melt-ui/svelte';
 	import { Story } from '@storybook/addon-svelte-csf';
+
+	let disabled = true;
 </script>
 
 <Story name="Default">
@@ -26,12 +28,22 @@ SPDX-License-Identifier: Unlicense
 </Story>
 
 <Story name="Disabled">
-	<Tooltip placement="right" disabled>
-		<button type="button" class={buttonVariants()} slot="trigger" let:trigger use:melt={trigger}
-			>Hover me</button
+	<div class="inline-flex flex-col gap-2">
+		{disabled ? 'Disabled' : 'Not disabled'}
+		<button
+			type="button"
+			class={buttonVariants()}
+			on:click={() => {
+				disabled = !disabled;
+			}}>Toggle disabled</button
 		>
-		<p>This is a tooltip!</p>
-	</Tooltip>
+		<Tooltip {disabled}>
+			<svelte:fragment slot="trigger" let:trigger>
+				<button type="button" class={buttonVariants()} use:melt={trigger}>Hover me</button>
+			</svelte:fragment>
+			<p>This is a tooltip!</p>
+		</Tooltip>
+	</div>
 </Story>
 
 <Story name="Error">

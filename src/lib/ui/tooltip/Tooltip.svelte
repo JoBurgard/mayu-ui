@@ -5,7 +5,6 @@ SPDX-License-Identifier: Unlicense
 
 <script lang="ts">
 	import { createSync, createTooltip, melt, type CreateTooltipProps } from '@melt-ui/svelte';
-	import { fade } from 'svelte/transition';
 	import type { VariantProps } from 'tailwind-variants';
 	import { tooltipVariants } from '.';
 
@@ -27,7 +26,9 @@ SPDX-License-Identifier: Unlicense
 	export let disabled = false;
 	export let size: VariantProps<typeof tooltipVariants>['size'] = undefined;
 	export let status: VariantProps<typeof tooltipVariants>['status'] = undefined;
-	export let onOpenChange: CreateTooltipProps['onOpenChange'] = ({ next }) => next;
+	export let onOpenChange: Required<CreateTooltipProps>['onOpenChange'] = ({ next }) => next;
+	export let openDelay: Required<CreateTooltipProps>['openDelay'] = 0;
+	export let closeDelay: Required<CreateTooltipProps>['closeDelay'] = 0;
 
 	const {
 		elements: { trigger, content },
@@ -36,24 +37,25 @@ SPDX-License-Identifier: Unlicense
 		positioning: {
 			placement,
 		},
-		openDelay: 0,
-		closeDelay: 0,
+		openDelay,
+		closeDelay,
 		closeOnPointerDown: false,
 		forceVisible: true,
-		onOpenChange,
+		onOpenChange: (params) => {
+			if (disabled) {
+				return params.curr;
+			}
+			return onOpenChange(params);
+		},
 	});
 
 	const sync = createSync(states);
 	sync.open(open, (value) => (open = value));
 </script>
 
-<slot name="trigger" trigger={disabled ? { action: () => {} } : $trigger} />
+<slot name="trigger" trigger={$trigger} />
 {#if open && !disabled}
-	<div
-		use:melt={$content}
-		transition:fade={{ duration: 100 }}
-		class={tooltipVariants({ size, status })}
-	>
+	<div use:melt={$content} class={tooltipVariants({ size, status })}>
 		<slot />
 	</div>
 {/if}
