@@ -6,6 +6,7 @@ SPDX-License-Identifier: Unlicense
 <script lang="ts" context="module">
 	import {
 		createPopover,
+		createSync,
 		type CreatePopoverProps,
 		type Popover as PopoverType,
 	} from '@melt-ui/svelte';
@@ -55,6 +56,7 @@ SPDX-License-Identifier: Unlicense
 	import { onDestroy } from 'svelte';
 
 	export let name: string = generateRegistryName();
+	export let open = false;
 	export let placement:
 		| 'top'
 		| 'top-start'
@@ -74,14 +76,17 @@ SPDX-License-Identifier: Unlicense
 
 	const {
 		elements: { trigger, content, close },
-		states: { open },
+		states,
 	} = popoverRegistry.get(name, { positioning: { placement } });
 
 	onDestroy(() => popoverRegistry.remove(name));
+
+	const sync = createSync(states);
+	$: sync.open(open, (v) => (open = v));
 </script>
 
 <slot name="trigger" trigger={$trigger} />
-{#if $open}
+{#if open}
 	<div
 		class={popoverVariants({ size, status })}
 		use:melt={$content}
