@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.4](https://github.com/joburgard/mayu-ui/compare/v0.9.3...v0.9.4) (2024-06-18)
+
+
+### Features
+
+* **Popover:** add synced open prop ([0fb1e27](https://github.com/joburgard/mayu-ui/commit/0fb1e27e27cdd0c1c992c89659e7e48cd43e5514))
+
 ## [0.9.3](https://github.com/joburgard/mayu-ui/compare/v0.9.2...v0.9.3) (2024-06-17)
 
 
