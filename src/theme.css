@@ -8,6 +8,9 @@
 	--color-primary: #0284c7;
 	--color-secondary: theme('colors.sky.500');
 	--color-neutral: theme('colors.gray.200');
+	--color-text-on-primary: white;
+	--color-text-on-secondary: white;
+	--color-text-on-neutral: theme('colors.gray.800');
 
 	/* roundedness / border-radius */
 	--roundedness-base: 0.5rem;
@@ -19,9 +22,9 @@
 	--btn-roundedness: var(--roundedness-base);
 	--btn-has-shadow: 1;
 	--btn-has-highlight: 1;
-	--btn-color-text-on-primary: white;
-	--btn-color-text-on-secondary: white;
-	--btn-color-text-on-neutral: theme('colors.gray.800');
+	--btn-color-text-on-primary: var(--color-text-on-primary);
+	--btn-color-text-on-secondary: var(--color-text-on-secondary);
+	--btn-color-text-on-neutral: var(--color-text-on-neutral);
 
 	/* input */
 	--input-roundedness: var(--roundedness-base);
