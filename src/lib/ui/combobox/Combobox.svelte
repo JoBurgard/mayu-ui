@@ -11,7 +11,7 @@ SPDX-License-Identifier: Unlicense
 <script lang="ts" generics="D, V">
 	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
 
-	import uFuzzy from '@leeoniya/ufuzzy';
+	import uFuzzy, { type HaystackIdxs, type Info, type InfoIdxOrder } from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher } from 'svelte';
 	import type { Action } from 'svelte/action';
@@ -165,10 +165,6 @@ SPDX-License-Identifier: Unlicense
 	// run on SSR
 	checkIfUpdateFromOutside();
 
-	const fuzzySearch = new uFuzzy({ intraMode: 1 });
-	let haystack: string[] = data.map(createHaystack);
-	let showAllResult = data.map((_, index) => index);
-
 	function handleInput() {
 		lastAction = 'input';
 		$highlightedItem = null;
@@ -207,22 +203,48 @@ SPDX-License-Identifier: Unlicense
 		}
 	}
 
-	// TODO sort results by relevancy
-	// TODO mark input in results
-	// TODO if arbitraryValue is false, preselect first entry
-	$: filteredOptions =
-		$touchedInput && $inputValue !== ''
-			? fuzzySearch.filter(haystack as string[], $inputValue)
-			: showAllResult;
-
-	$: options = data.map((it) => dataToOption(it));
-	$: haystack = data.map(createHaystack);
-	$: showAllResult = data.map((_, index) => index);
-
 	const minSameWidth: Action<HTMLUListElement> = (element) => {
 		const inputElement = document.getElementById($input.id);
 		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
 	};
+
+	// #region Search
+
+	const fuzzySearch = new uFuzzy({ intraMode: 1 });
+	let haystack: string[] = data.map(createHaystack);
+	let showAllResult = data.map((_, index) => index);
+	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder } = {
+		idxs: [],
+		info: null,
+		order: [],
+	};
+
+	function search(haystack: string[], searchText: string) {
+		if ($touchedInput && $inputValue !== '') {
+			const result = fuzzySearch.search(haystack, searchText);
+
+			if (result[0]) {
+				filteredResults.idxs = result[0];
+				filteredResults.info = result[1];
+				filteredResults.order = result[2]!;
+
+				return;
+			}
+		}
+		filteredResults.idxs = showAllResult;
+		filteredResults.info = null;
+		filteredResults.order = showAllResult;
+	}
+
+	// TODO if arbitraryValue is false, preselect first entry
+	// TODO render results as virtualized list
+
+	$: haystack = data.map(createHaystack);
+	$: options = data.map((it) => dataToOption(it));
+	$: showAllResult = data.map((_, index) => index);
+	$: search(haystack, $inputValue);
+
+	// #endregion
 </script>
 
 <div class="isolate flex h-full">
@@ -290,8 +312,8 @@ SPDX-License-Identifier: Unlicense
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<div class="flex min-h-0 flex-col gap-0" tabindex="0">
-				{#each filteredOptions || [] as resultIndex, index (index)}
-					{@const optionData = options[resultIndex]}
+				{#each filteredResults.order as orderedIndex, index (index)}
+					{@const optionData = options[filteredResults.idxs[orderedIndex]]}
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
 						use:melt={$option(optionData)}
@@ -299,7 +321,17 @@ SPDX-License-Identifier: Unlicense
 							lastAction = 'select';
 						}}
 					>
-						<div class="break-words">{optionData.label}</div>
+						<div class="break-words">
+							{#if filteredResults.info}
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								{@html uFuzzy.highlight(
+									optionData.label ?? '',
+									filteredResults.info.ranges[orderedIndex],
+								)}
+							{:else}
+								{optionData.label}
+							{/if}
+						</div>
 					</li>
 				{:else}
 					{#if !isLoading}
