@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.1](https://github.com/joburgard/mayu-ui/compare/v0.10.0...v0.10.1) (2024-06-19)
+
 ## [0.10.0](https://github.com/joburgard/mayu-ui/compare/v0.9.4...v0.10.0) (2024-06-19)
 
 
