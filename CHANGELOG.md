@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.0](https://github.com/joburgard/mayu-ui/compare/v0.9.4...v0.10.0) (2024-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* added base color-text-on properties
+
+### Features
+
+* added base color-text-on properties ([ce3cce2](https://github.com/joburgard/mayu-ui/commit/ce3cce26b5f94ed7767dde62c09f2daae28cb5da))
+* **Combobox:** search results are now sorted and marked ([3ad1a65](https://github.com/joburgard/mayu-ui/commit/3ad1a65ccce855964ede1070147ce1112cb2dfe6))
+
 ## [0.9.4](https://github.com/joburgard/mayu-ui/compare/v0.9.3...v0.9.4) (2024-06-18)
 
 
