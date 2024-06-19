@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.3](https://github.com/joburgard/mayu-ui/compare/v0.10.2...v0.10.3) (2024-06-19)
+
+
+### Bug Fixes
+
+* correctly handle search return that is not sorted (over 1000 results) ([b47ce6b](https://github.com/joburgard/mayu-ui/commit/b47ce6b582af00f60c7fab5b715a89732597a292))
+
 ## [0.10.2](https://github.com/joburgard/mayu-ui/compare/v0.10.1...v0.10.2) (2024-06-19)
 
 
