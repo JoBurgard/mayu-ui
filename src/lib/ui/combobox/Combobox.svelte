@@ -13,7 +13,7 @@ SPDX-License-Identifier: Unlicense
 
 	import uFuzzy, { type HaystackIdxs, type Info, type InfoIdxOrder } from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
-	import { beforeUpdate, createEventDispatcher } from 'svelte';
+	import { beforeUpdate, createEventDispatcher, tick } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import { fly } from 'svelte/transition';
 	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
@@ -83,6 +83,7 @@ SPDX-License-Identifier: Unlicense
 	let lastAction: 'input' | 'select' | null = null;
 	let skipProcessingOnClose = false;
 	let dispatchedSelect = false;
+	let inputField: HTMLInputElement;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
@@ -172,6 +173,7 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	const handleEnterKey = (event: InputEvents['keydown']) => {
+		console.log(event);
 		if (event.key !== 'Enter') {
 			return;
 		}
@@ -221,6 +223,16 @@ SPDX-License-Identifier: Unlicense
 
 	function search(haystack: string[], searchText: string) {
 		if ($touchedInput && $inputValue !== '') {
+			if (arbitraryValue === false) {
+				tick().then(() => {
+					const event = new KeyboardEvent('keydown', {
+						key: 'ArrowDown',
+						code: 'ArrowDown',
+						keyCode: 40,
+					});
+					inputField?.dispatchEvent(event);
+				});
+			}
 			const result = fuzzySearch.search(haystack, searchText);
 
 			if (result[0]) {
@@ -236,7 +248,6 @@ SPDX-License-Identifier: Unlicense
 		filteredResults.order = showAllResult;
 	}
 
-	// TODO if arbitraryValue is false, preselect first entry
 	// TODO render results as virtualized list
 
 	$: haystack = data.map(createHaystack);
@@ -250,6 +261,7 @@ SPDX-License-Identifier: Unlicense
 <div class="isolate flex h-full">
 	<label class="relative grow flex flex-col" use:melt={$label}>
 		<input
+			bind:this={inputField}
 			use:melt={$input}
 			class={comboboxInputVariants({
 				size,
