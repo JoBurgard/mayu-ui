@@ -173,7 +173,6 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	const handleEnterKey = (event: InputEvents['keydown']) => {
-		console.log(event);
 		if (event.key !== 'Enter') {
 			return;
 		}
@@ -215,7 +214,7 @@ SPDX-License-Identifier: Unlicense
 	const fuzzySearch = new uFuzzy({ intraMode: 1 });
 	let haystack: string[] = data.map(createHaystack);
 	let showAllResult = data.map((_, index) => index);
-	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder } = {
+	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder | null } = {
 		idxs: [],
 		info: null,
 		order: [],
@@ -235,10 +234,16 @@ SPDX-License-Identifier: Unlicense
 			}
 			const result = fuzzySearch.search(haystack, searchText);
 
-			if (result[0]) {
+			if (result[2]) {
 				filteredResults.idxs = result[0];
 				filteredResults.info = result[1];
-				filteredResults.order = result[2]!;
+				filteredResults.order = result[2];
+
+				return;
+			} else if (result[0]) {
+				filteredResults.idxs = result[0];
+				filteredResults.info = result[1];
+				filteredResults.order = result[0].map((_, index) => index);
 
 				return;
 			}

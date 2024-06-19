@@ -78,6 +78,34 @@ SPDX-License-Identifier: Unlicense
 	setTimeout(() => {
 		$delayedValue = 'Delayed value';
 	}, 1000);
+
+	const dateAndTimes: { label: string; value: string }[] = [];
+
+	for (let dayOffset = 0; dayOffset <= 13; dayOffset += 1) {
+		for (let hour = 0; hour < 24; hour += 1) {
+			for (let minute = 0; minute < 60; minute += 15) {
+				const date = new Date();
+				date.setDate(date.getDate() + dayOffset);
+				date.setHours(hour, minute, 0, 0);
+
+				const comboboxItem = {
+					label: date.toLocaleDateString('en-EN', {
+						weekday: 'long',
+						year: 'numeric',
+						month: '2-digit',
+						day: '2-digit',
+						hour: '2-digit',
+						minute: '2-digit',
+					}),
+					value: new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
+						.toISOString()
+						.slice(0, -5),
+				};
+
+				dateAndTimes.push(comboboxItem);
+			}
+		}
+	}
 </script>
 
 <Story name="Default">
@@ -289,4 +317,39 @@ SPDX-License-Identifier: Unlicense
 			{status}
 		/></FormError
 	>
+</Story>
+
+<Story name="Generated Data">
+	<div class="inline-flex">
+		<Combobox
+			menuClasses="max-h-[145px]"
+			size="sm"
+			placeholder="Date & Time"
+			value={undefined}
+			data={dateAndTimes}
+			dataToOption={(it) => ({ label: it.label, value: it.value })}
+			valueToData={(value) => {
+				const date = new Date(value);
+
+				return date instanceof Date && !isNaN(date.getTime())
+					? {
+							label: date.toLocaleDateString('en-EN', {
+								weekday: 'long',
+								year: 'numeric',
+								month: '2-digit',
+								day: '2-digit',
+								hour: '2-digit',
+								minute: '2-digit',
+							}),
+							value,
+						}
+					: {
+							label: '',
+							value: '',
+						};
+			}}
+			createHaystack={(it) => it.label}
+			arbitraryValue
+		/>
+	</div>
 </Story>
