@@ -147,6 +147,7 @@ SPDX-License-Identifier: Unlicense
 			if (next === true) {
 				skipProcessingOnClose = false;
 				dispatchedSelect = false;
+				search(haystack, $inputValue);
 			}
 			return next;
 		},
@@ -335,6 +336,9 @@ SPDX-License-Identifier: Unlicense
 			})}
 			on:blur
 			on:blur={() => {
+				if (!arbitraryValue) {
+					$inputValue = optionToDisplayText($selected);
+				}
 				if (!$open) {
 					dispatch('noselectblur');
 				}
