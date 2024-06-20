@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.4](https://github.com/joburgard/mayu-ui/compare/v0.10.3...v0.10.4) (2024-06-20)
+
+
+### Features
+
+* **Combobox:** improve handling of huge lists ([02ef826](https://github.com/joburgard/mayu-ui/commit/02ef8261dbcb85f37548999ba37ff5d9190be789))
+
 ## [0.10.3](https://github.com/joburgard/mayu-ui/compare/v0.10.2...v0.10.3) (2024-06-19)
 
 
