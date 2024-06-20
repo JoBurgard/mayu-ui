@@ -247,9 +247,13 @@ SPDX-License-Identifier: Unlicense
 	const handleScroll: EventHandler<Event, HTMLUListElement> = (event) => {
 		const scrollPosition = event.currentTarget.scrollTop + event.currentTarget.clientHeight;
 
-		// reached bottom
-		if (scrollPosition + 10 >= event.currentTarget.scrollHeight) {
+		// reached bottom & not showing all results yet
+		if (
+			scrollPosition + 10 >= event.currentTarget.scrollHeight &&
+			resultsToShow.length < filteredResults.idxs.length
+		) {
 			visibleListBlocks += 1;
+			updateResultsList();
 		}
 	};
 
@@ -263,8 +267,16 @@ SPDX-License-Identifier: Unlicense
 		info: null,
 		order: [],
 	};
+	let resultsToShow: number[] = [];
 
-	function search(haystack: string[], searchText: string, visibleBlocks: number) {
+	function updateResultsList() {
+		resultsToShow = (filteredResults?.order ?? []).slice(0, listSize * visibleListBlocks);
+	}
+
+	function search(haystack: string[], searchText: string) {
+		// reset list size on every search
+		visibleListBlocks = 1;
+
 		if ($touchedInput && $inputValue !== '') {
 			if (arbitraryValue === false) {
 				tick().then(() => {
@@ -281,30 +293,33 @@ SPDX-License-Identifier: Unlicense
 			if (result[2]) {
 				filteredResults.idxs = result[0];
 				filteredResults.info = result[1];
-				filteredResults.order = result[2].slice(0, listSize * visibleBlocks);
+				filteredResults.order = result[2];
+				updateResultsList();
 
 				return;
 			} else if (result[0]) {
 				filteredResults.idxs = result[0];
 				filteredResults.info = result[1];
-				filteredResults.order = result[0]
-					.slice(0, listSize * visibleBlocks)
-					.map((_, index) => index);
+				filteredResults.order = result[0].map((_, index) => index);
+				updateResultsList();
 
 				return;
 			}
 		}
-		filteredResults.idxs = showAllResult.slice(0, listSize * visibleBlocks);
+		filteredResults.idxs = showAllResult;
 		filteredResults.info = null;
-		filteredResults.order = showAllResult.slice(0, listSize * visibleBlocks);
+		filteredResults.order = showAllResult;
+		updateResultsList();
 	}
 
 	$: haystack = data.map(createHaystack);
 	$: options = data.map((it) => dataToOption(it));
 	$: showAllResult = data.map((_, index) => index);
-	$: search(haystack, $inputValue, visibleListBlocks);
+	$: search(haystack, $inputValue);
 
 	// #endregion
+
+	// TODO clear on blur if no matched value and arbitraryValue = false
 </script>
 
 <div class="isolate flex h-full">
@@ -374,7 +389,7 @@ SPDX-License-Identifier: Unlicense
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<div class="flex min-h-0 flex-col gap-0" tabindex="0">
-				{#each filteredResults.order ?? [] as orderedIndex, index (index)}
+				{#each resultsToShow ?? [] as orderedIndex, index (index)}
 					{@const optionData = options[filteredResults.idxs[orderedIndex]]}
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
