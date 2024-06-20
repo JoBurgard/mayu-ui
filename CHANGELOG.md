@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.5](https://github.com/joburgard/mayu-ui/compare/v0.10.4...v0.10.5) (2024-06-20)
+
+
+### Features
+
+* **combobox:** improve results list handling ([ddcad22](https://github.com/joburgard/mayu-ui/commit/ddcad22c18b3706d70eda28172980d63f2222afe))
+
 ## [0.10.4](https://github.com/joburgard/mayu-ui/compare/v0.10.3...v0.10.4) (2024-06-20)
 
 
