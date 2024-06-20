@@ -9,9 +9,16 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts" generics="D, V">
+	import type { EventHandler } from 'svelte/elements';
+
 	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
 
-	import uFuzzy, { type HaystackIdxs, type Info, type InfoIdxOrder } from '@leeoniya/ufuzzy';
+	import uFuzzy, {
+		type HaystackIdxs,
+		type Info,
+		type InfoIdxOrder,
+		type Options,
+	} from '@leeoniya/ufuzzy';
 	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher, tick } from 'svelte';
 	import type { Action } from 'svelte/action';
@@ -34,7 +41,12 @@ SPDX-License-Identifier: Unlicense
 		optionToDisplayText?: (
 			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined,
 		) => string;
+		listSize?: number;
+		searchOptions?: Options;
+		searchOutOfOrder?: number;
+		rankThreshold?: number;
 	};
+
 	type $$Events = InputEvents & {
 		select: CustomEvent<{
 			value: V | undefined;
@@ -77,6 +89,26 @@ SPDX-License-Identifier: Unlicense
 		({ label: value, value }) as unknown as D;
 	export let optionToDisplayText: Required<$$Props>['optionToDisplayText'] = (option) =>
 		option?.label || '';
+	/**
+	 * Defines the initial amount of list items that are rendered.
+	 * When the user scrolls to the end, it adds the next block to the list.
+	 */
+	export let listSize: Required<$$Props>['listSize'] = 100;
+	/**
+	 * Default: `{ intraMode: 1 }`
+	 * @see https://github.com/leeoniya/uFuzzy?tab=readme-ov-file#options
+	 */
+	export let searchOptions: Required<$$Props>['searchOptions'] = { intraMode: 1 };
+	/**
+	 * Setting for matching the search words out of order. Slows down fast. Be careful.
+	 * Default: `0`
+	 */
+	export let searchOutOfOrder: Required<$$Props>['searchOutOfOrder'] = 0;
+	/**
+	 * Determines when to start sorting and ranking the results after filtering. (When results count <= threshold)
+	 * Default: `1_000`
+	 */
+	export let rankThreshold: Required<$$Props>['rankThreshold'] = 1_000;
 
 	let options: ComboboxOptionProps<V>[] = data.map((it) => dataToOption(it));
 	let valueInternal: $$Props['value'];
@@ -84,6 +116,10 @@ SPDX-License-Identifier: Unlicense
 	let skipProcessingOnClose = false;
 	let dispatchedSelect = false;
 	let inputField: HTMLInputElement;
+	/**
+	 * This is connected to the listSize. When the user scrolls to the end of the list, this increases.
+	 */
+	let visibleListBlocks = 1;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
@@ -169,7 +205,6 @@ SPDX-License-Identifier: Unlicense
 	function handleInput() {
 		lastAction = 'input';
 		$highlightedItem = null;
-		// TODO highlight if exact match
 	}
 
 	const handleEnterKey = (event: InputEvents['keydown']) => {
@@ -209,9 +244,18 @@ SPDX-License-Identifier: Unlicense
 		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
 	};
 
+	const handleScroll: EventHandler<Event, HTMLUListElement> = (event) => {
+		const scrollPosition = event.currentTarget.scrollTop + event.currentTarget.clientHeight;
+
+		// reached bottom
+		if (scrollPosition + 10 >= event.currentTarget.scrollHeight) {
+			visibleListBlocks += 1;
+		}
+	};
+
 	// #region Search
 
-	const fuzzySearch = new uFuzzy({ intraMode: 1 });
+	const fuzzySearch = new uFuzzy(searchOptions);
 	let haystack: string[] = data.map(createHaystack);
 	let showAllResult = data.map((_, index) => index);
 	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder | null } = {
@@ -220,7 +264,7 @@ SPDX-License-Identifier: Unlicense
 		order: [],
 	};
 
-	function search(haystack: string[], searchText: string) {
+	function search(haystack: string[], searchText: string, visibleBlocks: number) {
 		if ($touchedInput && $inputValue !== '') {
 			if (arbitraryValue === false) {
 				tick().then(() => {
@@ -232,33 +276,33 @@ SPDX-License-Identifier: Unlicense
 					inputField?.dispatchEvent(event);
 				});
 			}
-			const result = fuzzySearch.search(haystack, searchText);
+			const result = fuzzySearch.search(haystack, searchText, searchOutOfOrder, rankThreshold);
 
 			if (result[2]) {
 				filteredResults.idxs = result[0];
 				filteredResults.info = result[1];
-				filteredResults.order = result[2];
+				filteredResults.order = result[2].slice(0, listSize * visibleBlocks);
 
 				return;
 			} else if (result[0]) {
 				filteredResults.idxs = result[0];
 				filteredResults.info = result[1];
-				filteredResults.order = result[0].map((_, index) => index);
+				filteredResults.order = result[0]
+					.slice(0, listSize * visibleBlocks)
+					.map((_, index) => index);
 
 				return;
 			}
 		}
-		filteredResults.idxs = showAllResult;
+		filteredResults.idxs = showAllResult.slice(0, listSize * visibleBlocks);
 		filteredResults.info = null;
-		filteredResults.order = showAllResult;
+		filteredResults.order = showAllResult.slice(0, listSize * visibleBlocks);
 	}
-
-	// TODO render results as virtualized list
 
 	$: haystack = data.map(createHaystack);
 	$: options = data.map((it) => dataToOption(it));
 	$: showAllResult = data.map((_, index) => index);
-	$: search(haystack, $inputValue);
+	$: search(haystack, $inputValue, visibleListBlocks);
 
 	// #endregion
 </script>
@@ -326,10 +370,11 @@ SPDX-License-Identifier: Unlicense
 			use:melt={$menu}
 			use:minSameWidth
 			transition:fly={{ duration: 150, y: -5 }}
+			on:scroll={handleScroll}
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<div class="flex min-h-0 flex-col gap-0" tabindex="0">
-				{#each filteredResults.order as orderedIndex, index (index)}
+				{#each filteredResults.order ?? [] as orderedIndex, index (index)}
 					{@const optionData = options[filteredResults.idxs[orderedIndex]]}
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"

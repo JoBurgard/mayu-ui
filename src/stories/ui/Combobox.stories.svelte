@@ -80,8 +80,16 @@ SPDX-License-Identifier: Unlicense
 	}, 1000);
 
 	const dateAndTimes: { label: string; value: string }[] = [];
+	const dateFormatter = new Intl.DateTimeFormat('en-EN', {
+		weekday: 'long',
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+	});
 
-	for (let dayOffset = 0; dayOffset <= 13; dayOffset += 1) {
+	for (let dayOffset = 0; dayOffset <= 100; dayOffset += 1) {
 		for (let hour = 0; hour < 24; hour += 1) {
 			for (let minute = 0; minute < 60; minute += 15) {
 				const date = new Date();
@@ -89,14 +97,7 @@ SPDX-License-Identifier: Unlicense
 				date.setHours(hour, minute, 0, 0);
 
 				const comboboxItem = {
-					label: date.toLocaleDateString('en-EN', {
-						weekday: 'long',
-						year: 'numeric',
-						month: '2-digit',
-						day: '2-digit',
-						hour: '2-digit',
-						minute: '2-digit',
-					}),
+					label: dateFormatter.format(date),
 					value: new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
 						.toISOString()
 						.slice(0, -5),
@@ -349,7 +350,7 @@ SPDX-License-Identifier: Unlicense
 						};
 			}}
 			createHaystack={(it) => it.label}
-			arbitraryValue
+			listSize={10}
 		/>
 	</div>
 </Story>
