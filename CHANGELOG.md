@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.6](https://github.com/joburgard/mayu-ui/compare/v0.10.5...v0.10.6) (2024-06-20)
+
+
+### Features
+
+* **combobox:** clear input on blur when no item was selected ([764d2ed](https://github.com/joburgard/mayu-ui/commit/764d2ede462badde686fafaa26a9bf0bb207583e))
+
 ## [0.10.5](https://github.com/joburgard/mayu-ui/compare/v0.10.4...v0.10.5) (2024-06-20)
 
 
