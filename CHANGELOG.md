@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.7](https://github.com/joburgard/mayu-ui/compare/v0.10.6...v0.10.7) (2024-06-22)
+
+
+### Features
+
+* **combobox:** improve robustness when data prop changes ([a4cd29a](https://github.com/joburgard/mayu-ui/commit/a4cd29a10cef0addf2370ac73b42455213677805))
+
 ## [0.10.6](https://github.com/joburgard/mayu-ui/compare/v0.10.5...v0.10.6) (2024-06-20)
 
 
