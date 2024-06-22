@@ -354,3 +354,40 @@ SPDX-License-Identifier: Unlicense
 		/>
 	</div>
 </Story>
+
+<Story name="Empty Data List">
+	<div class="inline-flex">
+		<Combobox
+			menuClasses="max-h-[145px]"
+			size="sm"
+			placeholder="Empty data list"
+			value={undefined}
+			data={[]}
+		/>
+	</div>
+</Story>
+
+<Story name="Overriden Messages">
+	<div class="inline-flex gap-2">
+		<Combobox
+			menuClasses="max-h-[145px]"
+			size="sm"
+			placeholder="Fallback messages"
+			value={undefined}
+			data={[]}
+			arbitraryValue
+		/>
+		<Combobox
+			menuClasses="max-h-[145px]"
+			size="sm"
+			placeholder="Overriden Messages"
+			value={undefined}
+			data={[]}
+			messages={{
+				noSearchResult: 'Sorry, nothing was found! 😭',
+				emptyList: 'Nothing to see here.',
+			}}
+			arbitraryValue
+		/>
+	</div>
+</Story>

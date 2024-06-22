@@ -5,6 +5,7 @@ SPDX-License-Identifier: Unlicense
 <script lang="ts" context="module">
 	export const i18n = {
 		noSearchResult: 'No matching entry found.',
+		emptyList: 'No Entries.',
 	};
 </script>
 
@@ -45,6 +46,7 @@ SPDX-License-Identifier: Unlicense
 		searchOptions?: Options;
 		searchOutOfOrder?: number;
 		rankThreshold?: number;
+		messages?: Partial<typeof i18n>;
 	};
 
 	type $$Events = InputEvents & {
@@ -109,6 +111,7 @@ SPDX-License-Identifier: Unlicense
 	 * Default: `1_000`
 	 */
 	export let rankThreshold: Required<$$Props>['rankThreshold'] = 1_000;
+	export let messages: Required<$$Props>['messages'] = {};
 
 	let options: ComboboxOptionProps<V>[] = data.map((it) => dataToOption(it));
 	let valueInternal: $$Props['value'];
@@ -330,6 +333,8 @@ SPDX-License-Identifier: Unlicense
 	$: updateSearchData(data);
 
 	// #endregion
+
+	$: mergedMessages = Object.assign(structuredClone(i18n), messages);
 </script>
 
 <div class="isolate flex h-full">
@@ -428,9 +433,15 @@ SPDX-License-Identifier: Unlicense
 					</li>
 				{:else}
 					{#if !isLoading}
-						<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
-							{i18n.noSearchResult}
-						</li>
+						{#if $inputValue !== ''}
+							<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
+								{mergedMessages.noSearchResult}
+							</li>
+						{:else}
+							<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
+								{mergedMessages.emptyList}
+							</li>
+						{/if}
 					{/if}
 				{/each}
 			</div>
