@@ -313,14 +313,23 @@ SPDX-License-Identifier: Unlicense
 		updateResultsList();
 	}
 
-	$: haystack = data.map(createHaystack);
-	$: options = data.map((it) => dataToOption(it));
-	$: showAllResult = data.map((_, index) => index);
-	$: search(haystack, $inputValue);
+	function updateSearchData(data: D[]) {
+		haystack = new Array(data.length);
+		options = new Array(data.length);
+		showAllResult = new Array(data.length);
+
+		for (let i = 0; i < data.length; i += 1) {
+			haystack[i] = createHaystack(data[i]);
+			options[i] = dataToOption(data[i]);
+			showAllResult[i] = i;
+		}
+
+		search(haystack, $inputValue);
+	}
+
+	$: updateSearchData(data);
 
 	// #endregion
-
-	// TODO clear on blur if no matched value and arbitraryValue = false
 </script>
 
 <div class="isolate flex h-full">
@@ -356,6 +365,9 @@ SPDX-License-Identifier: Unlicense
 			on:paste
 			on:input={handleInput}
 			on:input
+			on:m-input={(event) => {
+				search(haystack, event.detail.originalEvent.currentTarget?.value ?? '');
+			}}
 			on:m-keydown={(e) => {
 				// Prevent selecting value when closing by escape
 				if (e.detail.originalEvent.key === 'Escape') {
