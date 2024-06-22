@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.10.8](https://github.com/joburgard/mayu-ui/compare/v0.10.7...v0.10.8) (2024-06-22)
+
+
+### Features
+
+* **combobox:** added ability to override messages ([1dfa976](https://github.com/joburgard/mayu-ui/commit/1dfa976baa782431adeeca134c532ab0e1b2d476))
+
 ## [0.10.7](https://github.com/joburgard/mayu-ui/compare/v0.10.6...v0.10.7) (2024-06-22)
 
 
