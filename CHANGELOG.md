@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.11.0](https://github.com/joburgard/mayu-ui/compare/v0.10.8...v0.11.0) (2024-06-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Tooltip:** make closeOnPointerDown a prop + change default
+
+### Features
+
+* **Tooltip:** make closeOnPointerDown a prop + change default ([f2a654c](https://github.com/joburgard/mayu-ui/commit/f2a654ceb07af377bfff133d22d4cae7787a5659))
+
 ## [0.10.8](https://github.com/joburgard/mayu-ui/compare/v0.10.7...v0.10.8) (2024-06-22)
 
 
