@@ -29,6 +29,7 @@ SPDX-License-Identifier: Unlicense
 	export let onOpenChange: Required<CreateTooltipProps>['onOpenChange'] = ({ next }) => next;
 	export let openDelay: Required<CreateTooltipProps>['openDelay'] = 0;
 	export let closeDelay: Required<CreateTooltipProps>['closeDelay'] = 0;
+	export let closeOnPointerDown: Required<CreateTooltipProps>['closeOnPointerDown'] = true;
 
 	const {
 		elements: { trigger, content },
@@ -39,7 +40,7 @@ SPDX-License-Identifier: Unlicense
 		},
 		openDelay,
 		closeDelay,
-		closeOnPointerDown: false,
+		closeOnPointerDown,
 		forceVisible: true,
 		onOpenChange: (params) => {
 			if (disabled) {
