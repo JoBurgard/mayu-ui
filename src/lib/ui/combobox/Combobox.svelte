@@ -393,7 +393,11 @@ SPDX-License-Identifier: Unlicense
 				type="button"
 				tabindex="-1"
 				class={comboboxClearButtonVariants({ size })}
-				on:click={() => clearValueAndInput()}><div class="i-lucide-x-circle" /></button
+				on:click={() => {
+					clearValueAndInput();
+					inputField.focus();
+					$open = true;
+				}}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
 		{#if !hideChevronIcon}
