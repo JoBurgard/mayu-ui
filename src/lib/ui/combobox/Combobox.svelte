@@ -118,12 +118,12 @@ SPDX-License-Identifier: Unlicense
 	let lastAction: 'input' | 'select' | null = null;
 	let skipProcessingOnClose = false;
 	let dispatchedSelect = false;
+	let dispatchedNoSelectBlur = false;
 	let inputField: HTMLInputElement;
 	/**
 	 * This is connected to the listSize. When the user scrolls to the end of the list, this increases.
 	 */
 	let visibleListBlocks = 1;
-	let listHasFocus = false;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
@@ -141,12 +141,17 @@ SPDX-License-Identifier: Unlicense
 			sameWidth: false,
 		},
 		onOpenChange: ({ next }) => {
+			dispatchedNoSelectBlur = false;
 			if (next === false && skipProcessingOnClose === false) {
 				processInputValue();
 			}
 			if (next === false) {
 				$highlightedItem = null;
 				lastAction = null;
+				if (!dispatchedSelect) {
+					dispatchedNoSelectBlur = true;
+					dispatch('noselectblur');
+				}
 			}
 			if (next === true) {
 				skipProcessingOnClose = false;
@@ -350,6 +355,14 @@ SPDX-License-Identifier: Unlicense
 				class: className,
 			})}
 			on:blur
+			on:blur={() => {
+				if (!arbitraryValue) {
+					$inputValue = optionToDisplayText($selected);
+				}
+				if (!$open && !dispatchedNoSelectBlur) {
+					dispatch('noselectblur');
+				}
+			}}
 			on:change
 			on:click
 			on:focus
@@ -373,14 +386,6 @@ SPDX-License-Identifier: Unlicense
 				}
 				if (e.detail.originalEvent.key === 'Enter' && $highlightedItem) {
 					lastAction = 'select';
-				}
-			}}
-			on:blur={() => {
-				if (!arbitraryValue) {
-					$inputValue = optionToDisplayText($selected);
-				}
-				if (!$open || ($open && !$touchedInput)) {
-					dispatch('noselectblur');
 				}
 			}}
 			{placeholder}
