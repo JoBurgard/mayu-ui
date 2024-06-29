@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.11.3](https://github.com/joburgard/mayu-ui/compare/v0.11.2...v0.11.3) (2024-06-29)
+
+
+### Bug Fixes
+
+* **Combobox:** now actually correct behavior when list is open and input element blurs ([ba6fe1e](https://github.com/joburgard/mayu-ui/commit/ba6fe1e3251427ccbfd3ec12be55bf3b31c62ccd))
+
 ## [0.11.2](https://github.com/joburgard/mayu-ui/compare/v0.11.1...v0.11.2) (2024-06-29)
 
 
