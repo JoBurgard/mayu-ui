@@ -243,6 +243,13 @@ SPDX-License-Identifier: Unlicense
 							createHaystack={(it) => `${it.a}${String(it.b)}`}
 							on:select={(event) => {
 								onSelectData = event.detail;
+								alert('select');
+							}}
+							on:noselectenter={() => {
+								alert('noselectenter');
+							}}
+							on:noselectblur={() => {
+								alert('noselectblur');
 							}}
 							on:input={() => {
 								fakeFetch();
@@ -278,6 +285,9 @@ SPDX-License-Identifier: Unlicense
 							}}
 							on:noselectenter={() => {
 								alert('noselectenter');
+							}}
+							on:noselectblur={() => {
+								alert('noselectblur');
 							}}
 							on:input={() => {
 								fakeFetch();

@@ -123,6 +123,7 @@ SPDX-License-Identifier: Unlicense
 	 * This is connected to the listSize. When the user scrolls to the end of the list, this increases.
 	 */
 	let visibleListBlocks = 1;
+	let listHasFocus = false;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
@@ -349,14 +350,6 @@ SPDX-License-Identifier: Unlicense
 				class: className,
 			})}
 			on:blur
-			on:blur={() => {
-				if (!arbitraryValue) {
-					$inputValue = optionToDisplayText($selected);
-				}
-				if (!$open) {
-					dispatch('noselectblur');
-				}
-			}}
 			on:change
 			on:click
 			on:focus
@@ -380,6 +373,14 @@ SPDX-License-Identifier: Unlicense
 				}
 				if (e.detail.originalEvent.key === 'Enter' && $highlightedItem) {
 					lastAction = 'select';
+				}
+			}}
+			on:blur={() => {
+				if (!arbitraryValue) {
+					$inputValue = optionToDisplayText($selected);
+				}
+				if (!$open || ($open && !$touchedInput)) {
+					dispatch('noselectblur');
 				}
 			}}
 			{placeholder}
