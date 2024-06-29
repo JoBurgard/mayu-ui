@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.11.1](https://github.com/joburgard/mayu-ui/compare/v0.11.0...v0.11.1) (2024-06-29)
+
+
+### Features
+
+* **Combobox:** refocus on input field after using clear button ([647cfed](https://github.com/joburgard/mayu-ui/commit/647cfedaa4b758cf673bef699b30b2c672448a3d))
+
 ## [0.11.0](https://github.com/joburgard/mayu-ui/compare/v0.10.8...v0.11.0) (2024-06-23)
 
 
