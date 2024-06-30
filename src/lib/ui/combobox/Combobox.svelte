@@ -42,6 +42,7 @@ SPDX-License-Identifier: Unlicense
 		optionToDisplayText?: (
 			option: (ComboboxOptionProps<V> & Record<string, any>) | undefined,
 		) => string;
+		equal?: (a: V | undefined, b: V | undefined) => boolean;
 		listSize?: number;
 		searchOptions?: Options;
 		searchOutOfOrder?: number;
@@ -91,6 +92,15 @@ SPDX-License-Identifier: Unlicense
 		({ label: value, value }) as unknown as D;
 	export let optionToDisplayText: Required<$$Props>['optionToDisplayText'] = (option) =>
 		option?.label || '';
+	/**
+	 * Default: Strings are compared as lowercase. Everything else is compared by `===`.
+	 */
+	export let equal: Required<$$Props>['equal'] = (a, b) => {
+		if (typeof a === 'string' && typeof b === 'string') {
+			return a.toLowerCase() === b.toLowerCase();
+		}
+		return a === b;
+	};
 	/**
 	 * Defines the initial amount of list items that are rendered.
 	 * When the user scrolls to the end, it adds the next block to the list.
@@ -166,7 +176,10 @@ SPDX-License-Identifier: Unlicense
 			if (!(next === undefined && lastAction === undefined)) {
 				value = next?.value;
 				valueInternal = value;
-				dispatch('select', { value, option: options?.find((option) => option.value === value) });
+				dispatch('select', {
+					value,
+					option: options?.find((option) => equal(option.value, value)),
+				});
 			}
 
 			return next;
@@ -180,7 +193,7 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	function pickOptionByValue() {
-		const foundOption = options.find((option) => option.value === value);
+		const foundOption = options.find((option) => equal(option.value, value));
 		if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
 			$selected = dataToOption(valueToData(value));
 			$inputValue = optionToDisplayText($selected);
