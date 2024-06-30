@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.12.0](https://github.com/joburgard/mayu-ui/compare/v0.11.3...v0.12.0) (2024-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Combobox:** overridable equality function with string lowercase comparison by default
+
+### Features
+
+* **Combobox:** overridable equality function with string lowercase comparison by default ([a7a6aef](https://github.com/joburgard/mayu-ui/commit/a7a6aefb49b019f9a735f10daa1cc1f4dd5ded9f))
+
 ## [0.11.3](https://github.com/joburgard/mayu-ui/compare/v0.11.2...v0.11.3) (2024-06-29)
 
 
