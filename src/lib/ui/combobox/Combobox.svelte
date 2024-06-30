@@ -96,7 +96,7 @@ SPDX-License-Identifier: Unlicense
 	 * Default: Strings are compared as lowercase. Everything else is compared by `===`.
 	 */
 	export let equal: Required<$$Props>['equal'] = (a, b) => {
-		if (typeof a === 'string' && typeof b === 'string') {
+		if (!arbitraryValue && typeof a === 'string' && typeof b === 'string') {
 			return a.toLowerCase() === b.toLowerCase();
 		}
 		return a === b;
@@ -130,6 +130,7 @@ SPDX-License-Identifier: Unlicense
 	let dispatchedSelect = false;
 	let dispatchedNoSelectBlur = false;
 	let inputField: HTMLInputElement;
+	let menuElement: HTMLUListElement | null;
 	/**
 	 * This is connected to the listSize. When the user scrolls to the end of the list, this increases.
 	 */
@@ -150,6 +151,8 @@ SPDX-License-Identifier: Unlicense
 			placement: 'bottom-start',
 			sameWidth: false,
 		},
+		loop: false,
+		highlightOnHover: false,
 		onOpenChange: ({ next }) => {
 			dispatchedNoSelectBlur = false;
 			if (next === false && skipProcessingOnClose === false) {
@@ -166,7 +169,19 @@ SPDX-License-Identifier: Unlicense
 			if (next === true) {
 				skipProcessingOnClose = false;
 				dispatchedSelect = false;
-				search(haystack, $inputValue);
+
+				if (arbitraryValue === false && $inputValue === '') {
+					tick().then(() => {
+						if (menuElement) {
+							const firstItem = menuElement.querySelector<HTMLUListElement>(
+								'li[data-melt-combobox-option]',
+							);
+							if (firstItem) {
+								$highlightedItem = firstItem;
+							}
+						}
+					});
+				}
 			}
 			return next;
 		},
@@ -300,15 +315,19 @@ SPDX-License-Identifier: Unlicense
 		// reset list size on every search
 		visibleListBlocks = 1;
 
-		if ($touchedInput && $inputValue !== '') {
+		if (searchText !== '') {
 			if (arbitraryValue === false) {
 				tick().then(() => {
-					const event = new KeyboardEvent('keydown', {
-						key: 'ArrowDown',
-						code: 'ArrowDown',
-						keyCode: 40,
-					});
-					inputField?.dispatchEvent(event);
+					if (menuElement) {
+						const firstItem = menuElement.querySelector<HTMLUListElement>(
+							'li[data-melt-combobox-option]',
+						);
+						if (firstItem) {
+							// have to use setTimeout or otherwise Chrome bugs out
+							// maybe there is a better way
+							setTimeout(() => ($highlightedItem = firstItem), 0);
+						}
+					}
 				});
 			}
 			const result = fuzzySearch.search(haystack, searchText, searchOutOfOrder, rankThreshold);
@@ -425,6 +444,7 @@ SPDX-License-Identifier: Unlicense
 	</label>
 	{#if $open}
 		<ul
+			bind:this={menuElement}
 			class={tooltipVariants({ size, class: ['relative', menuClasses] })}
 			use:melt={$menu}
 			use:minSameWidth
@@ -436,7 +456,7 @@ SPDX-License-Identifier: Unlicense
 				{#each resultsToShow ?? [] as orderedIndex, index (index)}
 					{@const optionData = options[filteredResults.idxs[orderedIndex]]}
 					<li
-						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none"
+						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none transition-colors ease-out duration-75"
 						use:melt={$option(optionData)}
 						on:m-click={() => {
 							lastAction = 'select';
