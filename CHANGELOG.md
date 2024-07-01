@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.13.0](https://github.com/joburgard/mayu-ui/compare/v0.12.0...v0.13.0) (2024-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Combobox:** fix chrome behavior with highlighting + change some melt-ui settings
+
+### Bug Fixes
+
+* **Combobox:** fix chrome behavior with highlighting + change some melt-ui settings ([51e1571](https://github.com/joburgard/mayu-ui/commit/51e1571cecdab62a8b584fe4f58bc457a8aca045))
+
 ## [0.12.0](https://github.com/joburgard/mayu-ui/compare/v0.11.3...v0.12.0) (2024-06-30)
 
 
