@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.13.1](https://github.com/joburgard/mayu-ui/compare/v0.13.0...v0.13.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* issues with clear button & clicks inside input ([ec75a80](https://github.com/joburgard/mayu-ui/commit/ec75a803b18d20f93806e2cbaba3c7c15da4a692))
+* show all list items when opening without search input ([6bea622](https://github.com/joburgard/mayu-ui/commit/6bea622a28a7844355ba73344727fef68b559938))
+
 ## [0.13.0](https://github.com/joburgard/mayu-ui/compare/v0.12.0...v0.13.0) (2024-07-01)
 
 
