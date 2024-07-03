@@ -55,6 +55,7 @@ SPDX-License-Identifier: Unlicense
 		'Exceedingly',
 	];
 	let value: string | undefined;
+	let alreadySetValue: string | undefined = 'Huge';
 	let onSelectData: ComponentEvents<Combobox<typeof value, typeof value>>['select']['detail'];
 	let arbitraryValue = true;
 
@@ -218,6 +219,25 @@ SPDX-License-Identifier: Unlicense
 			placeholder="Find a word"
 			arbitraryValue
 			{isLoading}
+		/>
+	</div>
+</Story>
+
+<Story name="Already set value">
+	<h2>Selected Value</h2>
+	<pre>{JSON.stringify(alreadySetValue, null, 2)}</pre>
+	<div class="mt-4 flex flex-col gap-4 max-w-xs">
+		<Combobox
+			bind:value={alreadySetValue}
+			{data}
+			dataToOption={(it) => ({ label: it, value: it })}
+			valueToData={(it) => it}
+			createHaystack={(item) => item}
+			placeholder="Find a word"
+			{isLoading}
+			on:select={({ detail }) => {
+				console.log('on:select', detail.value);
+			}}
 		/>
 	</div>
 </Story>

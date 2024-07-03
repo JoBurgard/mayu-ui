@@ -45,7 +45,7 @@ const comboboxClearButtonVariants = tv({
 });
 
 const comboboxChevronVariants = tv({
-	base: ['i-lucide-chevrons-up-down absolute top-1/2 z-10 -translate-y-1/2'],
+	base: ['i-lucide-chevrons-up-down absolute top-1/2 z-10 -translate-y-1/2 pointer-events-none'],
 	variants: {
 		size: {
 			xs: 'right-1 size-3',

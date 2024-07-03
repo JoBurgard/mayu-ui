@@ -145,6 +145,7 @@ SPDX-License-Identifier: Unlicense
 	const {
 		elements: { menu, input, option, label },
 		states: { open, inputValue, touchedInput, selected, highlightedItem },
+		ids: { trigger: triggerId },
 	} = createCombobox<V>({
 		forceVisible: true,
 		positioning: {
@@ -208,7 +209,8 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	function pickOptionByValue() {
-		const foundOption = options.find((option) => equal(option.value, value));
+		const optionIndex = options.findIndex((option) => equal(option.value, value));
+		const foundOption = optionIndex > -1 ? options[optionIndex] : undefined;
 		if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
 			$selected = dataToOption(valueToData(value));
 			$inputValue = optionToDisplayText($selected);
@@ -226,6 +228,7 @@ SPDX-License-Identifier: Unlicense
 		if (value !== valueInternal) {
 			if (value === undefined) {
 				clearValueAndInput();
+				valueInternal = value;
 				return;
 			}
 			pickOptionByValue();
@@ -387,8 +390,8 @@ SPDX-License-Identifier: Unlicense
 				class: className,
 			})}
 			on:blur
-			on:blur={() => {
-				if (!arbitraryValue) {
+			on:blur={(event) => {
+				if (!arbitraryValue && event.relatedTarget?.dataset?.comboboxClearButton !== $triggerId) {
 					$inputValue = optionToDisplayText($selected);
 				}
 				if (!$open && !dispatchedNoSelectBlur) {
@@ -420,6 +423,9 @@ SPDX-License-Identifier: Unlicense
 					lastAction = 'select';
 				}
 			}}
+			on:m-click={(event) => {
+				skipProcessingOnClose = true;
+			}}
 			{placeholder}
 			aria-invalid={status ? 'true' : undefined}
 			{...$$restProps}
@@ -431,10 +437,13 @@ SPDX-License-Identifier: Unlicense
 				type="button"
 				tabindex="-1"
 				class={comboboxClearButtonVariants({ size })}
-				on:click={() => {
+				data-combobox-clear-button={$triggerId}
+				on:click={(event) => {
 					clearValueAndInput();
-					inputField.focus();
-					$open = true;
+					search(haystack, '');
+					inputField.click();
+					event.preventDefault();
+					event.stopPropagation();
 				}}><div class="i-lucide-x-circle" /></button
 			>
 		{/if}
