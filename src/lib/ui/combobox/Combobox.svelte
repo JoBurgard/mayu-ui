@@ -144,7 +144,7 @@ SPDX-License-Identifier: Unlicense
 
 	const {
 		elements: { menu, input, option, label },
-		states: { open, inputValue, touchedInput, selected, highlightedItem },
+		states: { open, inputValue, selected, highlightedItem },
 		ids: { trigger: triggerId },
 	} = createCombobox<V>({
 		forceVisible: true,
@@ -170,6 +170,7 @@ SPDX-License-Identifier: Unlicense
 			if (next === true) {
 				skipProcessingOnClose = false;
 				dispatchedSelect = false;
+				search(haystack, '');
 
 				if (arbitraryValue === false && $inputValue === '') {
 					tick().then(() => {
@@ -423,7 +424,7 @@ SPDX-License-Identifier: Unlicense
 					lastAction = 'select';
 				}
 			}}
-			on:m-click={(event) => {
+			on:m-click={() => {
 				skipProcessingOnClose = true;
 			}}
 			{placeholder}
