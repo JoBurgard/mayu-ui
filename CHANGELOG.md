@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.13.3](https://github.com/joburgard/mayu-ui/compare/v0.13.2...v0.13.3) (2024-07-04)
+
+
+### Features
+
+* **Combobox:** scroll to current option even on huge lists ([89318c9](https://github.com/joburgard/mayu-ui/commit/89318c9121bb8f52aec37f4e89cb968e0de6b1c9))
+
 ## [0.13.2](https://github.com/joburgard/mayu-ui/compare/v0.13.1...v0.13.2) (2024-07-04)
 
 
