@@ -3,6 +3,11 @@ SPDX-FileCopyrightText: 2023 Jo Burgard <mail@joburgard.com>
 SPDX-License-Identifier: Unlicense
 -->
 <script lang="ts" context="module">
+	/**
+	 * These are the messages used in the component.
+	 * When this is changed, then it is changed globally.
+	 * Useful for i18n.
+	 */
 	export const i18n = {
 		noSearchResult: 'No matching entry found.',
 		emptyList: 'No Entries.',
@@ -121,6 +126,9 @@ SPDX-License-Identifier: Unlicense
 	 * Default: `1_000`
 	 */
 	export let rankThreshold: Required<$$Props>['rankThreshold'] = 1_000;
+	/**
+	 * This is for overwriting the text messages of the component.
+	 */
 	export let messages: Required<$$Props>['messages'] = {};
 
 	let options: ComboboxOptionProps<V>[] = data.map((it) => dataToOption(it));
@@ -131,16 +139,93 @@ SPDX-License-Identifier: Unlicense
 	let dispatchedNoSelectBlur = false;
 	let inputField: HTMLInputElement;
 	let menuElement: HTMLUListElement | null;
-	/**
-	 * This is connected to the listSize. When the user scrolls to the end of the list, this increases.
-	 */
-	let visibleListBlocks = 1;
+	let listStartIndex = 0;
+	let listEndIndex: number = listSize;
 
 	const dispatch = createEventDispatcher<{
 		select: $$Events['select']['detail'];
 		noselectblur: $$Events['noselectblur']['detail'];
 		noselectenter: $$Events['noselectenter']['detail'];
 	}>();
+
+	// #region Search
+
+	const fuzzySearch = new uFuzzy(searchOptions);
+	let haystack: string[] = [];
+	let showAllResult: number[] = [];
+	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder | null } = {
+		idxs: [],
+		info: null,
+		order: [],
+	};
+	let resultsToShow: number[] = [];
+
+	function updateResultsList() {
+		resultsToShow = (filteredResults?.order ?? []).slice(listStartIndex, listEndIndex);
+	}
+
+	function search(haystack: string[], searchText: string) {
+		setTimeout(() => $highlightedItem?.scrollIntoView({ behavior: 'instant' }), 0);
+
+		if (searchText !== '') {
+			// reset list size on every search
+			listStartIndex = 0;
+			listEndIndex = listSize;
+			if (arbitraryValue === false) {
+				tick().then(() => {
+					if (menuElement) {
+						const firstItem = menuElement.querySelector<HTMLUListElement>(
+							'li[data-melt-combobox-option]',
+						);
+						if (firstItem) {
+							// have to use setTimeout or otherwise Chrome bugs out
+							// maybe there is a better way
+							setTimeout(() => ($highlightedItem = firstItem), 0);
+						}
+					}
+				});
+			}
+			const result = fuzzySearch.search(haystack, searchText, searchOutOfOrder, rankThreshold);
+
+			if (result[2]) {
+				filteredResults.idxs = result[0];
+				filteredResults.info = result[1];
+				filteredResults.order = result[2];
+				updateResultsList();
+
+				return;
+			} else if (result[0]) {
+				filteredResults.idxs = result[0];
+				filteredResults.info = result[1];
+				filteredResults.order = result[0].map((_, index) => index);
+				updateResultsList();
+
+				return;
+			}
+		}
+		filteredResults.idxs = showAllResult;
+		filteredResults.info = null;
+		filteredResults.order = showAllResult;
+		updateResultsList();
+	}
+
+	function updateSearchData(data: D[]) {
+		haystack = new Array(data.length);
+		options = new Array(data.length);
+		showAllResult = new Array(data.length);
+
+		for (let i = 0; i < data.length; i += 1) {
+			haystack[i] = createHaystack(data[i]);
+			options[i] = dataToOption(data[i]);
+			showAllResult[i] = i;
+		}
+
+		if ($open) {
+			search(haystack, $inputValue);
+		}
+	}
+
+	// #endregion
 
 	const {
 		elements: { menu, input, option, label },
@@ -193,9 +278,17 @@ SPDX-License-Identifier: Unlicense
 			if (!(next === undefined && lastAction === undefined)) {
 				value = next?.value;
 				valueInternal = value;
+				const optionIndex = options.findIndex((option) => equal(option.value, value));
+				const foundOption = optionIndex > -1 ? options[optionIndex] : undefined;
+
+				updateListIndices(
+					optionIndex - Math.floor(listSize / 2),
+					optionIndex + Math.floor(listSize / 2),
+				);
+
 				dispatch('select', {
 					value,
-					option: options?.find((option) => equal(option.value, value)),
+					option: foundOption,
 				});
 			}
 
@@ -209,6 +302,15 @@ SPDX-License-Identifier: Unlicense
 		$inputValue = value;
 	}
 
+	function updateListIndices(start: number, end: number) {
+		listStartIndex = start;
+		listEndIndex = end;
+
+		if (listStartIndex < 0) {
+			listStartIndex = 0;
+		}
+	}
+
 	function pickOptionByValue() {
 		const optionIndex = options.findIndex((option) => equal(option.value, value));
 		const foundOption = optionIndex > -1 ? options[optionIndex] : undefined;
@@ -217,6 +319,12 @@ SPDX-License-Identifier: Unlicense
 			$inputValue = optionToDisplayText($selected);
 			valueInternal = value;
 		} else if (foundOption !== undefined) {
+			updateListIndices(
+				optionIndex - Math.floor(listSize / 2),
+				optionIndex + Math.floor(listSize / 2),
+			);
+			updateResultsList();
+
 			$selected = foundOption;
 			$inputValue = optionToDisplayText($selected);
 			valueInternal = value;
@@ -235,14 +343,6 @@ SPDX-License-Identifier: Unlicense
 			pickOptionByValue();
 		}
 	}
-
-	// detect changes from the outside and try to match the option
-	beforeUpdate(() => {
-		checkIfUpdateFromOutside();
-	});
-
-	// run on SSR
-	checkIfUpdateFromOutside();
 
 	function handleInput() {
 		lastAction = 'input';
@@ -286,97 +386,41 @@ SPDX-License-Identifier: Unlicense
 		element.style.minWidth = `${inputElement?.getBoundingClientRect().width}px`;
 	};
 
+	const scrollThreshold = 10;
 	const handleScroll: EventHandler<Event, HTMLUListElement> = (event) => {
 		const scrollPosition = event.currentTarget.scrollTop + event.currentTarget.clientHeight;
 
-		// reached bottom & not showing all results yet
+		// reached top & not showing all results yet
 		if (
-			scrollPosition + 10 >= event.currentTarget.scrollHeight &&
+			event.currentTarget.scrollTop <= scrollThreshold &&
 			resultsToShow.length < filteredResults.idxs.length
 		) {
-			visibleListBlocks += 1;
+			updateListIndices(listStartIndex - listSize, listEndIndex);
 			updateResultsList();
+			return;
+		}
+
+		// reached bottom & not showing all results yet
+		if (
+			scrollPosition + scrollThreshold >= event.currentTarget.scrollHeight &&
+			resultsToShow.length < filteredResults.idxs.length
+		) {
+			updateListIndices(listStartIndex, listEndIndex + listSize);
+			updateResultsList();
+			return;
 		}
 	};
-
-	// #region Search
-
-	const fuzzySearch = new uFuzzy(searchOptions);
-	let haystack: string[] = data.map(createHaystack);
-	let showAllResult = data.map((_, index) => index);
-	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder | null } = {
-		idxs: [],
-		info: null,
-		order: [],
-	};
-	let resultsToShow: number[] = [];
-
-	function updateResultsList() {
-		resultsToShow = (filteredResults?.order ?? []).slice(0, listSize * visibleListBlocks);
-	}
-
-	function search(haystack: string[], searchText: string) {
-		// reset list size on every search
-		visibleListBlocks = 1;
-
-		if (searchText !== '') {
-			if (arbitraryValue === false) {
-				tick().then(() => {
-					if (menuElement) {
-						const firstItem = menuElement.querySelector<HTMLUListElement>(
-							'li[data-melt-combobox-option]',
-						);
-						if (firstItem) {
-							// have to use setTimeout or otherwise Chrome bugs out
-							// maybe there is a better way
-							setTimeout(() => ($highlightedItem = firstItem), 0);
-						}
-					}
-				});
-			}
-			const result = fuzzySearch.search(haystack, searchText, searchOutOfOrder, rankThreshold);
-
-			if (result[2]) {
-				filteredResults.idxs = result[0];
-				filteredResults.info = result[1];
-				filteredResults.order = result[2];
-				updateResultsList();
-
-				return;
-			} else if (result[0]) {
-				filteredResults.idxs = result[0];
-				filteredResults.info = result[1];
-				filteredResults.order = result[0].map((_, index) => index);
-				updateResultsList();
-
-				return;
-			}
-		}
-		filteredResults.idxs = showAllResult;
-		filteredResults.info = null;
-		filteredResults.order = showAllResult;
-		updateResultsList();
-	}
-
-	function updateSearchData(data: D[]) {
-		haystack = new Array(data.length);
-		options = new Array(data.length);
-		showAllResult = new Array(data.length);
-
-		for (let i = 0; i < data.length; i += 1) {
-			haystack[i] = createHaystack(data[i]);
-			options[i] = dataToOption(data[i]);
-			showAllResult[i] = i;
-		}
-
-		search(haystack, $inputValue);
-	}
 
 	$: updateSearchData(data);
-
-	// #endregion
-
 	$: mergedMessages = Object.assign(structuredClone(i18n), messages);
+
+	// detect changes from the outside and try to match the option
+	beforeUpdate(() => {
+		checkIfUpdateFromOutside();
+	});
+
+	// run on SSR
+	checkIfUpdateFromOutside();
 </script>
 
 <div class="isolate flex h-full">
@@ -469,7 +513,7 @@ SPDX-License-Identifier: Unlicense
 		>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<div class="flex min-h-0 flex-col gap-0" tabindex="0">
-				{#each resultsToShow ?? [] as orderedIndex, index (index)}
+				{#each resultsToShow ?? [] as orderedIndex (orderedIndex)}
 					{@const optionData = options[filteredResults.idxs[orderedIndex]]}
 					<li
 						class="px-3 py-1.5 scroll-my-2 cursor-pointer rounded-[--roundedness-sm] hover:(bg-gray-100) data-[highlighted]:bg-gray-200 select-none transition-colors ease-out duration-75"
