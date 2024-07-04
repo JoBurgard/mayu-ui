@@ -238,6 +238,9 @@ SPDX-License-Identifier: Unlicense
 			on:select={({ detail }) => {
 				console.log('on:select', detail.value);
 			}}
+			on:noselectblur={() => {
+				console.log('on:noselectblur');
+			}}
 		/>
 	</div>
 </Story>

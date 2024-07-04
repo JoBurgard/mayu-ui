@@ -162,7 +162,7 @@ SPDX-License-Identifier: Unlicense
 			if (next === false) {
 				$highlightedItem = null;
 				lastAction = null;
-				if (!dispatchedSelect) {
+				if (!dispatchedSelect && document.activeElement !== inputField) {
 					dispatchedNoSelectBlur = true;
 					dispatch('noselectblur');
 				}
@@ -392,7 +392,13 @@ SPDX-License-Identifier: Unlicense
 			})}
 			on:blur
 			on:blur={(event) => {
-				if (!arbitraryValue && event.relatedTarget?.dataset?.comboboxClearButton !== $triggerId) {
+				if (
+					event.relatedTarget?.dataset?.comboboxClearButton === $triggerId ||
+					event.relatedTarget === inputField
+				) {
+					return;
+				}
+				if (!arbitraryValue) {
 					$inputValue = optionToDisplayText($selected);
 				}
 				if (!$open && !dispatchedNoSelectBlur) {
