@@ -45,44 +45,44 @@ export default defineConfig({
 # example file
 
 :root {
-	/* colors */
-	--color-primary: #0284c7;
-	--color-secondary: theme('colors.sky.500');
-	--color-neutral: theme('colors.gray.200');
-	--color-text-on-primary: white;
-	--color-text-on-secondary: white;
-	--color-text-on-neutral: theme('colors.gray.800');
+  /* colors */
+  --color-primary: #0284c7;
+  --color-secondary: theme('colors.sky.500');
+  --color-neutral: theme('colors.gray.200');
+  --color-text-on-primary: white;
+  --color-text-on-secondary: white;
+  --color-text-on-neutral: theme('colors.gray.800');
 
-	/* roundedness / border-radius */
-	--roundedness-base: 0.5rem;
-	--roundedness-lg: 0.75rem;
-	--roundedness-sm: 0.4rem;
-	--roundedness-xs: 0.3rem;
+  /* roundedness / border-radius */
+  --roundedness-base: 0.5rem;
+  --roundedness-lg: 0.75rem;
+  --roundedness-sm: 0.4rem;
+  --roundedness-xs: 0.3rem;
 
-	/* button */
-	--btn-roundedness: var(--roundedness-base);
-	--btn-has-shadow: 1;
-	--btn-has-highlight: 1;
-	--btn-color-text-on-primary: var(--color-text-on-primary);
-	--btn-color-text-on-secondary: var(--color-text-on-secondary);
-	--btn-color-text-on-neutral: var(--color-text-on-neutral);
+  /* button */
+  --btn-roundedness: var(--roundedness-base);
+  --btn-has-shadow: 1;
+  --btn-has-highlight: 1;
+  --btn-color-text-on-primary: var(--color-text-on-primary);
+  --btn-color-text-on-secondary: var(--color-text-on-secondary);
+  --btn-color-text-on-neutral: var(--color-text-on-neutral);
 
-	/* input */
-	--input-roundedness: var(--roundedness-base);
-	--input-focus-border-color: var(--color-primary);
+  /* input */
+  --input-roundedness: var(--roundedness-base);
+  --input-focus-border-color: var(--color-primary);
 }
 
 * {
-	outline-color: transparent;
+  outline-color: transparent;
 }
 
 *:focus-visible {
-	outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-primary);
 }
 
 mark {
-	border-radius: var(--roundedness-xs);
-	background-color: color-mix(in oklch, var(--color-primary) 25%, transparent);
+  border-radius: var(--roundedness-xs);
+  background-color: color-mix(in oklch, var(--color-primary) 25%, transparent);
 }
 ```
 
