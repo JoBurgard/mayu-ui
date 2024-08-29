@@ -110,6 +110,7 @@ SPDX-License-Identifier: Unlicense
 	}
 </script>
 
+<!--  -->
 <Story name="Default">
 	<h2>Selected Value</h2>
 	<pre>{JSON.stringify(value, null, 2)}</pre>

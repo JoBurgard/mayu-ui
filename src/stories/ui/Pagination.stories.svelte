@@ -22,6 +22,7 @@ SPDX-License-Identifier: Unlicense
 	let selectedPage: number;
 </script>
 
+<!--  -->
 <Story name="Default">
 	<div class="flex flex-col gap-4">
 		<Pagination size="xs" {page} {totalItems} {perPage} />

@@ -1,14 +1,14 @@
-# Mayu UI
+# 🦋 Mayu UI
 
 An extensively themable component library for Svelte. 
 
 > [!WARNING]
-> This project is very early stages and not production ready. Breaking changes may appear with any release.
+> This project is still work in progress and not production ready. Breaking changes may appear with any release.
 
 We want to deliver a great component library that can be simply styled by an extensive theming system.
 Creating your own theme will be very simple with the provided Themebuilder.
 
-It will be built on top of Melt-UI, the great headless-ui library for Svelte.
+It's built on top of [Melt-UI](https://melt-ui.com/), the great headless-ui library for Svelte.
 
 ## How to use it
 

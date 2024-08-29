@@ -14,7 +14,11 @@ SPDX-License-Identifier: Unlicense
 	import { Story } from '@storybook/addon-svelte-csf';
 </script>
 
-<Story name="Default">
+<!-- -->
+<Story name="Primary">
+	<button type="button" class={buttonVariants({ variant: 'primary' })}>Button</button>
+</Story>
+<Story name="Enabled / Disabled">
 	<h2>Enabled</h2>
 	<div class="flex gap-4">
 		<button type="button" class={buttonVariants()}>Button</button>

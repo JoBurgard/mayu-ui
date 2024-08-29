@@ -22,6 +22,7 @@ SPDX-License-Identifier: Unlicense
 	let errors = writable<Record<string, any>>({ test: {} });
 </script>
 
+<!--  -->
 <Story name="Text"
 	><div class="flex flex-col gap-4 max-w-xs">
 		<input type="text" class={inputVariants({ size: 'xs' })} placeholder="Input text here" />

@@ -18,6 +18,7 @@ SPDX-License-Identifier: Unlicense
 	let disabled = true;
 </script>
 
+<!--  -->
 <Story name="Default">
 	<Tooltip placement="right">
 		<button type="button" class={buttonVariants()} slot="trigger" let:trigger use:melt={trigger}

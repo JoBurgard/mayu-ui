@@ -22,6 +22,7 @@ SPDX-License-Identifier: Unlicense
 	let trigger: ComponentProps<ContextMenu>['trigger'];
 </script>
 
+<!--  -->
 <Story name="Default">
 	<ContextMenu
 		items={[

@@ -15,6 +15,8 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts" generics="D, V">
+	import { htmlEncode } from '$lib/utils';
+
 	import type { EventHandler } from 'svelte/elements';
 
 	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
@@ -526,7 +528,7 @@ SPDX-License-Identifier: Unlicense
 							{#if filteredResults.info}
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 								{@html uFuzzy.highlight(
-									optionData.label ?? '',
+									htmlEncode(optionData.label ?? ''),
 									filteredResults.info.ranges[orderedIndex],
 								)}
 							{:else}
