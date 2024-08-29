@@ -112,6 +112,22 @@ SPDX-License-Identifier: Unlicense
 
 <!--  -->
 <Story name="Default">
+	<div class="max-w-[300px]">
+		<Combobox
+			bind:value
+			{data}
+			dataToOption={(it) => ({ label: it, value: it, test: 'blub' })}
+			createHaystack={(item) => item}
+			placeholder="Find a word"
+			on:select={(event) => {
+				onSelectData = event.detail;
+			}}
+			arbitraryValue
+		/>
+	</div>
+</Story>
+
+<Story name="Testingground">
 	<h2>Selected Value</h2>
 	<pre>{JSON.stringify(value, null, 2)}</pre>
 	<h2>onSelect</h2>
