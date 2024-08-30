@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.13.5](https://github.com/joburgard/mayu-ui/compare/v0.13.4...v0.13.5) (2024-08-30)
+
+
+### Bug Fixes
+
+* **combobox:** better scroll into view settings ([b3f5daf](https://github.com/joburgard/mayu-ui/commit/b3f5daf2e55e329c43c1f685e62988e386dda7ed))
+
 ## [0.13.4](https://github.com/joburgard/mayu-ui/compare/v0.13.3...v0.13.4) (2024-08-30)
 
 
