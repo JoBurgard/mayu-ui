@@ -15,6 +15,8 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 <script lang="ts" generics="D, V">
+	import { browser } from '$app/environment';
+
 	import { htmlEncode } from '$lib/utils';
 
 	import type { EventHandler } from 'svelte/elements';
@@ -167,15 +169,23 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	function search(haystack: string[], searchText: string) {
-		setTimeout(
-			() =>
-				$highlightedItem?.scrollIntoView({
-					behavior: 'instant',
-					block: 'nearest',
-					inline: 'nearest',
-				}),
-			0,
-		);
+		// this scrolls the selected item to the top
+		// scrollIntoView cannot be used as it scrolls the entire browser window
+		// and not just the container
+		if (browser) {
+			setTimeout(() => {
+				if ($highlightedItem && menuElement) {
+					menuElement.scrollTo({
+						behavior: 'instant',
+						top:
+							$highlightedItem.offsetTop -
+							Number(
+								window.getComputedStyle(menuElement, null).getPropertyValue('padding').slice(0, -2),
+							),
+					});
+				}
+			}, 0);
+		}
 
 		if (searchText !== '') {
 			// reset list size on every search
