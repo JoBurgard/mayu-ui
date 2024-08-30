@@ -167,7 +167,15 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	function search(haystack: string[], searchText: string) {
-		// setTimeout(() => $highlightedItem?.scrollIntoView({ behavior: 'instant' }), 0);
+		setTimeout(
+			() =>
+				$highlightedItem?.scrollIntoView({
+					behavior: 'instant',
+					block: 'nearest',
+					inline: 'nearest',
+				}),
+			0,
+		);
 
 		if (searchText !== '') {
 			// reset list size on every search
