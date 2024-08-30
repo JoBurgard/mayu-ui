@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.13.4](https://github.com/joburgard/mayu-ui/compare/v0.13.3...v0.13.4) (2024-08-30)
+
+
+### Bug Fixes
+
+* combobox scroll issue ([fc299ce](https://github.com/joburgard/mayu-ui/commit/fc299ce3812635973868ccbd4e0b65e749aad7e3))
+* gh-pages deployment action ([8170491](https://github.com/joburgard/mayu-ui/commit/8170491496ae07c8c6bbaac0875f7fa6f682848b))
+
 ## [0.13.3](https://github.com/joburgard/mayu-ui/compare/v0.13.2...v0.13.3) (2024-07-04)
 
 
