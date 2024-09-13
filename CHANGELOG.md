@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.14.0](https://github.com/joburgard/mayu-ui/compare/v0.13.6...v0.14.0) (2024-09-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Dialog:** added ability to close manually
+
+### Features
+
+* **Dialog:** added ability to close manually ([86a3d9e](https://github.com/joburgard/mayu-ui/commit/86a3d9e3a5415b869af32a5ddb338916ae709cc5))
+
 ## [0.13.6](https://github.com/joburgard/mayu-ui/compare/v0.13.5...v0.13.6) (2024-08-30)
 
 ## [0.13.5](https://github.com/joburgard/mayu-ui/compare/v0.13.4...v0.13.5) (2024-08-30)
