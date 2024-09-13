@@ -49,6 +49,10 @@ SPDX-License-Identifier: Unlicense
 		states: { open },
 	} = dialogRegistry.get(name);
 
+	function closeDialog() {
+		$open = false;
+	}
+
 	onDestroy(() => dialogRegistry.remove(name));
 </script>
 
@@ -64,7 +68,12 @@ SPDX-License-Identifier: Unlicense
 			use:melt={$content}
 			transition:fly={{ y: -30, duration: 150, easing: quintOut }}
 		>
-			<slot title={$title} description={$description} close={$close} />
+			<slot
+				titleBuilder={$title}
+				descriptionBuilder={$description}
+				closeBuilder={$close}
+				close={closeDialog}
+			/>
 		</div>
 	</div>
 {/if}

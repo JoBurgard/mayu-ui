@@ -19,8 +19,8 @@ SPDX-License-Identifier: Unlicense
 
 <!--  -->
 <Story name="Default">
-	<DialogTrigger name="default" let:trigger>
-		<button type="button" class={buttonVariants()} use:melt={trigger}>Press me</button>
+	<DialogTrigger name="default" let:triggerBuilder>
+		<button type="button" class={buttonVariants()} use:melt={triggerBuilder}>Press me</button>
 	</DialogTrigger>
 	<Dialog name="default">
 		<p>This is a Dialog!</p>

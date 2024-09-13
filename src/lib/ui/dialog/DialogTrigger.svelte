@@ -14,4 +14,4 @@ SPDX-License-Identifier: Unlicense
 	} = dialogRegistry.get(name);
 </script>
 
-<slot trigger={$trigger} {options} />
+<slot triggerBuilder={$trigger} {options} />
