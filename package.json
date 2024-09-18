@@ -93,5 +93,10 @@
 		"commitizen": {
 			"path": "@commitlint/cz-commitlint"
 		}
+	},
+	"commit-and-tag-version": {
+		"scripts": {
+			"postchangelog": "cat ./CHANGELOG.md > ./src/stories/Changelog.mdx"
+		}
 	}
 }

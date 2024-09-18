@@ -349,7 +349,7 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### Bug Fixes
 
-* **Button:** style <a> tags with button classes correctly ([77291fc](https://github.com/joburgard/mayu-ui/commit/77291fcb27c4c7ec938eaff08437f0f3069b35ed))
+* **Button:** style `<a>` tags with button classes correctly ([77291fc](https://github.com/joburgard/mayu-ui/commit/77291fcb27c4c7ec938eaff08437f0f3069b35ed))
 
 ## [0.7.10](https://github.com/joburgard/mayu-ui/compare/v0.7.9...v0.7.10) (2024-04-19)
 
@@ -488,7 +488,7 @@ All notable changes to this project will be documented in this file. See [commit
 
 ### Bug Fixes
 
-* <a> tags now render correctly ([3625b44](https://github.com/joburgard/mayu-ui/commit/3625b44aa5dda5be16af3a8a9a51ef8f7b977b37))
+* `<a>` tags now render correctly ([3625b44](https://github.com/joburgard/mayu-ui/commit/3625b44aa5dda5be16af3a8a9a51ef8f7b977b37))
 * several wrong behaviours in edge cases ([903c2fa](https://github.com/joburgard/mayu-ui/commit/903c2fa02b2f89066445e5729cdfec38d68688e0))
 
 ## [0.5.8](https://github.com/joburgard/mayu-ui/compare/v0.5.7...v0.5.8) (2024-01-31)
