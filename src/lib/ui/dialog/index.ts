@@ -4,7 +4,7 @@
  */
 
 import { tv } from 'tailwind-variants';
-import Dialog from './Dialog.svelte';
+import Dialog, { dialogRegistry, openDialog, closeDialog } from './Dialog.svelte';
 import DialogTrigger from './DialogTrigger.svelte';
 
 const dialogOverlayVariants = tv({
@@ -26,4 +26,12 @@ const dialogVariants = tv({
 		size: 'base',
 	},
 });
-export { Dialog, DialogTrigger, dialogOverlayVariants, dialogVariants };
+export {
+	Dialog,
+	DialogTrigger,
+	dialogRegistry,
+	openDialog,
+	closeDialog,
+	dialogOverlayVariants,
+	dialogVariants,
+};

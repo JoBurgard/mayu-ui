@@ -33,6 +33,14 @@ SPDX-License-Identifier: Unlicense
 	}
 
 	export const dialogRegistry = createDialogRegistry();
+
+	export function openDialog(name: string) {
+		dialogRegistry.get(name).states.open.set(true);
+	}
+
+	export function closeDialog(name: string) {
+		dialogRegistry.get(name).states.open.set(false);
+	}
 </script>
 
 <script lang="ts">
