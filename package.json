@@ -83,7 +83,7 @@
 		"storybook-docs": "storybook dev --docs",
 		"build-storybook": "storybook build",
 		"build-storybook-docs": "storybook build --docs",
-		"release": "commit-and-tag-version",
+		"release": "commit-and-tag-version -a",
 		"cm": "git-cz",
 		"commitlint": "commitlint --edit",
 		"prepare": "husky"
@@ -96,7 +96,7 @@
 	},
 	"commit-and-tag-version": {
 		"scripts": {
-			"postchangelog": "cat ./CHANGELOG.md > ./src/stories/Changelog.mdx"
+			"postchangelog": "cat ./CHANGELOG.md > ./src/stories/Changelog.mdx && git add ./src/stories/Changelog.mdx"
 		}
 	}
 }
