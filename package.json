@@ -3,7 +3,7 @@
 	"version": "0.14.1",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/joburgard/mayu-ui.git"
+		"url": "git+https://github.com/joburgard/mayu-ui.git"
 	},
 	"homepage": "https://github.com/joburgard/mayu-ui",
 	"dependencies": {
