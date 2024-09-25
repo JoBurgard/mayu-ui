@@ -6,7 +6,7 @@ SPDX-License-Identifier: Unlicense
 <script context="module" lang="ts">
 	export const meta = {
 		title: 'Components/Dialog',
-	};
+	} satisfies MetaProps;
 </script>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ SPDX-License-Identifier: Unlicense
 	import { buttonVariants } from '$lib/ui/button/';
 	import DialogTrigger from '$lib/ui/dialog/DialogTrigger.svelte';
 	import { melt } from '@melt-ui/svelte';
-	import { Story } from '@storybook/addon-svelte-csf';
+	import { Story, type MetaProps } from '@storybook/addon-svelte-csf';
 </script>
 
 <!--  -->

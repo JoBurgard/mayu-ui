@@ -51,6 +51,8 @@ SPDX-License-Identifier: Unlicense
 	import { onDestroy } from 'svelte';
 
 	export let name: string;
+	export let overlayClasses: string | undefined = undefined;
+	export let dialogClasses: string | undefined = undefined;
 
 	const {
 		elements: { portalled, title, content, description, close, overlay },
@@ -65,14 +67,14 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 {#if $open}
-	<div class="isolate" use:melt={$portalled}>
+	<div class="isolate fixed z-[calc(infinity)]" use:melt={$portalled}>
 		<div
 			use:melt={$overlay}
-			class={dialogOverlayVariants()}
+			class={dialogOverlayVariants({ class: overlayClasses })}
 			transition:fade={{ duration: 60, easing: quintOut }}
 		/>
 		<div
-			class={dialogVariants()}
+			class={dialogVariants({ class: dialogClasses })}
 			use:melt={$content}
 			transition:fly={{ y: -30, duration: 150, easing: quintOut }}
 		>

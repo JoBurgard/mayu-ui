@@ -12,7 +12,7 @@ const dialogOverlayVariants = tv({
 });
 
 const dialogVariants = tv({
-	base: 'fixed left-1/2 top-1/2 max-h-[85vh] w-[90vh] -translate-x-1/2 -translate-y-1/2 border min-h-0 rounded-[--roundedness-base] shadow-lg bg-white overflow-y-auto',
+	base: 'fixed left-1/2 top-1/2 max-h-[85vh] w-[500px] max-w-[85vw] -translate-x-1/2 -translate-y-1/2 border min-h-0 rounded-[--roundedness-base] shadow-lg bg-white overflow-y-auto',
 	variants: {
 		size: {
 			xs: 'p-1.5 text-xs',
