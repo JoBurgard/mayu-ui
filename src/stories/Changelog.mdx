@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.14.2](https://github.com/joburgard/mayu-ui/compare/v0.14.1...v0.14.2) (2024-09-25)
+
+
+### Features
+
+* **Combobox:** render content as slot to make it overridable ([3c5de09](https://github.com/joburgard/mayu-ui/commit/3c5de09b24a13b595726c59331f2bf3208a39bc1))
+* **Dialog:** make css classes overridable ([bdfea10](https://github.com/joburgard/mayu-ui/commit/bdfea10dd5afc76b4af9121af5efe109d02ad415))
+
 ## [0.14.1](https://github.com/joburgard/mayu-ui/compare/v0.14.0...v0.14.1) (2024-09-18)
 
 
