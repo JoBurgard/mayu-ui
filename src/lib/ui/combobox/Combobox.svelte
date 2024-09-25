@@ -543,15 +543,23 @@ SPDX-License-Identifier: Unlicense
 						}}
 					>
 						<div class="break-words">
-							{#if filteredResults.info}
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								{@html uFuzzy.highlight(
-									htmlEncode(optionData.label ?? ''),
-									filteredResults.info.ranges[orderedIndex],
-								)}
-							{:else}
-								{optionData.label}
-							{/if}
+							<slot
+								isFiltered={!!filteredResults.info}
+								ranges={filteredResults?.info?.ranges[orderedIndex] ?? []}
+								option={optionData}
+								{htmlEncode}
+								highlight={uFuzzy.highlight}
+							>
+								{#if filteredResults.info}
+									<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+									{@html uFuzzy.highlight(
+										htmlEncode(optionData.label ?? ''),
+										filteredResults.info.ranges[orderedIndex],
+									)}
+								{:else}
+									{optionData.label}
+								{/if}
+							</slot>
 						</div>
 					</li>
 				{:else}

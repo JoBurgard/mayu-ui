@@ -441,3 +441,50 @@ SPDX-License-Identifier: Unlicense
 		/>
 	</div>
 </Story>
+
+<Story name="Custom Option Display">
+	<div class="inline-flex gap-2">
+		<Combobox
+			menuClasses="max-h-[145px]"
+			size="sm"
+			placeholder="Searchtext..."
+			value={undefined}
+			data={dateAndTimes}
+			dataToOption={(it) => ({ label: it.label, value: it.value })}
+			valueToData={(value) => {
+				const date = new Date(value);
+
+				return date instanceof Date && !isNaN(date.getTime())
+					? {
+							label: date.toLocaleDateString('en-EN', {
+								weekday: 'long',
+								year: 'numeric',
+								month: '2-digit',
+								day: '2-digit',
+								hour: '2-digit',
+								minute: '2-digit',
+							}),
+							value,
+						}
+					: {
+							label: '',
+							value: '',
+						};
+			}}
+			createHaystack={(it) => String(new Date(Date.parse(it.label)).toISOString() ?? '')}
+			let:isFiltered
+			let:ranges
+			let:option
+			let:htmlEncode
+			let:highlight
+		>
+			{@const text = String(new Date(Date.parse(option.label)).toISOString() ?? '')}
+			{#if isFiltered}
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				{@html highlight(htmlEncode(text), ranges)}
+			{:else}
+				{text}
+			{/if}
+		</Combobox>
+	</div>
+</Story>
