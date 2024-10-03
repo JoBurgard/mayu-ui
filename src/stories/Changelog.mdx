@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.14.3](https://github.com/joburgard/mayu-ui/compare/v0.14.2...v0.14.3) (2024-10-03)
+
+
+### Bug Fixes
+
+* **Dialog:** revert z-index infinity ([269f4e3](https://github.com/joburgard/mayu-ui/commit/269f4e32c2fb7a87b68f4ef85b909c9d6ab151c7))
+
 ## [0.14.2](https://github.com/joburgard/mayu-ui/compare/v0.14.1...v0.14.2) (2024-09-25)
 
 
