@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.14.4](https://github.com/joburgard/mayu-ui/compare/v0.14.3...v0.14.4) (2024-10-24)
+
+
+### Features
+
+* new DialogProvider component ([b1b3df4](https://github.com/joburgard/mayu-ui/commit/b1b3df4cea44f7d4e73444de08885e3fe399ee77))
+
 ## [0.14.3](https://github.com/joburgard/mayu-ui/compare/v0.14.2...v0.14.3) (2024-10-03)
 
 
