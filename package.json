@@ -8,7 +8,8 @@
   "homepage": "https://github.com/joburgard/mayu-ui",
   "dependencies": {
     "@iconify-json/svg-spinners": "^1.2.1",
-    "@leeoniya/ufuzzy": "^1.0.14"
+    "@leeoniya/ufuzzy": "^1.0.14",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
@@ -29,6 +30,7 @@
     "@sveltejs/kit": "^2.7.2",
     "@sveltejs/package": "^2.3.6",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
+    "@types/lodash-es": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "autoprefixer": "^10.4.20",

@@ -4,7 +4,19 @@ SPDX-License-Identifier: Unlicense
 -->
 
 <script lang="ts" context="module">
-	import { createDialog, type CreateDialogProps, type Dialog as DialogType } from '@melt-ui/svelte';
+	import {
+		createDialog,
+		createSync,
+		type CreateDialogProps,
+		type Dialog as DialogType,
+	} from '@melt-ui/svelte';
+
+	let count = 0;
+	function generateName() {
+		count += 1;
+		return `__dialog_${count}`;
+	}
+
 	function createDialogRegistry() {
 		const registry = new Map<string, DialogType>();
 
@@ -50,23 +62,28 @@ SPDX-License-Identifier: Unlicense
 	import { quintOut } from 'svelte/easing';
 	import { onDestroy } from 'svelte';
 
-	export let name: string;
+	export let name: string = generateName();
+	export let open = false;
+	export let options: CreateDialogProps | undefined = undefined;
 	export let overlayClasses: string | undefined = undefined;
 	export let dialogClasses: string | undefined = undefined;
 
 	const {
 		elements: { portalled, title, content, description, close, overlay },
-		states: { open },
-	} = dialogRegistry.get(name);
+		states,
+	} = dialogRegistry.get(name, options);
 
 	function closeDialog() {
-		$open = false;
+		open = false;
 	}
 
 	onDestroy(() => dialogRegistry.remove(name));
+
+	const sync = createSync(states);
+	$: sync.open(open, (v) => (open = v));
 </script>
 
-{#if $open}
+{#if open}
 	<div class="isolate fixed" use:melt={$portalled}>
 		<div
 			use:melt={$overlay}
