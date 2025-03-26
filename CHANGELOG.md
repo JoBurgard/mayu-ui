@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.15.0](https://github.com/joburgard/mayu-ui/compare/v0.14.4...v0.15.0) (2025-03-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Dialog:** add ability to pass context to the prompted Dialog
+
+### Features
+
+* **Dialog:** add ability to pass context to the prompted Dialog ([a8e4bec](https://github.com/joburgard/mayu-ui/commit/a8e4bec6a9a781e3d690aeec60e744cdba926135))
+
 ## [0.14.4](https://github.com/joburgard/mayu-ui/compare/v0.14.3...v0.14.4) (2024-10-24)
 
 
