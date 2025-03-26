@@ -8,8 +8,15 @@ SPDX-License-Identifier: Unlicense
 
 	export let resolve: (data: any) => void;
 	export let reject: (reason: any) => void;
+	export let contexts: Map<any, any> | undefined = undefined;
+
 	setContext('resolve', resolve);
 	setContext('reject', reject);
+	if (contexts) {
+		for (const [name, value] of contexts) {
+			setContext(name, value);
+		}
+	}
 </script>
 
 <slot />

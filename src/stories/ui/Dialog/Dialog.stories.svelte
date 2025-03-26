@@ -16,8 +16,9 @@ SPDX-License-Identifier: Unlicense
 	import DialogTrigger from '$lib/ui/dialog/DialogTrigger.svelte';
 	import { melt } from '@melt-ui/svelte';
 	import { Story, type MetaProps } from '@storybook/addon-svelte-csf';
-	import ConfirmDialog from './ConfirmDialog.svelte';
 	import ComplexDialog from './ComplexDialog.svelte';
+	import ConfirmDialog from './ConfirmDialog.svelte';
+	import ContextsDialog from './ContextsDialog.svelte';
 </script>
 
 <!--  -->
@@ -45,18 +46,17 @@ SPDX-License-Identifier: Unlicense
 		class={buttonVariants()}
 		on:click={async (event) => {
 			const result = await dialogs
-				.prompt(
-					ConfirmDialog,
-					{
+				.prompt(ConfirmDialog, {
+					props: {
 						title: 'Important Decision',
-						text: 'Do you really want to proceed? This cannot be closed with an outside click.',
+						text: 'Do you really want to proceed? (This cannot be closed with an outside click.)',
 					},
-					{
+					settings: {
 						options: {
 							closeOnOutsideClick: false,
 						},
 					},
-				)
+				})
 				.catch(() => false); // catch has fallback value
 			event.target.innerText = `Returned: ${result}`;
 		}}>Important Confirm Dialog</button
@@ -68,5 +68,25 @@ SPDX-License-Identifier: Unlicense
 			const result = await dialogs.prompt(ComplexDialog).catch(() => null); // catch has fallback value
 			event.target.innerText = `Returned: ${result}`;
 		}}>Complex Dialog</button
+	>
+
+	<button
+		type="button"
+		class={buttonVariants()}
+		on:click={async (event) => {
+			const result = await dialogs
+				.prompt(ContextsDialog, {
+					settings: {
+						options: {
+							closeOnOutsideClick: false,
+						},
+					},
+					contexts: new Map(
+						Object.entries({ someContext: 'This was passed at the dialogs prompt area.' }),
+					),
+				})
+				.catch(() => false); // catch has fallback value
+			event.target.innerText = `Returned: ${result}`;
+		}}>Passing Contexts</button
 	>
 </Story>
