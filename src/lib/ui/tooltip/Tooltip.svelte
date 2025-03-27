@@ -56,7 +56,7 @@ SPDX-License-Identifier: Unlicense
 
 <slot name="trigger" trigger={$trigger} />
 {#if open && !disabled}
-	<div use:melt={$content} class={tooltipVariants({ size, status })}>
+	<div use:melt={$content} class={tooltipVariants({ size, status, class: 'z-[calc(infinity)]' })}>
 		<slot />
 	</div>
 {/if}
