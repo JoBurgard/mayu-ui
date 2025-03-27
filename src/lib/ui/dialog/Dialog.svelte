@@ -84,7 +84,7 @@ SPDX-License-Identifier: Unlicense
 </script>
 
 {#if open}
-	<div class="isolate fixed" use:melt={$portalled}>
+	<div class="isolate fixed z-[calc(infinity)]" use:melt={$portalled}>
 		<div
 			use:melt={$overlay}
 			class={dialogOverlayVariants({ class: overlayClasses })}
