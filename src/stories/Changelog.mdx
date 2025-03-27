@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.15.2](https://github.com/joburgard/mayu-ui/compare/v0.15.1...v0.15.2) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Tooltip:** z-index problem solved ([56188f5](https://github.com/joburgard/mayu-ui/commit/56188f5587d7282725bd71b2920092afaefe54e4))
+
 ## [0.15.1](https://github.com/joburgard/mayu-ui/compare/v0.15.0...v0.15.1) (2025-03-27)
 
 
