@@ -16,29 +16,22 @@ SPDX-License-Identifier: Unlicense
 
 <script lang="ts" generics="D, V">
 	import { browser } from '$app/environment';
-
 	import { htmlEncode } from '$lib/utils';
-
-	import type { EventHandler } from 'svelte/elements';
-
-	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
-
-	import uFuzzy, {
-		type HaystackIdxs,
-		type Info,
-		type InfoIdxOrder,
-		type Options,
-	} from '@leeoniya/ufuzzy';
-	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
+	import uFuzzy from '@leeoniya/ufuzzy';
+	import { createCombobox, createSync, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	import { beforeUpdate, createEventDispatcher, tick } from 'svelte';
 	import type { Action } from 'svelte/action';
+	import type { EventHandler } from 'svelte/elements';
+	import type { Writable } from 'svelte/store';
 	import { fly } from 'svelte/transition';
+	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
 	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
 	import { tooltipVariants } from '../tooltip';
 
 	type $$Props = Omit<InputProps, 'value'> & {
 		data: D[];
 		value: V | undefined;
+		inputValue: string;
 		arbitraryValue?: boolean;
 		isLoading?: boolean;
 		unstyled?: boolean;
@@ -53,7 +46,7 @@ SPDX-License-Identifier: Unlicense
 		) => string;
 		equal?: (a: V | undefined, b: V | undefined) => boolean;
 		listSize?: number;
-		searchOptions?: Options;
+		searchOptions?: uFuzzy.Options;
 		searchOutOfOrder?: number;
 		rankThreshold?: number;
 		messages?: Partial<typeof i18n>;
@@ -72,6 +65,7 @@ SPDX-License-Identifier: Unlicense
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 	export let value: $$Props['value'] = undefined;
+	export let inputValue: $$Props['inputValue'];
 	export let arbitraryValue: $$Props['arbitraryValue'] = false;
 	export let placeholder: $$Props['placeholder'] = undefined;
 	export let size: $$Props['size'] = undefined;
@@ -85,7 +79,7 @@ SPDX-License-Identifier: Unlicense
 	export let dataToOption: Required<$$Props>['dataToOption'] = (item) => {
 		if (!(item && typeof item === 'object' && Object.keys(item).length)) {
 			throw new Error(
-				'If data is not of type {label;value;disabled?} then you have to provide your own toOption function.',
+				'If data is not of type {label;value;disabled?} then you have to provide your own dataToOption function.',
 			);
 		}
 		return {
@@ -157,7 +151,11 @@ SPDX-License-Identifier: Unlicense
 	const fuzzySearch = new uFuzzy(searchOptions);
 	let haystack: string[] = [];
 	let showAllResult: number[] = [];
-	let filteredResults: { idxs: HaystackIdxs; info: Info | null; order: InfoIdxOrder | null } = {
+	let filteredResults: {
+		idxs: uFuzzy.HaystackIdxs;
+		info: uFuzzy.Info | null;
+		order: uFuzzy.InfoIdxOrder | null;
+	} = {
 		idxs: [],
 		info: null,
 		order: [],
@@ -241,7 +239,7 @@ SPDX-License-Identifier: Unlicense
 		}
 
 		if ($open) {
-			search(haystack, $inputValue);
+			search(haystack, inputValue);
 		}
 	}
 
@@ -249,7 +247,7 @@ SPDX-License-Identifier: Unlicense
 
 	const {
 		elements: { menu, input, option, label },
-		states: { open, inputValue, selected, highlightedItem },
+		states,
 		ids: { trigger: triggerId },
 	} = createCombobox<V>({
 		forceVisible: true,
@@ -277,7 +275,7 @@ SPDX-License-Identifier: Unlicense
 				dispatchedSelect = false;
 				search(haystack, '');
 
-				if (arbitraryValue === false && $inputValue === '') {
+				if (arbitraryValue === false && inputValue === '') {
 					tick().then(() => {
 						if (menuElement) {
 							const firstItem = menuElement.querySelector<HTMLUListElement>(
@@ -316,10 +314,12 @@ SPDX-License-Identifier: Unlicense
 		},
 	});
 
+	const { open, selected, highlightedItem } = states;
+
 	// initially set the value of the input field
 	// otherwise it would be empty if value is just a string
 	if (typeof value === 'string') {
-		$inputValue = value;
+		inputValue = value;
 	}
 
 	function updateListIndices(start: number, end: number) {
@@ -336,7 +336,7 @@ SPDX-License-Identifier: Unlicense
 		const foundOption = optionIndex > -1 ? options[optionIndex] : undefined;
 		if (foundOption === undefined && ((arbitraryValue && value !== undefined) || value === '')) {
 			$selected = dataToOption(valueToData(value));
-			$inputValue = optionToDisplayText($selected);
+			inputValue = optionToDisplayText($selected);
 			valueInternal = value;
 		} else if (foundOption !== undefined) {
 			updateListIndices(
@@ -346,7 +346,7 @@ SPDX-License-Identifier: Unlicense
 			updateResultsList();
 
 			$selected = foundOption;
-			$inputValue = optionToDisplayText($selected);
+			inputValue = optionToDisplayText($selected);
 			valueInternal = value;
 		} else {
 			value = valueInternal;
@@ -386,18 +386,18 @@ SPDX-License-Identifier: Unlicense
 	};
 
 	function clearValueAndInput() {
-		$inputValue = '';
+		inputValue = '';
 		$selected = undefined;
 	}
 
 	function processInputValue() {
-		if (lastAction === 'input' && $inputValue === '') {
+		if (lastAction === 'input' && inputValue === '') {
 			clearValueAndInput();
 		} else if (lastAction === 'input') {
-			value = $inputValue as V;
+			value = inputValue as V;
 			pickOptionByValue();
 		} else if (lastAction === 'select' || !arbitraryValue) {
-			$inputValue = optionToDisplayText($selected);
+			inputValue = optionToDisplayText($selected);
 		}
 	}
 
@@ -431,8 +431,9 @@ SPDX-License-Identifier: Unlicense
 		}
 	};
 
-	$: updateSearchData(data);
-	$: mergedMessages = Object.assign(structuredClone(i18n), messages);
+	function handleUpdatedData(data: $$Props['data']) {
+		updateSearchData(data);
+	}
 
 	// detect changes from the outside and try to match the option
 	beforeUpdate(() => {
@@ -441,6 +442,12 @@ SPDX-License-Identifier: Unlicense
 
 	// run on SSR
 	checkIfUpdateFromOutside();
+
+	const sync = createSync({ inputValue: states.inputValue });
+
+	$: handleUpdatedData(data);
+	$: mergedMessages = Object.assign(structuredClone(i18n), messages);
+	$: sync.inputValue(inputValue, (v) => (inputValue = v));
 </script>
 
 <div class="isolate flex h-full">
@@ -463,7 +470,7 @@ SPDX-License-Identifier: Unlicense
 					return;
 				}
 				if (!arbitraryValue) {
-					$inputValue = optionToDisplayText($selected);
+					inputValue = optionToDisplayText($selected);
 				}
 				if (!$open && !dispatchedNoSelectBlur) {
 					dispatch('noselectblur');
@@ -503,7 +510,7 @@ SPDX-License-Identifier: Unlicense
 		/>
 		{#if placeholder}<span class={inputPlaceholderVariants({ size, status })}>{placeholder}</span
 			>{/if}
-		{#if $inputValue !== '' && !hideClearButton}
+		{#if inputValue !== '' && !hideClearButton}
 			<button
 				type="button"
 				tabindex="-1"
@@ -564,7 +571,7 @@ SPDX-License-Identifier: Unlicense
 					</li>
 				{:else}
 					{#if !isLoading}
-						{#if $inputValue !== ''}
+						{#if inputValue !== ''}
 							<li class="px-3 py-1.5 rounded-[--roundedness-sm] select-none">
 								{mergedMessages.noSearchResult}
 							</li>
