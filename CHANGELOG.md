@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.15.3](https://github.com/joburgard/mayu-ui/compare/v0.15.2...v0.15.3) (2025-03-28)
+
+
+### Features
+
+* **Combobox:** give acces to inputValues for better optimistic update capabilities ([07b0639](https://github.com/joburgard/mayu-ui/commit/07b0639c91486ee9d6040352f834efd55a81c11c))
+
 ## [0.15.2](https://github.com/joburgard/mayu-ui/compare/v0.15.1...v0.15.2) (2025-03-27)
 
 
