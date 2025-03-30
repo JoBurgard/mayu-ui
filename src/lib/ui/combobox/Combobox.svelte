@@ -22,7 +22,6 @@ SPDX-License-Identifier: Unlicense
 	import { beforeUpdate, createEventDispatcher, tick } from 'svelte';
 	import type { Action } from 'svelte/action';
 	import type { EventHandler } from 'svelte/elements';
-	import type { Writable } from 'svelte/store';
 	import { fly } from 'svelte/transition';
 	import { comboboxChevronVariants, comboboxClearButtonVariants, comboboxInputVariants } from '.';
 	import { inputPlaceholderVariants, type InputEvents, type InputProps } from '../input';
@@ -455,6 +454,7 @@ SPDX-License-Identifier: Unlicense
 		<input
 			bind:this={inputField}
 			use:melt={$input}
+			value={inputValue}
 			class={comboboxInputVariants({
 				size,
 				status,
