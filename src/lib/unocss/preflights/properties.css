@@ -1,0 +1,22 @@
+@property --maui-base-spacing {
+	syntax: '<length>';
+	initial-value: 0;
+	inherits: true;
+}
+@property --maui-base-roundness {
+	syntax: '<length> | <percentage>';
+	initial-value: 0;
+	inherits: true;
+}
+@property --maui-btn-roundness {
+	syntax: '<length> | <percentage>';
+	initial-value: 0;
+	inherits: true;
+}
+:root {
+	--maui-base-spacing: 0.25rem;
+	--maui-base-roundness: var(--maui-base-spacing);
+
+	/* button */
+	--maui-btn-roundness: var(--maui-base-roundness);
+}
