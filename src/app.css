@@ -1,1 +1,15 @@
+/* default theme */
+:root {
+	--maui-base-spacing: var(--spacing);
+	--maui-base-roundness: var(--maui-base-spacing);
 
+	/* button */
+	--maui-btn-roundness: var(--maui-base-roundness);
+	--maui-btn-default-bg: var(--colors-neutral-500);
+	--maui-btn-default-fg: var(--colors-neutral-50);
+	--maui-btn-default-bg-hover: color-mix(
+		in oklab,
+		var(--maui-btn-default-bg) 90%,
+		var(--maui-btn-default-fg)
+	);
+}

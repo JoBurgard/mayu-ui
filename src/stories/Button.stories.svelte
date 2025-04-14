@@ -5,5 +5,6 @@
 </script>
 
 <Story name="Default">
-	<button class="btn">test</button>
+	<button class="btn test">Default Button</button>
+	<button class="btn btn-xs">Default Button</button>
 </Story>

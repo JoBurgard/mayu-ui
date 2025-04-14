@@ -8,6 +8,6 @@ import {
 import { presetMayuUi } from './src/lib/unocss/preset';
 
 export default defineConfig({
-	presets: [presetWind4(), presetIcons(), presetMayuUi()],
+	presets: [presetWind4({ themePreflight: true }), presetIcons(), presetMayuUi()],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 });

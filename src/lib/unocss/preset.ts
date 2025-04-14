@@ -7,16 +7,12 @@ const propertiesCss = fs.readFileSync(import.meta.dirname + '/preflights/propert
 export const presetMayuUi = definePreset((options?: Record<string, unknown>) => {
 	return {
 		name: 'mayu-ui',
-		variants: [],
-		shortcuts: {
-			...button,
-		},
 		preflights: [
 			{
 				getCSS: () => propertiesCss,
 			},
 		],
-		// it supports most of the configuration you could have in the root config
+		shortcuts: [...button],
 	};
 });
 
