@@ -1,8 +1,0 @@
-Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Mayu UI
-Upstream-Contact: Jo Burgard <mail@joburgard.com>
-Source: https://github.com/joburgard/mayu_ui
-
-Files: .eslintignore .eslintrc.cjs .gitignore .npmrc .prettierignore .prettierrc bun.lockb package.json uno.config.ts README.md svelte.config.js vite.config.ts tsconfig.json
-Copyright: 2023 Jo Burgard <mail@joburgard.com>
-License: Unlicense
