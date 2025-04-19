@@ -1,0 +1,17 @@
+@layer properties {
+	@property --mayu-base-spacing {
+		syntax: '<length>';
+		initial-value: 0;
+		inherits: true;
+	}
+	@property --mayu-base-roundness {
+		syntax: '<length> | <percentage>';
+		initial-value: 0;
+		inherits: true;
+	}
+	@property --mayu-btn-roundness {
+		syntax: '<length> | <percentage>';
+		initial-value: 0;
+		inherits: true;
+	}
+}

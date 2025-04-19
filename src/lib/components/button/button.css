@@ -1,0 +1,8 @@
+@layer components {
+	.btn {
+		@apply rounded-(--mayu-btn-roundness) bg-(--mayu-btn-default-bg) px-3 py-1 text-(--mayu-btn-default-fg) hover:bg-(--mayu-btn-default-bg-hover);
+		box-shadow:
+			0 2px color-mix(in oklab, var(--mayu-btn-default-bg) 80%, black),
+			0 4px 2px var(--color-gray-400);
+	}
+}

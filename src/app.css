@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+@import './lib/mayu-ui.css';
+
+/* default theme */
+@layer base {
+	:root {
+		--mayu-base-spacing: 4px;
+		--mayu-base-roundness: var(--mayu-base-spacing);
+
+		/* button */
+		--mayu-btn-roundness: var(--mayu-base-roundness);
+		--mayu-btn-default-bg: var(--color-neutral-500);
+		--mayu-btn-default-fg: var(--color-neutral-50);
+		--mayu-btn-default-bg-hover: color-mix(
+			in oklab,
+			var(--mayu-btn-default-bg) 90%,
+			var(--mayu-btn-default-fg)
+		);
+	}
+}
