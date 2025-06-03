@@ -9,5 +9,8 @@
 <script lang="ts"></script>
 
 <Story name="Default">
+	<button type="button" class="btn btn-xxs">Button text</button>
+	<button type="button" class="btn btn-xs">Button text</button>
+	<button type="button" class="btn btn-sm">Button text</button>
 	<button type="button" class="btn">Button text</button>
 </Story>
