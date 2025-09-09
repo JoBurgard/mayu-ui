@@ -4,6 +4,12 @@
 		box-shadow:
 			0 2px color-mix(in oklab, var(--mayu-btn-default-bg) 80%, black),
 			0 4px 2px var(--color-gray-400);
+		&:active {
+			transform: var(--mayu-btn-base-active-transform);
+			box-shadow:
+				0 1px color-mix(in oklab, var(--mayu-btn-default-bg) 80%, black),
+				0 2px 1px var(--color-gray-400);
+		}
 	}
 	.btn-sm {
 		@apply px-2 py-0.75 text-sm;

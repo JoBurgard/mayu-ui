@@ -5,12 +5,15 @@
 @layer base {
 	:root {
 		--mayu-base-spacing: 4px;
-		--mayu-base-roundness: var(--mayu-base-spacing);
+		--mayu-base-roundness: calc(var(--mayu-base-spacing) * 1.5);
+		--mayu-base-interactive-neutral-bg: var(--color-neutral-500);
+		--mayu-base-interactive-neutral-fg: var(--color-neutral-50);
 
 		/* button */
 		--mayu-btn-roundness: var(--mayu-base-roundness);
-		--mayu-btn-default-bg: var(--color-neutral-500);
-		--mayu-btn-default-fg: var(--color-neutral-50);
+		--mayu-btn-base-active-transform: scaleX(1.04) translateY(2px);
+		--mayu-btn-default-bg: var(--mayu-base-interactive-neutral-bg);
+		--mayu-btn-default-fg: var(--mayu-base-interactive-neutral-fg);
 		--mayu-btn-default-bg-hover: color-mix(
 			in oklab,
 			var(--mayu-btn-default-bg) 90%,
